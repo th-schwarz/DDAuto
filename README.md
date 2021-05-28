@@ -1,1 +1,3 @@
-# AutoDyn
+# AutoDYN
+
+Dynamic DNS with AutoDNS
