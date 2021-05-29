@@ -64,19 +64,18 @@ public class DomainrobotSdk {
 		}
 	}
 
-	public Zone getZone(String host) throws SdkException {
+	public Zone getZoneOfHost(String host) throws SdkException {
 		if(!context.getAccountData().containsKey(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = identifyZone(host);
-		String primaryNameServer = context.getZoneData().getProperty(host);
+		String primaryNameServer = context.getZoneData().getProperty(zone);
 		return getZone(zone, primaryNameServer);
 	}
 
-	public void updateZone(String host, String ipv4, String ipv6) {
+	public void updateZone(String host, String ipv4, String ipv6) throws SdkException {
 		// params must be validated by the caller
-		String zoneStr = identifyZone(host);
-		String sld = host.substring(0, host.indexOf(".") - 1);
-		Zone zone = getZone(zoneStr);
+		String sld = host.substring(0, host.indexOf("."));
+		Zone zone = getZoneOfHost(host);
 		if(ipv4 != null)
 			ZoneUtil.addOrUpdateIPv4(zone, sld, ipv4);
 		if(ipv6 != null)
@@ -92,6 +91,6 @@ public class DomainrobotSdk {
 	}
 
 	String identifyZone(String host) {
-		return host.substring(host.indexOf("." + 1));
+		return host.substring(host.indexOf(".") + 1);
 	}
 }

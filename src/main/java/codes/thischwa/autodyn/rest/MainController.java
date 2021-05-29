@@ -22,6 +22,9 @@ public class MainController {
 	
 	@Autowired
 	private Context context;
+	
+	@Autowired
+	private DomainrobotSdk sdk;
 
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> exist(@PathVariable String host) {
@@ -50,13 +53,19 @@ public class MainController {
 					HttpStatus.BAD_REQUEST);
 		
 		// processing the update
-		
-		return ResponseEntity.ok("Update successful.");
+		try {
+			sdk.updateZone(host, ipv4Str, ipv6Str);
+			logger.debug("Updated host {} successful.", host);
+			return ResponseEntity.ok("Update successful.");
+		} catch (SdkException e) {
+			logger.error("Updated host failed: " + host, e);
+			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	boolean validateIP(String ipStr) {
 		try {
-			InetAddress.getByAddress(ipStr.getBytes());
+			InetAddress.getByName(ipStr);
 			return true;
 		} catch (UnknownHostException e) {
 			return false;
