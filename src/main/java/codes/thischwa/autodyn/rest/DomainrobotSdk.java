@@ -78,8 +78,12 @@ public class DomainrobotSdk {
 		Zone zone = getZoneOfHost(host);
 		if(ipv4 != null)
 			ZoneUtil.addOrUpdateIPv4(zone, sld, ipv4);
+		else
+			ZoneUtil.removeIPv4(zone, sld);
 		if(ipv6 != null)
 			ZoneUtil.addOrUpdateIPv6(zone, sld, ipv6);
+		else
+			ZoneUtil.removeIPv6(zone, sld);
 		ZoneClient zc = getInstance();
 		try {
 			zc.update(zone, getCustomHeaders());

@@ -14,8 +14,23 @@ public class ZoneUtil {
 	public static void addOrUpdateIPv6(Zone zone, String sld, String ip) {
 		addOrUpdateIP(zone, sld, ip, "AAAA");
 	}
+	
+	public static void removeIPv4(Zone zone, String sld) {
+		removeIP(zone, sld, "A");
+	}
+	
+	public static void removeIPv6(Zone zone, String sld) {
+		removeIP(zone, sld, "AAAA");
+	}
 
-	static void addOrUpdateIP(Zone zone, String sld, String ip, String type) {
+	private static void removeIP(Zone zone, String sld, String type) {
+		ResourceRecord rr = searchResourceRecord(zone, sld, type);
+		if(rr != null) {
+			zone.getResourceRecords().remove(rr);
+		}
+	}
+	
+	private static void addOrUpdateIP(Zone zone, String sld, String ip, String type) {
 		ResourceRecord rr = searchResourceRecord(zone, sld, type);
 		if(rr != null) {
 			rr.setValue(ip);

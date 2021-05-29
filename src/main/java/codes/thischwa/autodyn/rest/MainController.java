@@ -3,6 +3,8 @@ package codes.thischwa.autodyn.rest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.domainrobot.sdk.models.generated.ResourceRecord;
+import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +38,15 @@ public class MainController {
 	
 
 	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> update(@PathVariable String host, @RequestParam(name = "ipv4", required = false) String ipv4Str,  @RequestParam(name = "ipv6", required = false) String ipv6Str) {
-		logger.debug("entered #update: host={}, ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
+	public ResponseEntity<String> update(@PathVariable String host, @RequestParam String apitoken, @RequestParam(name = "ipv4", required = false) String ipv4Str,
+			@RequestParam(name = "ipv6", required = false) String ipv6Str) {
+		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
 		
 		// validation
+		String validApitoken = context.getAccountData().getProperty(host);
+		if(!validApitoken.equals(apitoken))
+			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, 
+					HttpStatus.BAD_REQUEST);
 		if(!context.hostExists(host)) 
 			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 		if(ipv4Str == null && ipv6Str == null)
@@ -61,6 +68,33 @@ public class MainController {
 			logger.error("Updated host failed: " + host, e);
 			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+
+	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> info(@PathVariable String host) {
+		logger.debug("entered #info: host={}", host);
+		if(!context.hostExists(host)) 
+			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
+		
+		Zone zone = null;
+		try {
+			zone = sdk.getZoneOfHost(host);
+		} catch (SdkException e) {
+			logger.error("Zone info for host failed: " + host, e);
+			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		String sld = host.substring(0, host.indexOf("."));
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, sld, "A");
+		String ipv4Str = (rr == null) ? "n/a" : rr.getValue();
+		rr = ZoneUtil.searchResourceRecord(zone, sld, "AAAA");
+		String ipv6Str = (rr == null) ? "n/a" : rr.getValue();
+		StringBuilder info = new StringBuilder();
+		info.append("IP settings for host: ").append(host).append('\n');
+		info.append("IPv4: ").append(ipv4Str).append('\n');
+		info.append("IPv6: ").append(ipv6Str).append('\n');
+		return ResponseEntity.ok(info.toString());
 	}
 	
 	boolean validateIP(String ipStr) {

@@ -40,5 +40,13 @@ class ZoneUtilTest {
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
-
+	
+	@Test
+	final void testRemoveIPv4() {
+		assertEquals(4, zone.getResourceRecords().size());
+		ZoneUtil.addOrUpdateIPv4(zone, "sub2", "128.0.0.2");
+		assertEquals(5, zone.getResourceRecords().size());
+		ZoneUtil.removeIPv4(zone, "sub2");
+		assertEquals(4, zone.getResourceRecords().size());
+	}
 }
