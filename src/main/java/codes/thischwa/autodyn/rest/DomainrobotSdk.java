@@ -2,12 +2,15 @@ package codes.thischwa.autodyn.rest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.domainrobot.sdk.client.Domainrobot;
 import org.domainrobot.sdk.client.clients.ZoneClient;
 import org.domainrobot.sdk.models.DomainRobotHeaders;
 import org.domainrobot.sdk.models.DomainrobotApiException;
 import org.domainrobot.sdk.models.generated.Zone;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,21 +18,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class DomainrobotSdk {
 
+	private static final Logger logger = LoggerFactory.getLogger(Context.class);
+
 	@Value("${autodns.url}")
 	private String baseUrl;
-	
+
 	@Value("${autodns.user}")
 	private String user;
-	
+
 	@Value("${autodns.password}")
 	private String password;
-	
+
 	@Value("${autodns.context}")
 	private String autodnsContext;
-	
+
 	@Autowired
 	private Context context;
-	
+
 	private ZoneClient getInstance() {
 		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();
 	}
@@ -39,7 +44,15 @@ public class DomainrobotSdk {
 		headers.put(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE");
 		return headers;
 	}
-	
+
+	void checkConfiguredZones() {
+		Properties zoneData = context.getZoneData();
+		for(String z : zoneData.stringPropertyNames()) {
+			Zone zone = getZone(z,  zoneData.getProperty(z));
+			logger.info("Zone correct initialized: {}", zone.getOrigin());
+		}
+	}
+
 	Zone getZone(String origin, String primaryNameServer) throws SdkException {
 		ZoneClient zc = getInstance();
 		try {
@@ -50,7 +63,7 @@ public class DomainrobotSdk {
 			throw new SdkException("Unknown exception", e);
 		}
 	}
-	
+
 	public Zone getZone(String host) throws SdkException {
 		if(!context.getAccountData().containsKey(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
@@ -58,7 +71,7 @@ public class DomainrobotSdk {
 		String primaryNameServer = context.getZoneData().getProperty(host);
 		return getZone(zone, primaryNameServer);
 	}
-	
+
 	public void updateZone(String host, String ipv4, String ipv6) {
 		// params must be validated by the caller
 		String zoneStr = identifyZone(host);
@@ -77,7 +90,7 @@ public class DomainrobotSdk {
 			throw new SdkException("Unknown exception", e);
 		}
 	}
-	
+
 	String identifyZone(String host) {
 		return host.substring(host.indexOf("." + 1));
 	}

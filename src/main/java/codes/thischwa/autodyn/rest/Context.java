@@ -5,10 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-import org.domainrobot.sdk.models.generated.Zone;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -19,14 +15,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Context {
-
-	private static final Logger logger = LoggerFactory.getLogger(Context.class);
 	
 	@Value("${dir.data}")
 	private String dataDir;
-	
-	@Autowired
-	private DomainrobotSdk sdk;
 	
 	private Properties zoneData = null;
 
@@ -43,10 +34,6 @@ public class Context {
 	public void readAndValidateData() {
 		readData();
 		validateData(zoneData, accountData);
-		for(String z : zoneData.stringPropertyNames()) {
-			Zone zone = sdk.getZone(z,  zoneData.getProperty(z));
-			logger.info("Zone correct initialized: {}", zone.getOrigin());
-		}
 	}
 	
 	public boolean hostExists(String host) {

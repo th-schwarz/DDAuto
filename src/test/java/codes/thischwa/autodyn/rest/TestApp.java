@@ -8,26 +8,15 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * The starter and config.
- */
-@SpringBootApplication
+@SpringBootApplication()
 @Configuration
-public class AutoDynStarter {
+public class TestApp {
 
 	@Autowired
 	private Context context;
-
-	@Autowired
-	private DomainrobotSdk sdk;
 	
 	public static void main(String[] args) {
-		try {
-			SpringApplication.run(AutoDynStarter.class, args);
-		} catch (Exception e) {
-            System.out.println("Unexpected exception, Spring Boot stops!");
-            System.exit(10);
-		}
+		SpringApplication.run(AutoDynStarter.class, args);
 	}
 	
 	@Bean
@@ -37,7 +26,7 @@ public class AutoDynStarter {
 			@Override
 			public void onApplicationEvent(ApplicationReadyEvent event) {
 				context.readAndValidateData();	
-				sdk.checkConfiguredZones();
+				
 			}
 		};
 	}

@@ -12,3 +12,4 @@ target/
 
 # private
 /info.txt
+/myapp.properties
