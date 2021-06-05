@@ -54,7 +54,7 @@ public class Context {
 	}
 
 	void validateData(Properties zoneData, Properties accountData) {
-		if(zoneData == null || accountData == null || (accountData.size() != zoneData.size()))
+		if(zoneData == null || accountData == null || accountData.isEmpty())
 			throw new IllegalArgumentException("Account and zone data are inconsistent.");
 		for(String sld : accountData.stringPropertyNames()) {
 			String domain = sld.substring(sld.indexOf(".") + 1);
