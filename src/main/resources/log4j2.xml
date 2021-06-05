@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="trace">
 
+	<Properties>
+		<Property name="log-path">log</Property>
+		<Property name="pattern">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+	</Properties>
+
 	<Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
-        </Console>
+		<Console name="current" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}" />
+		</Console>
+		<RollingFile name="file"
+			fileName="${log-path}/autodyn.log"
+			filePattern="${log-path}/autodyn-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="${pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="24"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="30" />
+		</RollingFile>
 	</Appenders>
 	<Loggers>
-		<Logger name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener" level="warn">
-			<appender-ref ref="Console" />
+		<Logger
+			name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener"
+			level="warn">
+			<appender-ref ref="current" />
 		</Logger>
 		<Logger name="org.springframework.beans" level="info">
-			<appender-ref ref="Console" />
+			<appender-ref ref="current" />
 		</Logger>
 		<Logger name="org.springframework.web" level="info">
-			<appender-ref ref="Console" />
+			<appender-ref ref="current" />
 		</Logger>
 		<Logger name="org.eclipse.jetty" level="info">
-			<appender-ref ref="Console" />
+			<appender-ref ref="current" />
 		</Logger>
 		<Root level="debug">
-			<appender-ref ref="Console" />
+			<appender-ref ref="current" />
 		</Root>
 	</Loggers>
 </Configuration>
