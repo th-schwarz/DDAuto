@@ -27,6 +27,7 @@ public class MainController {
 	
 	@Autowired
 	private DomainrobotSdk sdk;
+	
 
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> exist(@PathVariable String host) {
