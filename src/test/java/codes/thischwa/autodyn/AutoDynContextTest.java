@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import java.util.Properties;
 
@@ -12,10 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(classes = { TestApp.class })
 @ExtendWith(SpringExtension.class)
-class ContextTest {
+class AutoDynContextTest {
 
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 
 	private Properties zoneData;
 
@@ -49,17 +49,10 @@ class ContextTest {
 	
 	@Test
 	public void testValidateData_fail2() {
-		accountData.setProperty("sld_1.domain.tld", "1234567890abcdf");
+		accountData.setProperty("sld_1.domain1.tld", "1234567890abcdf");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			context.validateData(zoneData, accountData);
 		});
 	}
 
-	@Test
-	public void testValidateData_fail3() {
-		zoneData.setProperty("domain_1.tld", "ns.nameserver.tld");
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData(zoneData, accountData);
-		});
-	}
 }

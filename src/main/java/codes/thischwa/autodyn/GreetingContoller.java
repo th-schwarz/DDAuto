@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import java.io.BufferedReader;
 import java.io.IOException;

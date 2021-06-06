@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn.service;
 
 public interface UpdateLogger {
 

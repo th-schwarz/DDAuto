@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import codes.thischwa.autodyn.service.ZoneSdk;
+
 /**
  * The starter and config.
  */
@@ -16,10 +18,10 @@ import org.springframework.context.annotation.Configuration;
 public class AutoDynStarter {
 
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 
 	@Autowired
-	private DomainrobotSdk sdk;
+	private ZoneSdk sdk;
 	
 	public static void main(String[] args) {
 		try {

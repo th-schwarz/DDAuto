@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,16 +17,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import codes.thischwa.autodyn.service.ZoneSdk;
+import codes.thischwa.autodyn.service.ZoneSdkException;
+import codes.thischwa.autodyn.util.ZoneUtil;
+import codes.thischwa.autodyn.service.UpdateLogger;
+import codes.thischwa.autodyn.service.UpdateLoggerException;
+
 @Controller
 public class MainController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 	
 	@Autowired
-	private DomainrobotSdk sdk;
+	private ZoneSdk sdk;
 	
 	@Autowired
 	private UpdateLogger updateLogger;
@@ -67,7 +73,7 @@ public class MainController {
 			sdk.updateZone(host, ipv4Str, ipv6Str);
 			logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
 			updateLogger.log(host, ipv4Str, ipv6Str);
-		} catch (SdkException e) {
+		} catch (ZoneSdkException e) {
 			logger.error("Updated host failed: " + host, e);
 			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (UpdateLoggerException e) {
@@ -86,7 +92,7 @@ public class MainController {
 		Zone zone = null;
 		try {
 			zone = sdk.getZoneOfHost(host);
-		} catch (SdkException e) {
+		} catch (ZoneSdkException e) {
 			logger.error("Zone info for host failed: " + host, e);
 			return new ResponseEntity<String>("Info failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

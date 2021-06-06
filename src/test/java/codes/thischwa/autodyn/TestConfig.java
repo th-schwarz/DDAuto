@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 public class TestConfig {
 
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 	
 	@Bean
 	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {

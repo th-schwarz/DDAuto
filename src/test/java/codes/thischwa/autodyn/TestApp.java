@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class TestApp {
 
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AutoDynStarter.class, args);

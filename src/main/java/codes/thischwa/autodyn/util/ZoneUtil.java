@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn.util;
 
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
@@ -45,7 +45,7 @@ public class ZoneUtil {
 		}
 	}
 
-	static ResourceRecord searchResourceRecord(Zone zone, String name, String type) {
+	public static ResourceRecord searchResourceRecord(Zone zone, String name, String type) {
 		for(ResourceRecord rr : zone.getResourceRecords()) {
 			if(rr.getType().equals(type) && rr.getName().equals(name)) {
 				return rr;

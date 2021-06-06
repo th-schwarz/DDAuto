@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,16 +9,22 @@ import org.domainrobot.sdk.client.clients.ZoneClient;
 import org.domainrobot.sdk.models.DomainRobotHeaders;
 import org.domainrobot.sdk.models.DomainrobotApiException;
 import org.domainrobot.sdk.models.generated.Zone;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class DomainrobotSdk {
+import codes.thischwa.autodyn.AuoDynContext;
+import codes.thischwa.autodyn.util.ZoneUtil;
 
-	private static final Logger logger = LoggerFactory.getLogger(Context.class);
+/**
+ * A simple wrapper to ZoneClient of the Domainrobot.
+ */
+@Service
+public class ZoneSdk {
+
+	private static final Logger logger = LoggerFactory.getLogger(AuoDynContext.class);
 
 	@Value("${autodns.url}")
 	private String baseUrl;
@@ -33,7 +39,7 @@ public class DomainrobotSdk {
 	private String autodnsContext;
 
 	@Autowired
-	private Context context;
+	private AuoDynContext context;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();
@@ -45,26 +51,26 @@ public class DomainrobotSdk {
 		return headers;
 	}
 
-	void checkConfiguredZones() {
+	public void checkConfiguredZones() {
 		Properties zoneData = context.getZoneData();
 		for(String z : zoneData.stringPropertyNames()) {
-			Zone zone = getZone(z,  zoneData.getProperty(z));
+			Zone zone = getZone(z, zoneData.getProperty(z));
 			logger.info("Zone correct initialized: {}", zone.getOrigin());
 		}
 	}
 
-	Zone getZone(String origin, String primaryNameServer) throws SdkException {
+	Zone getZone(String origin, String primaryNameServer) throws ZoneSdkException {
 		ZoneClient zc = getInstance();
 		try {
 			return zc.info(origin, primaryNameServer, getCustomHeaders());
 		} catch (DomainrobotApiException e) {
-			throw new SdkException("API exception", e);
+			throw new ZoneSdkException("API exception", e);
 		} catch (Exception e) {
-			throw new SdkException("Unknown exception", e);
+			throw new ZoneSdkException("Unknown exception", e);
 		}
 	}
 
-	public Zone getZoneOfHost(String host) throws SdkException {
+	public Zone getZoneOfHost(String host) throws ZoneSdkException {
 		if(!context.getAccountData().containsKey(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = identifyZone(host);
@@ -72,7 +78,7 @@ public class DomainrobotSdk {
 		return getZone(zone, primaryNameServer);
 	}
 
-	public void updateZone(String host, String ipv4, String ipv6) throws SdkException {
+	public void updateZone(String host, String ipv4, String ipv6) throws ZoneSdkException {
 		// params must be validated by the caller
 		String sld = host.substring(0, host.indexOf("."));
 		Zone zone = getZoneOfHost(host);
@@ -88,9 +94,9 @@ public class DomainrobotSdk {
 		try {
 			zc.update(zone, getCustomHeaders());
 		} catch (DomainrobotApiException e) {
-			throw new SdkException("API exception", e);
+			throw new ZoneSdkException("API exception", e);
 		} catch (Exception e) {
-			throw new SdkException("Unknown exception", e);
+			throw new ZoneSdkException("Unknown exception", e);
 		}
 	}
 

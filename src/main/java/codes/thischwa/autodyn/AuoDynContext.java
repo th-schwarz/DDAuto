@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.rest;
+package codes.thischwa.autodyn;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * Holds the data and validates it at start.
  */
 @Component
-public class Context {
+public class AuoDynContext {
 	
 	@Value("${dir.data}")
 	private String dataDir;
