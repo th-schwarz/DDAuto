@@ -63,7 +63,7 @@ public class MainController {
 		// processing the update
 		try {
 			sdk.updateZone(host, ipv4Str, ipv6Str);
-			logger.debug("Updated host {} successful.", host);
+			logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
 			return ResponseEntity.ok("Update successful.");
 		} catch (SdkException e) {
 			logger.error("Updated host failed: " + host, e);
