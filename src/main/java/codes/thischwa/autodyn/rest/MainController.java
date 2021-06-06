@@ -28,7 +28,9 @@ public class MainController {
 	@Autowired
 	private DomainrobotSdk sdk;
 	
-
+	@Autowired
+	private UpdateLogger updateLogger;
+	
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> exist(@PathVariable String host) {
 		logger.debug("entered #exist: host={}", host);
@@ -64,11 +66,14 @@ public class MainController {
 		try {
 			sdk.updateZone(host, ipv4Str, ipv6Str);
 			logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
-			return ResponseEntity.ok("Update successful.");
+			updateLogger.log(host, ipv4Str, ipv6Str);
 		} catch (SdkException e) {
 			logger.error("Updated host failed: " + host, e);
 			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (UpdateLoggerException e) {
+			logger.error("Error while writing to zone log.", e);
 		}
+		return ResponseEntity.ok("Update successful."); 
 	}
 	
 
