@@ -25,15 +25,13 @@ public class SimpleFileLogger implements UpdateLogger {
 	private static final Logger logger = LoggerFactory.getLogger(SimpleFileLogger.class);
 	
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	
-	private static String fileName = "zone.log";
-	
-	@Value("${dir.data}")
-	private String dataDir;
+		
+	@Value("${file.zone.log}")
+	private String logFileName;
 	
 	@PostConstruct
 	public void init() {
-		Path logPath = Paths.get(dataDir, fileName);
+		Path logPath = Paths.get(logFileName);
 		if(!Files.exists(logPath)) {
 			try {
 				Files.createFile(logPath);
@@ -52,8 +50,8 @@ public class SimpleFileLogger implements UpdateLogger {
 		String dateStr = now.format(formatter);
 		ipv4 = (ipv4 == null) ? "n/a" : ipv4;
 		ipv6 = (ipv6 == null) ? "n/a" : ipv6;
-		String line = String.format("%s   %60s   %15s   %30s\n", dateStr, host, ipv4, ipv6);
-		Path logPath = Paths.get(dataDir, fileName);
+		String line = String.format("%s  %60s  %15s  %30s\n", dateStr, host, ipv4, ipv6);
+		Path logPath = Paths.get(logFileName);
 		try {
 			Files.writeString(logPath, line, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
 		} catch (IOException e) {
