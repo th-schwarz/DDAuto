@@ -21,7 +21,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
+  
+  <repositories>
+     <repository>
+         <!-- DO NOT set id to "local" because it is reserved by Maven -->
+         <id>fake-repo</id>
+         <url>file://${project.basedir}/fake-repo</url>
+     </repository>
+  </repositories>
+  
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,15 +73,11 @@
 			<groupId>org.domainrobot</groupId>
 			<artifactId>sdk-model</artifactId>
 			<version>0.2.8</version>
-			<!-- <scope>system</scope> -->
-			<!-- <systemPath>${project.basedir}/extra-libs/sdk-model-0.2.8.jar</systemPath> -->
 		</dependency>
 		<dependency>
 			<groupId>org.domainrobot</groupId>
 			<artifactId>sdk-client</artifactId>
 			<version>0.2.8</version>
-			<!-- <scope>system</scope> -->
-			<!-- <systemPath>${project.basedir}/extra-libs/sdk-client-0.2.8.jar</systemPath> -->
 		</dependency>
 
 		<dependency>
