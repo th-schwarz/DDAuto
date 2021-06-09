@@ -52,12 +52,12 @@ public class MainController {
 		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
 		
 		// validation
+		if(!context.hostExists(host)) 
+			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 		String validApitoken = context.getAccountData().getProperty(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, 
 					HttpStatus.BAD_REQUEST);
-		if(!context.hostExists(host)) 
-			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 		if(ipv4Str == null && ipv6Str == null)
 			return new ResponseEntity<String>("At least one of the following request parameter must be set: ipv4, ipv6", 
 					HttpStatus.BAD_REQUEST);
