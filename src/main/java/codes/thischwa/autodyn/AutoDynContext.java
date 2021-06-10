@@ -21,8 +21,15 @@ import org.springframework.stereotype.Component;
 public class AutoDynContext {
 
 	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
+	
 	@Value("${dir.data}")
 	private String dataDir;
+	
+	@Value("${data.zone.name}")
+	private String zoneDataName;
+
+	@Value("${data.account.name}")
+	private String accountDataName;
 	
 	private Properties zoneData = null;
 
