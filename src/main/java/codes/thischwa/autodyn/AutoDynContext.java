@@ -60,8 +60,8 @@ public class AutoDynContext {
 	
 	private void readData() {
 		try {
-			zoneData = readPropertiesfromDataDir("zone.properties");
-			accountData = readPropertiesfromDataDir("account.properties");
+			zoneData = readPropertiesfromDataDir(zoneDataName);
+			accountData = readPropertiesfromDataDir(accountDataName);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
