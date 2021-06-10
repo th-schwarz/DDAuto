@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class AutoDynContextTest {
 
 	@Autowired
-	private AuoDynContext context;
+	private AutoDynContext context;
 
 	private Properties zoneData;
 

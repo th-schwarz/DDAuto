@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.autodyn.AuoDynContext;
+import codes.thischwa.autodyn.AutoDynContext;
 import codes.thischwa.autodyn.util.ZoneUtil;
 
 /**
@@ -24,7 +24,7 @@ import codes.thischwa.autodyn.util.ZoneUtil;
 @Service
 public class ZoneSdk {
 
-	private static final Logger logger = LoggerFactory.getLogger(AuoDynContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
 
 	@Value("${autodns.url}")
 	private String baseUrl;
@@ -39,7 +39,7 @@ public class ZoneSdk {
 	private String autodnsContext;
 
 	@Autowired
-	private AuoDynContext context;
+	private AutoDynContext context;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();

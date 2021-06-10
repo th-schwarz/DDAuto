@@ -5,6 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -14,8 +18,9 @@ import org.springframework.stereotype.Component;
  * Holds the data and validates it at start.
  */
 @Component
-public class AuoDynContext {
-	
+public class AutoDynContext {
+
+	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
 	@Value("${dir.data}")
 	private String dataDir;
 	
@@ -31,7 +36,13 @@ public class AuoDynContext {
 		return accountData;
 	}
 
-	public void readAndValidateData() {
+	@PostConstruct
+	void init() {
+		readAndValidateData();
+		logger.info("*** Account and zone data read and validated successful!");
+	}
+	
+	void readAndValidateData() {
 		readData();
 		validateData(zoneData, accountData);
 	}
@@ -43,10 +54,6 @@ public class AuoDynContext {
 	private void readData() {
 		try {
 			zoneData = readPropertiesfromDataDir("zone.properties");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		try {
 			accountData = readPropertiesfromDataDir("account.properties");
 		} catch (IOException e) {
 			throw new RuntimeException(e);

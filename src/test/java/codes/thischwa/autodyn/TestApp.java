@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class TestApp {
 
 	@Autowired
-	private AuoDynContext context;
+	private AutoDynContext context;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AutoDynStarter.class, args);

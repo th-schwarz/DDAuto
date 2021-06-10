@@ -18,9 +18,6 @@ import codes.thischwa.autodyn.service.ZoneSdk;
 public class AutoDynStarter {
 
 	@Autowired
-	private AuoDynContext context;
-
-	@Autowired
 	private ZoneSdk sdk;
 	
 	public static void main(String[] args) {
@@ -38,7 +35,6 @@ public class AutoDynStarter {
 			
 			@Override
 			public void onApplicationEvent(ApplicationReadyEvent event) {
-				context.readAndValidateData();	
 				sdk.checkConfiguredZones();
 			}
 		};
