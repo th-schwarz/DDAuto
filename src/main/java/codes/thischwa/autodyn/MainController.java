@@ -12,62 +12,63 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import codes.thischwa.autodyn.service.UpdateLogger;
+import codes.thischwa.autodyn.service.UpdateLoggerException;
 import codes.thischwa.autodyn.service.ZoneSdk;
 import codes.thischwa.autodyn.service.ZoneSdkException;
 import codes.thischwa.autodyn.util.ZoneUtil;
-import codes.thischwa.autodyn.service.UpdateLogger;
-import codes.thischwa.autodyn.service.UpdateLoggerException;
 
 @Controller
 public class MainController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
+
 	@Autowired
 	private AutoDynContext context;
-	
+
 	@Autowired
 	private ZoneSdk sdk;
-	
+
 	@Autowired
 	private UpdateLogger updateLogger;
-	
+
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> exist(@PathVariable String host) {
+	public ResponseEntity<String> exist(@PathVariable
+	String host) {
 		logger.debug("entered #exist: host={}", host);
-		if(context.hostExists(host)) 
+		if(context.hostExists(host))
 			return ResponseEntity.ok("Host found.");
 		return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 	}
-	
 
 	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> update(@PathVariable String host, @RequestParam String apitoken, @RequestParam(name = "ipv4", required = false) String ipv4Str,
-			@RequestParam(name = "ipv6", required = false) String ipv6Str) {
+	public ResponseEntity<String> update(@PathVariable
+	String host, @RequestParam
+	String apitoken, @RequestParam(name = "ipv4", required = false)
+	String ipv4Str, @RequestParam(name = "ipv6", required = false)
+	String ipv6Str) {
 		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
-		
+
 		// validation
-		if(!context.hostExists(host)) 
+		if(!context.hostExists(host))
 			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 		String validApitoken = context.getAccountData().getProperty(host);
 		if(!validApitoken.equals(apitoken))
-			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, 
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
 		if(ipv4Str == null && ipv6Str == null)
-			return new ResponseEntity<String>("At least one of the following request parameter must be set: ipv4, ipv6", 
+			return new ResponseEntity<String>("At least one of the following request parameter must be set: ipv4, ipv6",
 					HttpStatus.BAD_REQUEST);
 		if(ipv4Str != null && !validateIP(ipv4Str))
-			return new ResponseEntity<String>("Request parameter 'ipv4' isn't valid: " + ipv4Str, 
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
 		if(ipv6Str != null && !validateIP(ipv6Str))
-			return new ResponseEntity<String>("Request parameter 'ipv6' isn't valid: " + ipv6Str, 
-					HttpStatus.BAD_REQUEST);
-		
+			return new ResponseEntity<String>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
+
 		// processing the update
 		try {
 			sdk.updateZone(host, ipv4Str, ipv6Str);
@@ -79,16 +80,16 @@ public class MainController {
 		} catch (UpdateLoggerException e) {
 			logger.error("Error while writing to zone log.", e);
 		}
-		return ResponseEntity.ok("Update successful."); 
+		return ResponseEntity.ok("Update successful.");
 	}
-	
 
 	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> info(@PathVariable String host) {
+	public ResponseEntity<String> info(@PathVariable
+	String host) {
 		logger.debug("entered #info: host={}", host);
-		if(!context.hostExists(host)) 
+		if(!context.hostExists(host))
 			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
-		
+
 		Zone zone = null;
 		try {
 			zone = sdk.getZoneOfHost(host);
@@ -108,7 +109,7 @@ public class MainController {
 		info.append("IPv6: ").append(ipv6Str).append('\n');
 		return ResponseEntity.ok(info.toString());
 	}
-	
+
 	boolean validateIP(String ipStr) {
 		try {
 			InetAddress.getByName(ipStr);
@@ -116,5 +117,15 @@ public class MainController {
 		} catch (UnknownHostException e) {
 			return false;
 		}
+	}
+
+	@GetMapping("meminfo")
+	public ResponseEntity<String> getMemoryStatistics() {
+		StringBuilder memInfo = new StringBuilder();
+		memInfo.append("Basic memory Information:\n");
+		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / (1024l * 1024l)));
+		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / (1024l * 1024l)));
+		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / (1024l * 1024l)));
+		return ResponseEntity.ok(memInfo.toString());
 	}
 }
