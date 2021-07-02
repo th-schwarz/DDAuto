@@ -19,23 +19,28 @@ public class AutoDynStarter {
 
 	@Autowired
 	private ZoneSdk sdk;
-	
+
 	public static void main(String[] args) {
 		try {
 			SpringApplication.run(AutoDynStarter.class, args);
 		} catch (Exception e) {
-            System.out.println("Unexpected exception, Spring Boot stops!");
-            System.exit(10);
+			System.out.println("Unexpected exception, Spring Boot stops!");
+			System.exit(10);
 		}
 	}
-	
+
+	/**
+	 * Creates a listener for the ApplicationReadyEvent, that validates the configured zones.
+	 * 
+	 * @return the required ApplicationListener
+	 */
 	@Bean
 	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {
 		return new ApplicationListener<ApplicationReadyEvent>() {
-			
+
 			@Override
 			public void onApplicationEvent(ApplicationReadyEvent event) {
-				sdk.checkConfiguredZones();
+				sdk.validateConfiguredZones();
 			}
 		};
 	}

@@ -7,6 +7,7 @@ import org.domainrobot.sdk.client.JsonUtils;
 import org.domainrobot.sdk.models.generated.JsonResponseDataZone;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -48,5 +49,17 @@ class ZoneUtilTest {
 		assertEquals(5, zone.getResourceRecords().size());
 		ZoneUtil.removeIPv4(zone, "sub2");
 		assertEquals(4, zone.getResourceRecords().size());
+	}
+	
+	@Test
+	final void testDeriveZone() {
+		assertEquals("example.com", ZoneUtil.deriveZone("sub.example.com"));
+	}
+
+	@Test
+	final void testDeriveZone_fail() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			ZoneUtil.deriveZone("example.com");
+		});
 	}
 }

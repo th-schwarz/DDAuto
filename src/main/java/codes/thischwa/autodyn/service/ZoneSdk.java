@@ -26,6 +26,8 @@ public class ZoneSdk {
 
 	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
 
+	private static Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
+
 	@Value("${autodns.url}")
 	private String baseUrl;
 
@@ -45,24 +47,18 @@ public class ZoneSdk {
 		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();
 	}
 
-	private Map<String, String> getCustomHeaders() {
-		Map<String, String> headers = new HashMap<>();
-		headers.put(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE");
-		return headers;
-	}
-
-	public void checkConfiguredZones() {
+	public void validateConfiguredZones() {
 		Properties zoneData = context.getZoneData();
 		for(String z : zoneData.stringPropertyNames()) {
-			Zone zone = getZone(z, zoneData.getProperty(z));
+			Zone zone = zoneInfo(z, zoneData.getProperty(z));
 			logger.info("Zone correct initialized: {}", zone.getOrigin());
 		}
 	}
 
-	Zone getZone(String origin, String primaryNameServer) throws ZoneSdkException {
+	Zone zoneInfo(String origin, String primaryNameServer) throws ZoneSdkException {
 		ZoneClient zc = getInstance();
 		try {
-			return zc.info(origin, primaryNameServer, getCustomHeaders());
+			return zc.info(origin, primaryNameServer, customHeaders);
 		} catch (DomainrobotApiException e) {
 			throw new ZoneSdkException("API exception", e);
 		} catch (Exception e) {
@@ -70,18 +66,28 @@ public class ZoneSdk {
 		}
 	}
 
-	public Zone getZoneOfHost(String host) throws ZoneSdkException {
+	public Zone zoneInfo(String host) throws ZoneSdkException {
 		if(!context.getAccountData().containsKey(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
-		String zone = identifyZone(host);
+		String zone = ZoneUtil.deriveZone(host);
 		String primaryNameServer = context.getZoneData().getProperty(zone);
-		return getZone(zone, primaryNameServer);
+		return zoneInfo(zone, primaryNameServer);
 	}
 
-	public void updateZone(String host, String ipv4, String ipv6) throws ZoneSdkException {
-		// params must be validated by the caller
+	/**
+	 * Updates the zone derived from the host. <br>
+	 * The parameters must be validated by the caller.
+	 * 
+	 * @param host the hostname, should be a sub domain
+	 * @param ipv4 Add or update the ipv4 address. If it's null, it will be dropped from the zone.
+	 * @param ipv6 Add or update the ipv6 address. If it's null, it will be dropped from the zone.
+	 * @throws ZoneSdkException
+	 */
+	public void zoneUpdate(String host, String ipv4, String ipv6) throws ZoneSdkException {
 		String sld = host.substring(0, host.indexOf("."));
-		Zone zone = getZoneOfHost(host);
+		
+		// set the IPs in the zone object
+		Zone zone = zoneInfo(host);
 		if(ipv4 != null)
 			ZoneUtil.addOrUpdateIPv4(zone, sld, ipv4);
 		else
@@ -90,17 +96,15 @@ public class ZoneSdk {
 			ZoneUtil.addOrUpdateIPv6(zone, sld, ipv6);
 		else
 			ZoneUtil.removeIPv6(zone, sld);
+		
+		// processing the update
 		ZoneClient zc = getInstance();
 		try {
-			zc.update(zone, getCustomHeaders());
+			zc.update(zone, customHeaders);
 		} catch (DomainrobotApiException e) {
 			throw new ZoneSdkException("API exception", e);
 		} catch (Exception e) {
 			throw new ZoneSdkException("Unknown exception", e);
 		}
-	}
-
-	String identifyZone(String host) {
-		return host.substring(host.indexOf(".") + 1);
 	}
 }

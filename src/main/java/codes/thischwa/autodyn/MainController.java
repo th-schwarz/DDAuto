@@ -71,7 +71,7 @@ public class MainController {
 
 		// processing the update
 		try {
-			sdk.updateZone(host, ipv4Str, ipv6Str);
+			sdk.zoneUpdate(host, ipv4Str, ipv6Str);
 			logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
 			updateLogger.log(host, ipv4Str, ipv6Str);
 		} catch (ZoneSdkException e) {
@@ -92,7 +92,7 @@ public class MainController {
 
 		Zone zone = null;
 		try {
-			zone = sdk.getZoneOfHost(host);
+			zone = sdk.zoneInfo(host);
 		} catch (ZoneSdkException e) {
 			logger.error("Zone info failed for: " + host, e);
 			return new ResponseEntity<String>("Zone info failed!", HttpStatus.INTERNAL_SERVER_ERROR);

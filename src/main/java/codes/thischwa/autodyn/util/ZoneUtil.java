@@ -3,7 +3,7 @@ package codes.thischwa.autodyn.util;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 
-public class ZoneUtil {
+public abstract class ZoneUtil {
 
 	private final static long DEFAULT_TLD = 60;
 
@@ -52,6 +52,13 @@ public class ZoneUtil {
 			}
 		}
 		return null;
+	}
+
+	public static String deriveZone(String host) {
+		long cnt = host.chars().filter(ch -> ch == '.').count();
+		if(cnt < 2)
+			throw new IllegalArgumentException("'host' must be a sub domain.");
+		return host.substring(host.indexOf(".") + 1);
 	}
 
 }
