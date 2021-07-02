@@ -94,8 +94,8 @@ public class MainController {
 		try {
 			zone = sdk.getZoneOfHost(host);
 		} catch (ZoneSdkException e) {
-			logger.error("Zone info for host failed: " + host, e);
-			return new ResponseEntity<String>("Info failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.error("Zone info failed for: " + host, e);
+			return new ResponseEntity<String>("Zone info failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		String sld = host.substring(0, host.indexOf("."));
