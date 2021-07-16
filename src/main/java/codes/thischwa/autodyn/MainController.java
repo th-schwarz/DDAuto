@@ -1,8 +1,5 @@
 package codes.thischwa.autodyn;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
@@ -64,9 +61,9 @@ public class MainController {
 		if(ipv4Str == null && ipv6Str == null)
 			return new ResponseEntity<String>("At least one of the following request parameter must be set: ipv4, ipv6",
 					HttpStatus.BAD_REQUEST);
-		if(ipv4Str != null && !validateIP(ipv4Str))
+		if(ipv4Str != null && !ZoneUtil.validateIP(ipv4Str))
 			return new ResponseEntity<String>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
-		if(ipv6Str != null && !validateIP(ipv6Str))
+		if(ipv6Str != null && !ZoneUtil.validateIP(ipv6Str))
 			return new ResponseEntity<String>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
 
 		// processing the update
@@ -108,15 +105,6 @@ public class MainController {
 		info.append("IPv4: ").append(ipv4Str).append('\n');
 		info.append("IPv6: ").append(ipv6Str).append('\n');
 		return ResponseEntity.ok(info.toString());
-	}
-
-	boolean validateIP(String ipStr) {
-		try {
-			InetAddress.getByName(ipStr);
-			return true;
-		} catch (UnknownHostException e) {
-			return false;
-		}
 	}
 
 	@GetMapping("meminfo")

@@ -1,8 +1,14 @@
 package codes.thischwa.autodyn.util;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 
+/**
+ * A static utility class mainly for the Zone object of the domain-robot sdk.
+ */
 public abstract class ZoneUtil {
 
 	private final static long DEFAULT_TLD = 60;
@@ -59,6 +65,15 @@ public abstract class ZoneUtil {
 		if(cnt < 2)
 			throw new IllegalArgumentException("'host' must be a sub domain.");
 		return host.substring(host.indexOf(".") + 1);
+	}
+
+	public static boolean validateIP(String ipStr) {
+		try {
+			InetAddress.getByName(ipStr);
+			return true;
+		} catch (UnknownHostException e) {
+			return false;
+		}
 	}
 
 }
