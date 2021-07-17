@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn;
+package codes.thischwa.ddauto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

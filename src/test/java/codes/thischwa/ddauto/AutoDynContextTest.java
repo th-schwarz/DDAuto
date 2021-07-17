@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn;
+package codes.thischwa.ddauto;
 
 import java.util.Properties;
 

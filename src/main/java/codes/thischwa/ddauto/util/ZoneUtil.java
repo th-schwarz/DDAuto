@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.util;
+package codes.thischwa.ddauto.util;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

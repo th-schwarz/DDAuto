@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.util;
+package codes.thischwa.ddauto.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

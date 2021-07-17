@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn;
+package codes.thischwa.ddauto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import codes.thischwa.autodyn.service.ZoneSdk;
+import codes.thischwa.ddauto.service.ZoneSdk;
 
 /**
  * The starter and config.

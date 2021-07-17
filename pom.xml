@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>codes.thischwa</groupId>
-	<artifactId>autodyn</artifactId>
+	<artifactId>ddauto</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<name>AutoDyn</name>
+	<name>ddauto</name>
 	<description>Dynamic DNS with AutoDNS</description>
 
 	<properties>

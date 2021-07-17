@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.service;
+package codes.thischwa.ddauto.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.autodyn.AutoDynContext;
+import codes.thischwa.ddauto.AutoDynContext;
 
 /**
  * A very simple logger for zone updates.

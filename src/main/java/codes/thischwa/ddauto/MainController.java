@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn;
+package codes.thischwa.ddauto;
 
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import codes.thischwa.autodyn.service.UpdateLogger;
-import codes.thischwa.autodyn.service.UpdateLoggerException;
-import codes.thischwa.autodyn.service.ZoneSdk;
-import codes.thischwa.autodyn.service.ZoneSdkException;
-import codes.thischwa.autodyn.util.ZoneUtil;
+import codes.thischwa.ddauto.service.UpdateLogger;
+import codes.thischwa.ddauto.service.UpdateLoggerException;
+import codes.thischwa.ddauto.service.ZoneSdk;
+import codes.thischwa.ddauto.service.ZoneSdkException;
+import codes.thischwa.ddauto.util.ZoneUtil;
 
 @Controller
 public class MainController {

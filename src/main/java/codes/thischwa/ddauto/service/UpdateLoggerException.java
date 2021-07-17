@@ -1,4 +1,4 @@
-package codes.thischwa.autodyn.service;
+package codes.thischwa.ddauto.service;
 
 public class UpdateLoggerException extends Exception {
 

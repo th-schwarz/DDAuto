@@ -1,4 +1,4 @@
-# AutoDYN
+# DDAuto
 
 Dynamic DNS with AutoDNS
 
