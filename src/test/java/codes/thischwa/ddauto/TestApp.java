@@ -5,16 +5,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication()
+@SpringBootApplication
+@Configuration
 public class TestApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AutoDynStarter.class, args);
+		SpringApplication.run(DDAutoStarter.class, args);
 	}
 	
 	@Bean
-	ApplicationListener<ApplicationReadyEvent> createTestApplicationReadyListener() {
+	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {
 		return new ApplicationListener<ApplicationReadyEvent>() {
 			
 			@Override

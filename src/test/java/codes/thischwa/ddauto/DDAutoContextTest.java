@@ -12,10 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(classes = { TestApp.class })
 @ExtendWith(SpringExtension.class)
-class AutoDynContextTest {
+class DDAutoContextTest {
 
 	@Autowired
-	private AutoDynContext context;
+	private DDAutoContext context;
 
 	private Properties zoneData;
 

@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.ddauto.AutoDynContext;
+import codes.thischwa.ddauto.DDAutoContext;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**
@@ -24,7 +24,7 @@ import codes.thischwa.ddauto.util.ZoneUtil;
 @Service
 public class ZoneSdk {
 
-	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDAutoContext.class);
 
 	private static Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
@@ -41,7 +41,7 @@ public class ZoneSdk {
 	private String autodnsContext;
 
 	@Autowired
-	private AutoDynContext context;
+	private DDAutoContext context;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();

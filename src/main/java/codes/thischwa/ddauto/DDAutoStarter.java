@@ -15,14 +15,14 @@ import codes.thischwa.ddauto.service.ZoneSdk;
  */
 @SpringBootApplication
 @Configuration
-public class AutoDynStarter {
+public class DDAutoStarter {
 
 	@Autowired
 	private ZoneSdk sdk;
 
 	public static void main(String[] args) {
 		try {
-			SpringApplication.run(AutoDynStarter.class, args);
+			SpringApplication.run(DDAutoStarter.class, args);
 		} catch (Exception e) {
 			System.out.println("Unexpected exception, Spring Boot stops!");
 			System.exit(10);

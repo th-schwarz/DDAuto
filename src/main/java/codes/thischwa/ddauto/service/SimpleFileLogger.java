@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.ddauto.AutoDynContext;
+import codes.thischwa.ddauto.DDAutoContext;
 
 /**
  * A very simple logger for zone updates.
@@ -34,7 +34,7 @@ public class SimpleFileLogger implements UpdateLogger {
 	private String logFileName;
 
 	@Autowired
-	private AutoDynContext context;
+	private DDAutoContext context;
 
 	private String logEntryFormat;
 

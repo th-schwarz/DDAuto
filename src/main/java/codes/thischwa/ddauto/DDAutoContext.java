@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
  * Holds the data and validates it at start.
  */
 @Component
-public class AutoDynContext {
+public class DDAutoContext {
 
-	private static final Logger logger = LoggerFactory.getLogger(AutoDynContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDAutoContext.class);
 	
 	@Value("${dir.data}")
 	private String dataDir;
