@@ -14,7 +14,7 @@ public class TestApp {
 	}
 	
 	@Bean
-	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {
+	ApplicationListener<ApplicationReadyEvent> createTestApplicationReadyListener() {
 		return new ApplicationListener<ApplicationReadyEvent>() {
 			
 			@Override
