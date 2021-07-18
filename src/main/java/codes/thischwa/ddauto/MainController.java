@@ -36,8 +36,7 @@ public class MainController {
 	private UpdateLogger updateLogger;
 
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> exist(@PathVariable
-	String host) {
+	public ResponseEntity<String> exist(@PathVariable String host) {
 		logger.debug("entered #exist: host={}", host);
 		if(context.hostExists(host))
 			return ResponseEntity.ok("Host found.");
@@ -45,11 +44,8 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> update(@PathVariable
-	String host, @RequestParam
-	String apitoken, @RequestParam(name = "ipv4", required = false)
-	String ipv4Str, @RequestParam(name = "ipv6", required = false)
-	String ipv6Str) {
+	public ResponseEntity<String> update(@PathVariable String host, @RequestParam String apitoken,
+			@RequestParam(name = "ipv4", required = false) String ipv4Str, @RequestParam(name = "ipv6", required = false) String ipv6Str) {
 		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
 
 		// validation
@@ -81,8 +77,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> info(@PathVariable
-	String host) {
+	public ResponseEntity<String> info(@PathVariable String host) {
 		logger.debug("entered #info: host={}", host);
 		if(!context.hostExists(host))
 			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);

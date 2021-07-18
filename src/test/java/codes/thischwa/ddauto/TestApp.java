@@ -14,13 +14,13 @@ public class TestApp {
 	public static void main(String[] args) {
 		SpringApplication.run(DDAutoStarter.class, args);
 	}
-	
+
 	@Bean
 	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {
 		return new ApplicationListener<ApplicationReadyEvent>() {
-			
+
 			@Override
-			public void onApplicationEvent(ApplicationReadyEvent event) {				
+			public void onApplicationEvent(ApplicationReadyEvent event) {
 			}
 		};
 	}

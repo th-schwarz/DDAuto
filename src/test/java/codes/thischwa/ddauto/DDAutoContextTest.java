@@ -33,7 +33,7 @@ class DDAutoContextTest {
 	final void dummyTest() {
 		Assertions.assertTrue(zoneData.size() == accountData.size());
 	}
-	
+
 	@Test
 	final void testValidateData_ok() {
 		context.validateData(zoneData, accountData);
@@ -46,7 +46,7 @@ class DDAutoContextTest {
 			context.validateData(zoneData, accountData);
 		});
 	}
-	
+
 	@Test
 	public void testValidateData_fail2() {
 		accountData.setProperty("sld_1.domain1.tld", "1234567890abcdf");

@@ -31,7 +31,7 @@ class ZoneUtilTest {
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
-	
+
 	@Test
 	final void testAddIPv4() {
 		assertEquals(4, zone.getResourceRecords().size());
@@ -41,7 +41,7 @@ class ZoneUtilTest {
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
-	
+
 	@Test
 	final void testRemoveIPv4() {
 		assertEquals(4, zone.getResourceRecords().size());
@@ -50,7 +50,7 @@ class ZoneUtilTest {
 		ZoneUtil.removeIPv4(zone, "sub2");
 		assertEquals(4, zone.getResourceRecords().size());
 	}
-	
+
 	@Test
 	final void testDeriveZone() {
 		assertEquals("example.com", ZoneUtil.deriveZone("sub.example.com"));

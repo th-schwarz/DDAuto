@@ -21,16 +21,16 @@ import org.springframework.stereotype.Component;
 public class DDAutoContext {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDAutoContext.class);
-	
+
 	@Value("${dir.data}")
 	private String dataDir;
-	
+
 	@Value("${data.zone.name}")
 	private String zoneDataName;
 
 	@Value("${data.account.name}")
 	private String accountDataName;
-	
+
 	private Properties zoneData = null;
 
 	private Properties accountData = null;
@@ -48,16 +48,16 @@ public class DDAutoContext {
 		readAndValidateData();
 		logger.info("*** Account and zone data read and validated successful!");
 	}
-	
+
 	void readAndValidateData() {
 		readData();
 		validateData(zoneData, accountData);
 	}
-	
+
 	public boolean hostExists(String host) {
 		return accountData.containsKey(host);
 	}
-	
+
 	private void readData() {
 		try {
 			zoneData = readPropertiesfromDataDir(zoneDataName);
