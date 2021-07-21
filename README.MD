@@ -6,14 +6,9 @@ Dynamic DNS with AutoDNS
 
 # Docu TODOs
 
-- big picture
-
-- routes & query strings
-
-- starting 
-
-  - cli
-  
-  - systemd
-
-- javadoc
+* big picture
+* routes & query strings
+* starting 
+  * cli
+  * systemd
+* javadoc
