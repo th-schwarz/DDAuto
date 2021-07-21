@@ -28,19 +28,19 @@ public class DDAutoContext {
 	@Value("${data.zone.name}")
 	private String zoneDataName;
 
-	@Value("${data.account.name}")
-	private String accountDataName;
+	@Value("${data.apitoken.name}")
+	private String apitokenDataName;
 
 	private Properties zoneData = null;
 
-	private Properties accountData = null;
+	private Properties apitokenData = null;
 
 	public Properties getZoneData() {
 		return zoneData;
 	}
 
-	public Properties getAccountData() {
-		return accountData;
+	public Properties getApitokenData() {
+		return apitokenData;
 	}
 
 	@PostConstruct
@@ -51,17 +51,17 @@ public class DDAutoContext {
 
 	void readAndValidateData() {
 		readData();
-		validateData(zoneData, accountData);
+		validateData(zoneData, apitokenData);
 	}
 
 	public boolean hostExists(String host) {
-		return accountData.containsKey(host);
+		return apitokenData.containsKey(host);
 	}
 
 	private void readData() {
 		try {
 			zoneData = readPropertiesfromDataDir(zoneDataName);
-			accountData = readPropertiesfromDataDir(accountDataName);
+			apitokenData = readPropertiesfromDataDir(apitokenDataName);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

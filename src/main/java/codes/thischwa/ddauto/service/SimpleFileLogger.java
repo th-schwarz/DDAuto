@@ -73,7 +73,7 @@ public class SimpleFileLogger implements UpdateLogger {
 	private void initLogEntryFormat() {
 		// determine the max. length of the hosts for nicer logging
 		// can't be done in PostConstruct, because properties aren't loaded
-		int maxSize = context.getAccountData().stringPropertyNames().stream().max(Comparator.comparing(String::length)).get().length();
+		int maxSize = context.getApitokenData().stringPropertyNames().stream().max(Comparator.comparing(String::length)).get().length();
 		logEntryFormat = "%s  %" + maxSize + "s  %15s  %40s\n";
 	}
 }

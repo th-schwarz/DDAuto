@@ -67,7 +67,7 @@ public class ZoneSdk {
 	}
 
 	public Zone zoneInfo(String host) throws ZoneSdkException {
-		if(!context.getAccountData().containsKey(host))
+		if(!context.getApitokenData().containsKey(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = ZoneUtil.deriveZone(host);
 		String primaryNameServer = context.getZoneData().getProperty(zone);
