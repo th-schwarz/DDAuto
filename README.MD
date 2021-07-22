@@ -46,3 +46,7 @@ The start by command line looks like:
 java -jar /opt/ddauto/ddauto.jar \
    --spring.config.location=file:///opt/ddauto/application.properties
 ```
+
+## Routes
+
+TODO !!!
