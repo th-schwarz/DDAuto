@@ -23,7 +23,7 @@ For each host an api-token can be defined. If the api-token doesn't match the ho
 
 DDAuto is a spring boot application, that's why the application is extremely customizable just by configuration! It is compiled with the starter using jetty. Details of the configuration can be found here: https://docs.spring.io/spring-boot/docs/2.5.2/reference/htmlsingle/#application-properties and https://docs.spring.io/spring-boot/docs/2.5.2/reference/htmlsingle/#actuator.monitoring.customizing-management-server-port
 
-Side note: To avoid the use of the java keystore tool, DDAuto could be run behind proxy. Corresponding headers are set by default.
+Side note: To avoid the use of the java keystore tool, DDAuto could be run behind a proxy. Corresponding headers are set by default.
 
 Here is the suggested directory/file structure:
 
