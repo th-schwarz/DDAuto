@@ -43,5 +43,6 @@ Here is the suggested directory/file structure:
 
 The start by command line looks like:
 ```bash
-java -jar /opt/ddauto/ddauto.jar --spring.config.location=file:///opt/ddauto/application.properties
+java -jar /opt/ddauto/ddauto.jar \
+   --spring.config.location=file:///opt/ddauto/application.properties
 ```
