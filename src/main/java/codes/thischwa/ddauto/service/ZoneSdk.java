@@ -2,7 +2,6 @@ package codes.thischwa.ddauto.service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.domainrobot.sdk.client.Domainrobot;
 import org.domainrobot.sdk.client.clients.ZoneClient;
@@ -48,9 +47,8 @@ public class ZoneSdk {
 	}
 
 	public void validateConfiguredZones() {
-		Properties zoneData = context.getZoneData();
-		for(String z : zoneData.stringPropertyNames()) {
-			Zone zone = zoneInfo(z, zoneData.getProperty(z));
+		for(String z : context.getConfiguredZones()) {
+			Zone zone = zoneInfo(z, context.getPrimaryNameServer(z));
 			logger.info("Zone correct initialized: {}", zone.getOrigin());
 		}
 	}
@@ -66,11 +64,11 @@ public class ZoneSdk {
 		}
 	}
 
-	public Zone zoneInfo(String host) throws ZoneSdkException {
-		if(!context.getApitokenData().containsKey(host))
+	public Zone zoneInfo(String host) throws ZoneSdkException, IllegalArgumentException {
+		if(!context.hostExists(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = ZoneUtil.deriveZone(host);
-		String primaryNameServer = context.getZoneData().getProperty(zone);
+		String primaryNameServer = context.getPrimaryNameServer(zone);
 		return zoneInfo(zone, primaryNameServer);
 	}
 

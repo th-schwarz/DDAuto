@@ -51,7 +51,7 @@ public class MainController {
 		// validation
 		if(!context.hostExists(host))
 			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
-		String validApitoken = context.getApitokenData().getProperty(host);
+		String validApitoken = context.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
 		if(ipv4Str == null && ipv6Str == null)

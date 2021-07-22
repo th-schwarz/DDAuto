@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -34,19 +35,19 @@ public class DDAutoContext {
 	private Properties zoneData = null;
 
 	private Properties apitokenData = null;
-
-	public Properties getZoneData() {
-		return zoneData;
+	
+	public Set<String> getConfiguredHosts() {
+		return apitokenData.stringPropertyNames();
 	}
 
-	public Properties getApitokenData() {
-		return apitokenData;
+	public Set<String> getConfiguredZones() {
+		return zoneData.stringPropertyNames();
 	}
-
+	
 	@PostConstruct
 	void init() {
 		readAndValidateData();
-		logger.info("*** Api-token and zone data read and validated successful!");
+		logger.info("*** Api-token and zone data are read and validated successful!");
 	}
 
 	void readAndValidateData() {
@@ -56,6 +57,18 @@ public class DDAutoContext {
 
 	public boolean hostExists(String host) {
 		return apitokenData.containsKey(host);
+	}
+	
+	public String getApitoken(String host) throws IllegalArgumentException {
+		if(hostExists(host))
+			throw new IllegalArgumentException("Host isn't configured: " + host);
+		return apitokenData.getProperty(host);
+	}
+	
+	public String getPrimaryNameServer(String zone) throws IllegalArgumentException {
+		if(!zoneData.containsKey(zone))
+			throw new IllegalArgumentException("Zone isn't configured: " + zone);
+		return zoneData.getProperty(zone);
 	}
 
 	private void readData() {
@@ -67,13 +80,13 @@ public class DDAutoContext {
 		}
 	}
 
-	void validateData(Properties zoneData, Properties accountData) {
-		if(zoneData == null || accountData == null || accountData.isEmpty())
+	void validateData(Properties zoneData, Properties apitokenData) {
+		if(zoneData == null || apitokenData == null || apitokenData.isEmpty())
 			throw new IllegalArgumentException("Account and zone data are inconsistent.");
-		for(String sld : accountData.stringPropertyNames()) {
-			String domain = sld.substring(sld.indexOf(".") + 1);
+		for(String host : apitokenData.stringPropertyNames()) {
+			String domain = host.substring(host.indexOf(".") + 1);
 			if(!zoneData.containsKey(domain))
-				throw new IllegalArgumentException("No zone data found for: " + domain);
+				throw new IllegalArgumentException("Missing zone data for: " + domain);
 		}
 	}
 
