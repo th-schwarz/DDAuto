@@ -16,21 +16,21 @@
 	<description>Dynamic DNS with AutoDNS</description>
 
 	<properties>
-<!-- 		<servlet-api.version>3.1.0</servlet-api.version> -->
+		<!-- <servlet-api.version>3.1.0</servlet-api.version> -->
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-  
-  <repositories>
-     <repository>
-         <!-- DO NOT set id to "local" because it is reserved by Maven -->
-         <!-- This is a fake maven repo for the extra jars. -->
-         <id>fake-repo</id>
-         <url>file://${project.basedir}/fake-repo</url>
-     </repository>
-  </repositories>
-  
+
+	<repositories>
+		<repository>
+			<!-- DO NOT set id to "local" because it is reserved by Maven -->
+			<!-- This is a fake maven repo for the extra jars. -->
+			<id>fake-repo</id>
+			<url>file://${project.basedir}/fake-repo</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -108,7 +108,28 @@
 					<includeSystemScope>true</includeSystemScope>
 				</configuration>
 			</plugin>
+			<!-- plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin -->
 		</plugins>
 	</build>
 
+	<developers>
+		<developer>
+			<id>th-schwarz</id>
+			<name>Thilo Schwarz</name>
+			<email>osp AT thischwa.codes</email>
+			<url>https://www.thischwa.codes</url>
+			<roles>
+				<role>Head Project Manager</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 </project>
