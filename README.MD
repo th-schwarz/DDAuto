@@ -29,12 +29,12 @@ Here is the suggested directory/file structure:
 
 ```bash
 ├── /opt/ddauto
-│   ├── api-token.properties
-│   ├── application.properties
+│   ├── api-token.properties  (defines an api-token per host, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/api-token.properties_example))
+│   ├── application.properties (defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties))
 │   ├── ddauto-0.1.0-SNAPSHOT.jar
 │   ├── ddauto.jar -> ddauto-0.1.0-SNAPSHOT.jar
-│   ├── ddauto-zone.log
+│   ├── ddauto-zone.log   (log of the zone updates)
 │   ├── log4j2.xml
-│   ├── zone.properties
+│   ├── zone.properties  (defines a primary name server per zone, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/zone.properties_example))
 ```
 
