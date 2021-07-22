@@ -46,7 +46,7 @@ public class DDAutoContext {
 	@PostConstruct
 	void init() {
 		readAndValidateData();
-		logger.info("*** Account and zone data read and validated successful!");
+		logger.info("*** Api-token and zone data read and validated successful!");
 	}
 
 	void readAndValidateData() {
