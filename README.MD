@@ -38,7 +38,8 @@ Here is the suggested directory/file structure:
 │   ├── zone.properties
 ```
 * api-token.properties: defines an api-token per host, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/api-token.properties_example)
-* application.properties: defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties)
+* application.properties: defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties)<br>#
+  Important: Here the basic-auth must be defined!
 * zone.properties: defines a primary name server per zone, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/zone.properties_example)
 
 The start by command line looks like:
@@ -49,5 +50,9 @@ java -jar /opt/ddauto/ddauto.jar \
 
 ## Basic routes
 
-* {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&&ipv6=[yourIPv6] <br>
-  'ipv6' is optional
+All routes are secured by basic-auth.
+
+* {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&ipv6=[yourIPv6] <br>
+  Updates the IP addresses of 'yourHost', 'ipv6' is optional.
+* {baseUrl}/info/[yourHost] <br>
+  Returns a plain text with the IP configuration of 'yourHost'.
