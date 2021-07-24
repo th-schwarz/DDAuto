@@ -47,7 +47,7 @@ java -jar /opt/ddauto/ddauto.jar \
    --spring.config.location=file:///opt/ddauto/application.properties
 ```
 
-## Routes
+## Basic routes
 
-* {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&&ipv6=[yourIPv6]
+* {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&&ipv6=[yourIPv6] <br>
   'ipv6' is optional
