@@ -9,7 +9,8 @@ Requirement: An AutoDNS account! For further details have a look at [AutoDNS: Ef
 
 If you find a bug or you certain features, don't hesitate to file a ticket.
 
-[![Build Status](https://www.travis-ci.com/th-schwarz/DDAuto.svg?token=qSPv4SNGn1yMojeF1zXi&branch=develop)](https://www.travis-ci.com/th-schwarz/DDAuto)
+![License](https://img.shields.io/github/license/th-schwarz/DDAuto)
+[![Build Status](https://www.travis-ci.com/th-schwarz/DDAuto.svg?token=qSPv4SNGn1yMojeF1zXi&branch=develop)](https://www.travis-ci.com/th-schwarz/DDAuto) 
 
 ## Big picture
 
