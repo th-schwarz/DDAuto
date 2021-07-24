@@ -4,7 +4,7 @@ Dynamic DNS with AutoDNS
 
 ![License](https://img.shields.io/github/license/th-schwarz/DDAuto)
 [![Build Status](https://www.travis-ci.com/th-schwarz/DDAuto.svg?token=qSPv4SNGn1yMojeF1zXi&branch=develop)](https://www.travis-ci.com/th-schwarz/DDAuto) 
-![](https://img.shields.io/badge/Ready-to%20use-brightgreen)
+![](https://img.shields.io/badge/Ready-to%20use-green)
 
 DDAuto is a simple REST-service for dynamic DNS. It uses the [Java Domainrobot Sdk](https://github.com/InterNetX/java-domainrobot-sdk) to update the IPv4 and IPv6 addresses of a host and can be used with many routers, for example the AVM Fritz!Box.
 DDAuto can be executed by `commandline`, `init.d` or `systemd`.
