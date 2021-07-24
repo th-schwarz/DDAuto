@@ -35,6 +35,14 @@ public class MainController {
 	@Autowired
 	private UpdateLogger updateLogger;
 
+	/**
+	 * Checks, if the 'host' is configured / exists.
+	 * 
+	 * @param host
+	 *            The desired host to check.
+	 * @return If the host is configured, the plain text 'Host found.' will be returned. Otherwise 'Host not found!' and http status 404
+	 *         (not found)
+	 */
 	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> exist(@PathVariable String host) {
 		logger.debug("entered #exist: host={}", host);
@@ -43,6 +51,22 @@ public class MainController {
 		return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host.
+	 * 
+	 * @param host
+	 *            The host, for which the IPs must be updated.
+	 * @param apitoken
+	 *            The api-token.
+	 * @param ipv4Str
+	 *            The IPv4 address.
+	 * @param ipv6Str
+	 *            The IPv6 address, optional.
+	 * @return If the 'host' isn't configured http status 404 (not found). <br>
+	 *         If the 'apitoken' doesn't match the 'host' or IP addresses aren't valid http status 400 (bad request). If the zone-update
+	 *         fails http status 500 (internal server error), <br>
+	 *         or the plain text 'Update successful.'
+	 */
 	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> update(@PathVariable String host, @RequestParam String apitoken,
 			@RequestParam(name = "ipv4", required = false) String ipv4Str, @RequestParam(name = "ipv6", required = false) String ipv6Str) {
@@ -76,7 +100,16 @@ public class MainController {
 		return ResponseEntity.ok("Update successful.");
 	}
 
-	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	/**
+	 * Determine the IP settings of the 'host' and returns it as formatted plain text.
+	 * 
+	 * @param host
+	 *            The host, for which the IPs must be identified.
+	 * @return If the 'host' is configured and the zone info was successful, a plain text will be, which contains the IPs. <br>
+	 *         If the 'host' isn't configured http status 404 (not found). <br>
+	 *         If the zone-info fails, http status 500 (internal server error).
+	 */
+	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> info(@PathVariable String host) {
 		logger.debug("entered #info: host={}", host);
 		if(!context.hostExists(host))
