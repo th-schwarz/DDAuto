@@ -39,7 +39,7 @@ Here is the suggested directory/file structure:
 ```
 * api-token.properties: defines an api-token per host, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/api-token.properties_example)
 * application.properties: defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties)<br>
-  Important: Here the basic-auth must be defined!
+  Important: The basic-auth must be defined here!
 * zone.properties: defines a primary name server per zone, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/zone.properties_example)
 
 The start by command line looks like:
