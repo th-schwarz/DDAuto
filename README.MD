@@ -49,4 +49,5 @@ java -jar /opt/ddauto/ddauto.jar \
 
 ## Routes
 
-TODO !!!
+* {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&&ipv6=[yourIPv6]
+  'ipv6' is optional
