@@ -59,3 +59,7 @@ All routes are secured by basic-auth.
   Updates the IP addresses of 'yourHost'. If both IP parameters are omitted, an attempt is made to fetch the remote IP.
 * {baseUrl}/info/[yourHost] <br>
   Returns a plain text with the IP configuration of 'yourHost'.
+
+## Suggested AutoDNS setup#
+
+TODO
