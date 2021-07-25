@@ -60,6 +60,19 @@ All routes are secured by basic-auth.
 * {baseUrl}/info/[yourHost] <br>
   Returns a plain text with the IP configuration of 'yourHost'.
 
-## Suggested AutoDNS setup#
+
+
+## Suggested AutoDNS setup
 
 TODO
+
+
+## Setup a router for dynamic DNS
+
+As an example, let's have a look at the setup of dynamic DNS in the [Fritz!Box 7590](https://service.avm.de/help/en/FRITZ-Box-7530/019p2/hilfe_dyndns). 
+The following settngs are required:
+* *DynDNS Provider:* User-defined
+* *Domain name:* The hostname for which the IPs should be updated.
+* *Username / Password:* The credentials for basic-auth.
+* *Update-URL:* {baseUrl}/update/\<domain\>/?apitoken=[yourApitoken]&ipv4=\<ipaddr\>&ipv6=\<ip6addr\> <br>
+  If both IP parameters are omitted, an attempt is made to fetch the remote IP.
