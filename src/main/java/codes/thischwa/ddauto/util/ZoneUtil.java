@@ -1,5 +1,6 @@
 package codes.thischwa.ddauto.util;
 
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -67,7 +68,7 @@ public abstract class ZoneUtil {
 		return host.substring(host.indexOf(".") + 1);
 	}
 
-	public static boolean validateIP(String ipStr) {
+	public static boolean isValidateIP(String ipStr) {
 		try {
 			InetAddress.getByName(ipStr);
 			return true;
@@ -75,5 +76,13 @@ public abstract class ZoneUtil {
 			return false;
 		}
 	}
-
+	
+	public static boolean isIPv6(String ipStr) throws IllegalArgumentException {
+		try {
+			InetAddress adr = InetAddress.getByName(ipStr);
+			return (adr instanceof Inet6Address);
+		} catch (UnknownHostException e) {
+			throw new IllegalArgumentException(ipStr + " isn't a valid IP.");
+		}
+	}
 }

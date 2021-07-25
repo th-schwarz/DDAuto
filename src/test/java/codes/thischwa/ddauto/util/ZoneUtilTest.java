@@ -1,7 +1,9 @@
 package codes.thischwa.ddauto.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.domainrobot.sdk.client.JsonUtils;
 import org.domainrobot.sdk.models.generated.JsonResponseDataZone;
@@ -60,6 +62,25 @@ class ZoneUtilTest {
 	final void testDeriveZone_fail() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			ZoneUtil.deriveZone("example.com");
+		});
+	}
+	
+	@Test
+	final void testIfIPv6() {
+		assertTrue(ZoneUtil.isIPv6("2a03:4000:41:32::1"));
+		assertFalse(ZoneUtil.isIPv6("217.229.139.240"));
+	}
+
+	@Test
+	final void testIfIPv6_fail1() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			ZoneUtil.isIPv6("2a03.4000:41:32::1");
+		});
+	}
+	@Test
+	final void testIfIPv6_fail() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			ZoneUtil.isIPv6("217:229.139.240");
 		});
 	}
 }

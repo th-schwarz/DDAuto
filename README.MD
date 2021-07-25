@@ -20,7 +20,6 @@ DDAuto is running as a service. A client can access the service via url and basi
 curl -u dyndns:test123 -i \ 
    "http://localhost:8081/update/mydyndns.domain.com/?apitoken=1234567890abcdf&ipv4=127.1.2.4&ipv6=2a03:4000:41:32::2"
 ```
-The parameter _ipv6_ is optional.
 For each host an api-token can be defined. If the api-token doesn't match the host, the update will be rejected. Because of this security feature, DDAuto can be used by different people. They can't update the IPs each other.
 
 ## Configuration and start
@@ -43,7 +42,7 @@ Here is the suggested directory/file structure:
 ```
 * api-token.properties: defines an api-token per host, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/api-token.properties_example)
 * application.properties: defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties)<br>
-  Important: The basic-auth must be defined here!
+  Important: The basic-auth must be defined in this file!
 * zone.properties: defines a primary name server per zone, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/zone.properties_example)
 
 The start by command line looks like:
@@ -57,6 +56,6 @@ java -jar /opt/ddauto/ddauto.jar \
 All routes are secured by basic-auth.
 
 * {baseUrl}/update/[yourHost]/?apitoken=[yourApitoken]&ipv4=[yourIPv4]&ipv6=[yourIPv6] <br>
-  Updates the IP addresses of 'yourHost', 'ipv6' is optional.
+  Updates the IP addresses of 'yourHost'. If both IP parameters are omitted, an attempt is made to fetch the remote IP.
 * {baseUrl}/info/[yourHost] <br>
   Returns a plain text with the IP configuration of 'yourHost'.

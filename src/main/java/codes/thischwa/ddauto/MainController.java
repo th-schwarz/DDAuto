@@ -1,5 +1,7 @@
 package codes.thischwa.ddauto;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
@@ -52,7 +54,8 @@ public class MainController {
 	}
 
 	/**
-	 * Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host.
+	 * Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. <br>
+	 * If both parameters for IP addresses not set, an attempt is made to fetch the remote IP.
 	 * 
 	 * @param host
 	 *            The host, for which the IPs must be updated.
@@ -61,7 +64,8 @@ public class MainController {
 	 * @param ipv4Str
 	 *            The IPv4 address.
 	 * @param ipv6Str
-	 *            The IPv6 address, optional.
+	 *            The IPv6 address.
+	 * @param req The ServletRequest.
 	 * @return If the 'host' isn't configured http status 404 (not found). <br>
 	 *         If the 'apitoken' doesn't match the 'host' or IP addresses aren't valid http status 400 (bad request). If the zone-update
 	 *         fails http status 500 (internal server error), <br>
@@ -69,7 +73,7 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> update(@PathVariable String host, @RequestParam String apitoken,
-			@RequestParam(name = "ipv4", required = false) String ipv4Str, @RequestParam(name = "ipv6", required = false) String ipv6Str) {
+			@RequestParam(name = "ipv4", required = false) String ipv4Str, @RequestParam(name = "ipv6", required = false) String ipv6Str, HttpServletRequest req) {
 		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
 
 		// validation
@@ -78,13 +82,23 @@ public class MainController {
 		String validApitoken = context.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
-		if(ipv4Str == null && ipv6Str == null)
-			return new ResponseEntity<String>("At least one of the following request parameter must be set: ipv4, ipv6",
-					HttpStatus.BAD_REQUEST);
-		if(ipv4Str != null && !ZoneUtil.validateIP(ipv4Str))
+		if(ipv4Str != null && !ZoneUtil.isValidateIP(ipv4Str))
 			return new ResponseEntity<String>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
-		if(ipv6Str != null && !ZoneUtil.validateIP(ipv6Str))
+		if(ipv6Str != null && !ZoneUtil.isValidateIP(ipv6Str))
 			return new ResponseEntity<String>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
+		if(ipv4Str == null && ipv6Str == null) {
+			logger.debug("Both IP parameters are null, try to fetch the remote IP.");
+			String remoteIP = req.getRemoteAddr();
+			if(remoteIP == null) {
+				logger.error("Couldn't determine the remote ip!");
+				return new ResponseEntity<String>("Couldn't determine the remote ip!", HttpStatus.BAD_REQUEST);
+			}
+			logger.debug("Fetched remote IP: " + remoteIP);
+			if(ZoneUtil.isIPv6(remoteIP))
+				ipv6Str = remoteIP;
+			else
+				ipv4Str = remoteIP;
+		}
 
 		// processing the update
 		try {
