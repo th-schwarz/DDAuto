@@ -61,7 +61,6 @@ All routes are secured by basic-auth.
   Returns a plain text with the IP configuration of 'yourHost'.
 
 
-
 ## Suggested AutoDNS setup
 
 TODO
