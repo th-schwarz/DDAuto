@@ -60,7 +60,7 @@ public class DDAutoContext {
 	}
 	
 	public String getApitoken(String host) throws IllegalArgumentException {
-		if(hostExists(host))
+		if(!hostExists(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		return apitokenData.getProperty(host);
 	}
