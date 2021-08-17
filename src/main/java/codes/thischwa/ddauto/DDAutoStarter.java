@@ -33,7 +33,7 @@ public class DDAutoStarter {
 
 	private static String CONST_SWAGGER_ENABLED_CLI = "--swagger.enabled=true";
 
-	@Value("${zone.validation.enabled}")
+	@Value("${zone.validation.enabled:true}")
 	private boolean zoneValidation;
 
 	@Autowired
