@@ -92,7 +92,7 @@ public class MainController {
 				logger.error("Couldn't determine the remote ip!");
 				return new ResponseEntity<String>("Couldn't determine the remote ip!", HttpStatus.BAD_REQUEST);
 			}
-			logger.debug("Fetched remote IP: " + remoteIP);
+			logger.debug("Fetched remote IP: {}", remoteIP);
 			if(ZoneUtil.isIPv6(remoteIP))
 				ipv6Str = remoteIP;
 			else
