@@ -6,6 +6,10 @@ Dynamic DNS with AutoDNS
 [![Build Status](https://www.travis-ci.com/th-schwarz/DDAuto.svg?token=qSPv4SNGn1yMojeF1zXi&branch=develop)](https://www.travis-ci.com/th-schwarz/DDAuto) 
 ![License](https://img.shields.io/github/license/th-schwarz/DDAuto)
 
+Some measurement values
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=alert_status)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=security_rating)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=coverage)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=ncloc)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  
+
 Give it a try!   [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/th-schwarz/DDAuto?include_prereleases)](https://github.com/th-schwarz/DDAuto/releases)
 
 DDAuto is a simple REST-service for dynamic DNS. It uses the [Java Domainrobot Sdk](https://github.com/InterNetX/java-domainrobot-sdk) to update the IPv4 and IPv6 addresses of a host and can be used with many routers, for example the AVM Fritz!Box.
