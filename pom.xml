@@ -105,8 +105,11 @@
 				<configuration>
 					<executable>true</executable>
 					<includeSystemScope>true</includeSystemScope>
-					<commandlineArguments>--swagger.enabled=true --data.zone.name=zone.properties_example --data.apitoken.name=api-token.properties_example</commandlineArguments>
-					<jvmArguments>-Dserver.port=8080 -Dspringdoc.writer-with-default-pretty-printer=true</jvmArguments>
+					<commandlineArguments>--swagger.enabled=true
+						--data.zone.name=zone.properties_example
+						--data.apitoken.name=api-token.properties_example</commandlineArguments>
+					<jvmArguments>-Dserver.port=8080
+						-Dspringdoc.writer-with-default-pretty-printer=true</jvmArguments>
 				</configuration>
 				<executions>
 					<execution>
@@ -139,6 +142,29 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<formats>XML</formats>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
