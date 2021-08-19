@@ -2,7 +2,6 @@
 
 Dynamic DNS with AutoDNS
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=alert_status)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)
 [![Build Status](https://www.travis-ci.com/th-schwarz/DDAuto.svg?token=qSPv4SNGn1yMojeF1zXi&branch=develop)](https://www.travis-ci.com/th-schwarz/DDAuto) 
 ![License](https://img.shields.io/github/license/th-schwarz/DDAuto)
 
