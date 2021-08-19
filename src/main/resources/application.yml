@@ -30,3 +30,17 @@ file:
   zone:
     log: ddauto-zone.log
 
+ddauto:
+  zones:
+    -  
+      name: dynhost0.info
+      ns: ns0.domain.info
+      hosts:
+        - my0:1234567890abcdef
+        - test1:1234567890abcdx
+    -
+      name: dynhost1.info
+      ns: ns1.domain.info
+      hosts:
+        - my1:1234567890abcdef
+        - test1:1234567890abcdx
