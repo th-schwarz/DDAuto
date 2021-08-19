@@ -28,7 +28,7 @@ For each host an api-token can be defined. If the api-token doesn't match the ho
 
 ## Configuration and start
 
-DDAuto is a spring boot application, that's why the application is extremely customizable just by configuration! It is compiled with the starter using jetty. Details of the configuration can be found here: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#application-properties and https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.monitoring.customizing-management-server-port
+DDAuto is a spring boot application, that's why the application is extremely customizable just by configuration! Details of the configuration can be found here: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#application-properties and https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.monitoring.customizing-management-server-port
 
 Side note: To avoid the use of the java keystore tool, DDAuto could be run behind a proxy. Corresponding headers are set by default.
 
@@ -36,23 +36,19 @@ Here is the suggested directory/file structure:
 
 ```bash
 ├── /opt/ddauto
-│   ├── api-token.properties
-│   ├── application.properties
+│   ├── application.yml
 │   ├── ddauto-0.1.0-SNAPSHOT.jar
 │   ├── ddauto.jar -> ddauto-0.1.0-SNAPSHOT.jar
 │   ├── ddauto-zone.log   (log of the zone updates)
 │   ├── log4j2.xml
-│   ├── zone.properties
 ```
-* api-token.properties: defines an api-token per host, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/api-token.properties_example)
-* application.properties: defines the properties, that differs from the [default](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.properties)<br>
-  Important: The basic-auth must be defined in this file!
-* zone.properties: defines a primary name server per zone, see [here](https://github.com/th-schwarz/DDAuto/blob/develop/ddauto-data/zone.properties_example)
+application.yml defines the properties. An example can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml)<br>
+Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!
 
 The start by command line looks like:
 ```bash
 java -jar /opt/ddauto/ddauto.jar \
-   --spring.config.location=file:///opt/ddauto/application.properties
+   --spring.config.location=file:///opt/ddauto/application.yml
 ```
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 

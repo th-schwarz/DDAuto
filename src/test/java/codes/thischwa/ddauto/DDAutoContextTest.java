@@ -1,6 +1,7 @@
 package codes.thischwa.ddauto;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,23 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest(classes = { DDAutoStarter.class })
+@SpringBootTest(classes = { DDAutoConfig.class, DDAutoContext.class })
 @ExtendWith(SpringExtension.class)
 class DDAutoContextTest {
 
 	@Autowired
 	private DDAutoContext context;
 
-	private Properties zoneData;
+	private Map<String, String> zoneData;
 
-	private Properties accountData;
+	private Map<String, String> accountData;
 
 	@BeforeEach
 	void setUp() {
-		zoneData = new Properties();
-		zoneData.setProperty("domain.tld", "ns.nameserver.tld");
-		accountData = new Properties();
-		accountData.setProperty("sld.domain.tld", "1234567890abcdf");
+		zoneData = new HashMap<>();
+		zoneData.put("domain.tld", "ns.nameserver.tld");
+		accountData = new HashMap<>();
+		accountData.put("sld.domain.tld", "1234567890abcdf");
 	}
 
 	@Test
@@ -49,7 +50,7 @@ class DDAutoContextTest {
 
 	@Test
 	public void testValidateData_fail2() {
-		accountData.setProperty("sld_1.domain1.tld", "1234567890abcdf");
+		accountData.put("sld_1.domain1.tld", "1234567890abcdf");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			context.validateData(zoneData, accountData);
 		});

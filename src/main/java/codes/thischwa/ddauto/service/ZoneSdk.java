@@ -11,9 +11,9 @@ import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import codes.thischwa.ddauto.AutoDnsConfig;
 import codes.thischwa.ddauto.DDAutoContext;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
@@ -27,23 +27,15 @@ public class ZoneSdk {
 
 	private static Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
-	@Value("${autodns.url}")
-	private String baseUrl;
-
-	@Value("${autodns.user}")
-	private String user;
-
-	@Value("${autodns.password}")
-	private String password;
-
-	@Value("${autodns.context}")
-	private String autodnsContext;
+	@Autowired
+	private AutoDnsConfig autoDnsConfig;
 
 	@Autowired
 	private DDAutoContext context;
 
 	private ZoneClient getInstance() {
-		return new Domainrobot(user, autodnsContext, password, baseUrl).getZone();
+		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
+				autoDnsConfig.getUrl()).getZone();
 	}
 
 	public void validateConfiguredZones() {
@@ -76,14 +68,17 @@ public class ZoneSdk {
 	 * Updates the zone derived from the host. <br>
 	 * The parameters must be validated by the caller.
 	 * 
-	 * @param host the hostname, should be a sub domain
-	 * @param ipv4 Add or update the ipv4 address. If it's null, it will be dropped from the zone.
-	 * @param ipv6 Add or update the ipv6 address. If it's null, it will be dropped from the zone.
+	 * @param host
+	 *            the hostname, should be a sub domain
+	 * @param ipv4
+	 *            Add or update the ipv4 address. If it's null, it will be dropped from the zone.
+	 * @param ipv6
+	 *            Add or update the ipv6 address. If it's null, it will be dropped from the zone.
 	 * @throws ZoneSdkException
 	 */
 	public void zoneUpdate(String host, String ipv4, String ipv6) throws ZoneSdkException {
 		String sld = host.substring(0, host.indexOf("."));
-		
+
 		// set the IPs in the zone object
 		Zone zone = zoneInfo(host);
 		if(ipv4 != null)
@@ -94,7 +89,7 @@ public class ZoneSdk {
 			ZoneUtil.addOrUpdateIPv6(zone, sld, ipv6);
 		else
 			ZoneUtil.removeIPv6(zone, sld);
-		
+
 		// processing the update
 		ZoneClient zc = getInstance();
 		try {
