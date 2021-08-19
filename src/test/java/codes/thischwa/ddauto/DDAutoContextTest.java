@@ -40,14 +40,14 @@ class DDAutoContextTest {
 	}
 
 	@Test
-	public void testValidateData_fail1() {
+	final void testValidateData_fail1() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			context.validateData(Map.of(), Map.of("sld.domain.tld", "1234567890abcdf"));
 		});
 	}
 
 	@Test
-	public void testValidateData_fail2() {
+	final void testValidateData_fail2() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			context.validateData(Map.of("domain.tld", "ns.nameserver.tld"),
 					Map.of("sld.domain.tld", "1234567890abcdf", "sld_1.domain1.tld", "1234567890abcdf"));
