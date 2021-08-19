@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +49,7 @@ public class MainController {
 					@ExampleObject(value = "Host found.") })),
 			@ApiResponse(responseCode = "404", description = "Host doesn't exists.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Host not found.") })) })
-	@RequestMapping(value = "/exist/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	@GetMapping(value = "/exist/{host}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> exist(
 			@Parameter(description = "The desired host to check.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "mydyndns.domain.com") }))
@@ -69,7 +67,7 @@ public class MainController {
 			@ApiResponse(responseCode = "400", description = "If the 'apitoken' doesn't match the 'host', IP addresses aren't valid or the remote IP couldn't determine."),
 			@ApiResponse(responseCode = "500", description = "If the zone update fails.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Zone update failed.") })) })
-	@RequestMapping(value = "/update/{host}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	@GetMapping(value = "/update/{host}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> update(
 			@Parameter(description = "The host, for which the IPs must be updated.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "mydyndns.domain.com") }))
@@ -121,7 +119,7 @@ public class MainController {
 					@ExampleObject(value = "Host not found.") })),
 			@ApiResponse(responseCode = "500", description = "If the zone info fails.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Zone info failed.") })) })
-	@RequestMapping(value = "/info/{host}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/info/{host}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> info(
 			@Parameter(description = "The host, for which the IPs must be identified.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "mydyndns.domain.com") }))
@@ -152,7 +150,7 @@ public class MainController {
 
 	@Operation(summary = "Generates basic memory informations", tags = "info")
 	@ApiResponse(responseCode = "200", description = "Textual information about the memory.")
-	@GetMapping("meminfo")
+	@GetMapping(value = "meminfo", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> getMemoryStatistics() {
 		StringBuilder memInfo = new StringBuilder();
 		memInfo.append("Basic memory Information:\n");
