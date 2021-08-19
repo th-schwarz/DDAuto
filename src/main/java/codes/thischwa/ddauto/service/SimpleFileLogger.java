@@ -30,7 +30,7 @@ public class SimpleFileLogger implements UpdateLogger {
 
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-	@Value("${file.zone.log}")
+	@Value("${file.zone.log:zone.log}")
 	private String logFileName;
 
 	@Autowired

@@ -14,10 +14,6 @@ zone:
   validation:
     enabled: false
     
-file:
-  zone:
-    log: ddauto-data/ddauto-zone.log
-
 autodns:
   context: 4
   password: pwd
