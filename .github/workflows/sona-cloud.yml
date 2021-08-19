@@ -1,4 +1,4 @@
-name: Build
+name: sona-cloud
 on:
   push:
     branches:
