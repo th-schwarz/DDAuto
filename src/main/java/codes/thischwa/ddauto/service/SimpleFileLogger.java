@@ -62,7 +62,7 @@ public class SimpleFileLogger implements UpdateLogger {
 			try {
 				Files.createFile(logPath);
 			} catch (IOException e) {
-				throw new RuntimeException("Zone log file couldn't be created!", e);
+				throw new SecurityException("Zone log file couldn't be created!", e);
 			}
 			logger.info("Zone log file didn't exists, successful created!");
 		} else {

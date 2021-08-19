@@ -12,7 +12,10 @@ import org.domainrobot.sdk.models.generated.Zone;
  */
 public abstract class ZoneUtil {
 
-	private final static long DEFAULT_TLD = 60;
+	private static final long DEFAULT_TLD = 60;
+	
+	private ZoneUtil() {
+	}
 
 	public static void addOrUpdateIPv4(Zone zone, String sld, String ip) {
 		addOrUpdateIP(zone, sld, ip, "A");

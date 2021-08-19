@@ -23,7 +23,7 @@ import codes.thischwa.ddauto.util.ZoneUtil;
 @Service
 public class ZoneSdk {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDAutoContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(ZoneSdk.class);
 
 	private static Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 

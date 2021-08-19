@@ -73,7 +73,9 @@ public class DDAutoContext {
 			for(String hostRaw : hostRawData) {
 				if(!hostRaw.contains(":"))
 					throw new IllegalArgumentException("The host entry must be in the following format: [sld|:[apitoken], but it was: " + hostRaw);
-				String parts[] = hostRaw.split(":");
+				String[] parts = hostRaw.split(":");
+				if(parts.length != 2)
+					throw new IllegalArgumentException("The host entry must be in the following format: [sld|:[apitoken], but it was: " + hostRaw);
 				String host = String.format("%s.%s", parts[0], zone.getName());
 				apitokenData.put(host, parts[1]);
 			}

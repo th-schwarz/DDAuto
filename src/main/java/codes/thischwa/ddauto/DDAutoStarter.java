@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,9 +35,6 @@ public class DDAutoStarter {
 	@Value("${zone.validation.enabled:true}")
 	private boolean zoneValidation;
 
-	@Autowired
-	private ZoneSdk sdk;
-
 	public static void main(String[] args) {
 		try {
 			SpringApplication app = new SpringApplication(DDAutoStarter.class);
@@ -62,7 +58,7 @@ public class DDAutoStarter {
 	 * @return the required ApplicationListener
 	 */
 	@Bean
-	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener() {
+	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk) {
 		return new ApplicationListener<ApplicationReadyEvent>() {
 
 			@Override
