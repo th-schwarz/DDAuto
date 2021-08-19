@@ -62,7 +62,7 @@ public class DDAutoContext {
 		return zoneData.get(zone);
 	}
 
-	private void readData() {
+	void readData() {
 		apitokenData = new HashMap<>();
 		zoneData = new HashMap<>();
 		for(DDAutoConfig.Zone zone : config.getZones()) {

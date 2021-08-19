@@ -1,5 +1,7 @@
 package codes.thischwa.ddauto;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,41 +20,38 @@ class DDAutoContextTest {
 	@Autowired
 	private DDAutoContext context;
 
-	private Map<String, String> zoneData;
-
-	private Map<String, String> accountData;
-
 	@BeforeEach
 	void setUp() {
-		zoneData = new HashMap<>();
-		zoneData.put("domain.tld", "ns.nameserver.tld");
-		accountData = new HashMap<>();
-		accountData.put("sld.domain.tld", "1234567890abcdf");
+		context.readData();
 	}
 
 	@Test
-	final void dummyTest() {
-		Assertions.assertTrue(zoneData.size() == accountData.size());
+	final void testGetApiToken() {
+		assertEquals("1234567890abcdef", context.getApitoken("my0.dynhost0.info"));
+	}
+
+	@Test
+	final void testgetPrimaryNameServer() {
+		assertEquals("ns1.domain.info", context.getPrimaryNameServer("dynhost1.info"));
 	}
 
 	@Test
 	final void testValidateData_ok() {
-		context.validateData(zoneData, accountData);
+		context.validateData(Map.of("domain.tld", "ns.nameserver.tld"), Map.of("sld.domain.tld", "1234567890abcdf"));
 	}
 
 	@Test
 	public void testValidateData_fail1() {
-		zoneData.clear();
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData(zoneData, accountData);
+		assertThrows(IllegalArgumentException.class, () -> {
+			context.validateData(Map.of(), Map.of("sld.domain.tld", "1234567890abcdf"));
 		});
 	}
 
 	@Test
 	public void testValidateData_fail2() {
-		accountData.put("sld_1.domain1.tld", "1234567890abcdf");
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData(zoneData, accountData);
+		assertThrows(IllegalArgumentException.class, () -> {
+			context.validateData(Map.of("domain.tld", "ns.nameserver.tld"),
+					Map.of("sld.domain.tld", "1234567890abcdf", "sld_1.domain1.tld", "1234567890abcdf"));
 		});
 	}
 
