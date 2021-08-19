@@ -21,6 +21,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<sonar.organization>th-schwarz</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.exclusions>
+			src/main/java/codes/thischwa/ddauto/DDAutoStarter.java,
+			src/main/java/codes/thischwa/ddauto/SecurityConfig.java,
+			src/main/java/codes/thischwa/ddauto/MainController.java
+		</sonar.coverage.exclusions>
 		<fakerepo.outputdir>${project.basedir}/fake-repo</fakerepo.outputdir>
 	</properties>
 
