@@ -60,6 +60,8 @@ DDAuto can also be started easily as a service. For further information, see htt
 
 All routes are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
 
+A simple greeting page is enabled by default. It can be disabled with ```greeting.enabled=false```.
+
 
 ## Suggested AutoDNS setup
 
