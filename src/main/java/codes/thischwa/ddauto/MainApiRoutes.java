@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "main", description = "The routes.")
 public interface MainApiRoutes {
 
-	@Operation(summary = "Checks, if the 'host' exists and is configured.", tags = "host")
+	@Operation(summary = "Checks, if the 'host' exists and is configured.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Host exists and is configured.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Host found.") })),
@@ -32,7 +32,7 @@ public interface MainApiRoutes {
 			@PathVariable String host);
 
 
-	@Operation(summary = "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.", tags = "host")
+	@Operation(summary = "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Update successful.") })),
@@ -47,7 +47,7 @@ public interface MainApiRoutes {
 			@RequestParam(name = "ipv6", required = false) String ipv6Str, HttpServletRequest req);
 
 
-	@Operation(summary = "Determine the IP settings of the 'host' and returns it as formatted plain text.", tags = "host")
+	@Operation(summary = "Determine the IP settings of the 'host' and returns it as formatted plain text.")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Formatted plain text with the IP settings of the 'host'"),
 			@ApiResponse(responseCode = "404", description = "If the 'host' isn't configured.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Host not found.") })),
@@ -59,7 +59,7 @@ public interface MainApiRoutes {
 					@ExampleObject(value = "mydyndns.domain.com") }))
 			@PathVariable String host);
 
-	@Operation(summary = "Generates basic memory informations", tags = "info")
+	@Operation(summary = "Generates basic memory informations")
 	@ApiResponse(responseCode = "200", description = "Textual information about the memory.")
 	@GetMapping(value = "meminfo", produces = MediaType.TEXT_PLAIN_VALUE)
 	ResponseEntity<String> getMemoryStatistics();

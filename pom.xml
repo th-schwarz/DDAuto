@@ -115,11 +115,9 @@
 					<executable>true</executable>
 					<includeSystemScope>true</includeSystemScope>
 					<commandlineArguments>--swagger.enabled=true
-						--data.zone.name=zone.properties_example
-						--data.apitoken.name=api-token.properties_example
+						--server.port=8080
 						--zone.validation.enabled=false</commandlineArguments>
-					<jvmArguments>-Dserver.port=8080
-						-Dspringdoc.writer-with-default-pretty-printer=true</jvmArguments>
+					<jvmArguments>-Dspring-boot.run.arguments=--springdoc.writer-with-default-pretty-printer=true</jvmArguments>
 				</configuration>
 				<executions>
 					<execution>
