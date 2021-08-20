@@ -116,7 +116,8 @@
 					<includeSystemScope>true</includeSystemScope>
 					<commandlineArguments>--swagger.enabled=true
 						--data.zone.name=zone.properties_example
-						--data.apitoken.name=api-token.properties_example</commandlineArguments>
+						--data.apitoken.name=api-token.properties_example
+						--zone.validation.enabled=false</commandlineArguments>
 					<jvmArguments>-Dserver.port=8080
 						-Dspringdoc.writer-with-default-pretty-printer=true</jvmArguments>
 				</configuration>
