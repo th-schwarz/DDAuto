@@ -64,7 +64,7 @@ public class DDAutoContext {
 		return zoneData.get(zone);
 	}
 
-	void readData() {
+	void readData() throws IllegalArgumentException {
 		apitokenData = new HashMap<>();
 		zoneData = new HashMap<>();
 		for(DDAutoConfig.Zone zone : config.getZones()) {
@@ -90,12 +90,5 @@ public class DDAutoContext {
 		for(String host : apitokenData.keySet()) {
 			logger.info(" - {}", host);
 		}
-	}
-	
-	/**
-	 * just for testing!!!
-	 */
-	void _clearData() {
-		zoneData.clear();
 	}
 }

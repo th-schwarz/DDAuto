@@ -18,7 +18,7 @@ class DDAutoContextTest {
 
 	@Autowired
 	private DDAutoContext context;
-
+	
 	@BeforeEach
 	void setUp() {
 		context.readData();
@@ -49,14 +49,6 @@ class DDAutoContextTest {
 	@Test
 	final void testValidateData_ok() {
 		context.validateData();
-	}
-
-	@Test
-	final void testValidateData_fail() {
-		context._clearData();
-		assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData();
-		});
 	}
 
 }
