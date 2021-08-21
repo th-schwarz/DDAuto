@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Holds the data and validates it at start.
+ * Holds and validates the data at start.
  */
 @Component
 public class DDAutoContext {
@@ -23,8 +23,10 @@ public class DDAutoContext {
 	@Autowired
 	private DDAutoConfig config;
 
+	// <zone, ns>
 	private Map<String, String> zoneData = null;
 
+	// <fqdn, apitoken>
 	private Map<String, String> apitokenData = null;
 	
 	public Set<String> getConfiguredHosts() {
@@ -43,7 +45,7 @@ public class DDAutoContext {
 
 	void readAndValidateData() {
 		readData();
-		validateData(zoneData, apitokenData);
+		validateData();
 	}
 
 	public boolean hostExists(String host) {
@@ -71,24 +73,29 @@ public class DDAutoContext {
 			if(hostRawData == null || hostRawData.isEmpty())
 				throw new IllegalArgumentException("Missing host data for: " + zone.getName());
 			for(String hostRaw : hostRawData) {
-				if(!hostRaw.contains(":"))
-					throw new IllegalArgumentException("The host entry must be in the following format: [sld|:[apitoken], but it was: " + hostRaw);
 				String[] parts = hostRaw.split(":");
 				if(parts.length != 2)
 					throw new IllegalArgumentException("The host entry must be in the following format: [sld|:[apitoken], but it was: " + hostRaw);
+				// build the fqdn hosstname
 				String host = String.format("%s.%s", parts[0], zone.getName());
 				apitokenData.put(host, parts[1]);
 			}
 		}
 	}
 
-	void validateData(Map<String, String> zoneData, Map<String, String> apitokenData) {
-		if(zoneData == null || apitokenData == null || apitokenData.isEmpty())
-			throw new IllegalArgumentException("Account and zone data are inconsistent.");
+	void validateData() {
+		if(zoneData == null || zoneData.isEmpty() || apitokenData == null || apitokenData.isEmpty())
+			throw new IllegalArgumentException("Zone or host data are empty.");
+		logger.info("*** Configured hosts:");
 		for(String host : apitokenData.keySet()) {
-			String domain = host.substring(host.indexOf(".") + 1);
-			if(!zoneData.containsKey(domain))
-				throw new IllegalArgumentException("Missing zone data for: " + domain);
+			logger.info(" - {}", host);
 		}
+	}
+	
+	/**
+	 * just for testing!!!
+	 */
+	void _clearData() {
+		zoneData.clear();
 	}
 }

@@ -3,8 +3,6 @@ package codes.thischwa.ddauto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,21 +48,14 @@ class DDAutoContextTest {
 	
 	@Test
 	final void testValidateData_ok() {
-		context.validateData(Map.of("domain.tld", "ns.nameserver.tld"), Map.of("sld.domain.tld", "1234567890abcdf"));
+		context.validateData();
 	}
 
 	@Test
-	final void testValidateData_fail1() {
+	final void testValidateData_fail() {
+		context._clearData();
 		assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData(Map.of(), Map.of("sld.domain.tld", "1234567890abcdf"));
-		});
-	}
-
-	@Test
-	final void testValidateData_fail2() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			context.validateData(Map.of("domain.tld", "ns.nameserver.tld"),
-					Map.of("sld.domain.tld", "1234567890abcdf", "sld_1.domain1.tld", "1234567890abcdf"));
+			context.validateData();
 		});
 	}
 
