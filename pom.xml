@@ -14,6 +14,7 @@
 	<version>0.2.0-SNAPSHOT</version>
 	<name>DDAuto</name>
 	<description>Dynamic DNS with AutoDNS</description>
+	<url>https://github.com/th-schwarz/DDAuto</url>
 
 	<properties>
 		<java.version>11</java.version>
@@ -30,7 +31,7 @@
 			src/main/java/codes/thischwa/ddauto/service/ZoneSdk.java,
 			src/main/java/codes/thischwa/ddauto/service/ZoneSdkException.java
 		</sonar.coverage.exclusions>
-		<fakerepo.outputdir>${project.basedir}/fake-repo</fakerepo.outputdir>
+		<fakerepo.dir>${project.basedir}/fake-repo</fakerepo.dir>
 	</properties>
 
 	<repositories>
@@ -39,7 +40,7 @@
 			<!-- This is a fake maven repo. -->
 			<id>fake-repo</id>
 			<name>Just a fake repository.</name>
-			<url>file://${fakerepo.outputdir}</url>
+			<url>file://${fakerepo.dir}</url>
 		</repository>
 	</repositories>
 
