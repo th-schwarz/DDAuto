@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = { DDAutoConfig.class, DDAutoContext.class })
 @ExtendWith(SpringExtension.class)
 class DDAutoContextFailTest {
-	
+
 	@Autowired
 	private DDAutoContext context;
 
@@ -31,12 +31,13 @@ class DDAutoContextFailTest {
 		});
 		z.getHosts().remove(wrongHost);
 	}
-	
+
 	@Test
 	final void testEmptyHosts() {
 		DDAutoConfig.Zone z = config.getZones().get(1);
 		List<String> hosts = new ArrayList<>(z.getHosts());
-		z.getHosts().clear();assertThrows(IllegalArgumentException.class, () -> {
+		z.getHosts().clear();
+		assertThrows(IllegalArgumentException.class, () -> {
 			context.readData();
 		});
 		z.setHosts(hosts);
