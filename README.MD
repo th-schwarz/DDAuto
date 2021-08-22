@@ -42,7 +42,7 @@ Here is the suggested directory/file structure:
 │   ├── application.yml
 │   ├── ddauto-0.1.0-SNAPSHOT.jar
 │   ├── ddauto.jar -> ddauto-0.1.0-SNAPSHOT.jar
-│   ├── ddauto-zone.log   (log of the zone updates)
+│   ├── zone.log   (log of the zone updates)
 │   ├── log4j2.xml
 ```
 application.yml defines the properties. An example can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml)<br>
@@ -54,6 +54,21 @@ java -jar /opt/ddauto/ddauto.jar \
    --spring.config.location=file:///opt/ddauto/application.yml
 ```
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
+
+
+## Configuration of zone and host
+
+Example: 
+```yaml
+ddauto:
+  zones:
+    -  
+      name: dynhost.info   # the zone
+      ns: ns.domain.info   # the primary nameserver of the zone
+      hosts:
+        - myhost:1234567890abcdef
+```
+The last line defines the host ```myhost.dynhost.info``` with the api-token `1234567890abcdef`.
 
 
 ## Basic routes
