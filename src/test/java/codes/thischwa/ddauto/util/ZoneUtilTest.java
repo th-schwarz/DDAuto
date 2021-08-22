@@ -54,11 +54,6 @@ class ZoneUtilTest {
 		ZoneUtil.removeIPv4(zone, "unknownsub");
 		assertEquals(4, zone.getResourceRecords().size());
 	}
-
-	@Test
-	final void testDeriveZone() {
-		assertEquals("example.com", ZoneUtil.deriveZone("sub.example.com"));
-	}
 	
 	@Test
 	final void testValidIP() {
@@ -69,6 +64,11 @@ class ZoneUtilTest {
 		assertFalse(ZoneUtil.isValidateIP("2x03:4000:41:32::1"));
 	}
 
+	@Test
+	final void testDeriveZone() {
+		assertEquals("example.com", ZoneUtil.deriveZone("sub.example.com"));
+	}
+	
 	@Test
 	final void testDeriveZone_fail() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
