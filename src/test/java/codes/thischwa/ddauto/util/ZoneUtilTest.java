@@ -51,11 +51,22 @@ class ZoneUtilTest {
 		assertEquals(5, zone.getResourceRecords().size());
 		ZoneUtil.removeIPv4(zone, "sub2");
 		assertEquals(4, zone.getResourceRecords().size());
+		ZoneUtil.removeIPv4(zone, "unknownsub");
+		assertEquals(4, zone.getResourceRecords().size());
 	}
 
 	@Test
 	final void testDeriveZone() {
 		assertEquals("example.com", ZoneUtil.deriveZone("sub.example.com"));
+	}
+	
+	@Test
+	final void testValidIP() {
+		assertTrue(ZoneUtil.isValidateIP("217.229.139.240"));
+		assertTrue(ZoneUtil.isValidateIP("2a03:4000:41:32::1"));
+
+		assertFalse(ZoneUtil.isValidateIP("300.229.139.240"));
+		assertFalse(ZoneUtil.isValidateIP("2x03:4000:41:32::1"));
 	}
 
 	@Test
@@ -77,6 +88,7 @@ class ZoneUtilTest {
 			ZoneUtil.isIPv6("2a03.4000:41:32::1");
 		});
 	}
+	
 	@Test
 	final void testIfIPv6_fail() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
