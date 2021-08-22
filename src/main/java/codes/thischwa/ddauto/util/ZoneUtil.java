@@ -3,6 +3,7 @@ package codes.thischwa.ddauto.util;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Optional;
 
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
@@ -13,7 +14,7 @@ import org.domainrobot.sdk.models.generated.Zone;
 public abstract class ZoneUtil {
 
 	private static final long DEFAULT_TLD = 60;
-	
+
 	private ZoneUtil() {
 	}
 
@@ -24,11 +25,11 @@ public abstract class ZoneUtil {
 	public static void addOrUpdateIPv6(Zone zone, String sld, String ip) {
 		addOrUpdateIP(zone, sld, ip, "AAAA");
 	}
-	
+
 	public static void removeIPv4(Zone zone, String sld) {
 		removeIP(zone, sld, "A");
 	}
-	
+
 	public static void removeIPv6(Zone zone, String sld) {
 		removeIP(zone, sld, "AAAA");
 	}
@@ -39,7 +40,7 @@ public abstract class ZoneUtil {
 			zone.getResourceRecords().remove(rr);
 		}
 	}
-	
+
 	private static void addOrUpdateIP(Zone zone, String sld, String ip, String type) {
 		ResourceRecord rr = searchResourceRecord(zone, sld, type);
 		if(rr != null) {
@@ -56,12 +57,9 @@ public abstract class ZoneUtil {
 	}
 
 	public static ResourceRecord searchResourceRecord(Zone zone, String name, String type) {
-		for(ResourceRecord rr : zone.getResourceRecords()) {
-			if(rr.getType().equals(type) && rr.getName().equals(name)) {
-				return rr;
-			}
-		}
-		return null;
+		Optional<ResourceRecord> rrO = zone.getResourceRecords().stream()
+				.filter(rr -> rr.getType().equals(type) && rr.getName().equals(name)).findFirst();
+		return rrO.isPresent() ? rrO.get() : null;
 	}
 
 	public static String deriveZone(String host) {
@@ -79,7 +77,7 @@ public abstract class ZoneUtil {
 			return false;
 		}
 	}
-	
+
 	public static boolean isIPv6(String ipStr) throws IllegalArgumentException {
 		try {
 			return (InetAddress.getByName(ipStr) instanceof Inet6Address);
