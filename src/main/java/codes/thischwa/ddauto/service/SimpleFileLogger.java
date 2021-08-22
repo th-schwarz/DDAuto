@@ -40,8 +40,6 @@ public class SimpleFileLogger implements UpdateLogger {
 
 	@Override
 	public synchronized void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
-		if(logEntryFormat == null)
-			initLogEntryFormat();
 		LocalDateTime now = LocalDateTime.now();
 		String dateStr = now.format(formatter);
 		ipv4 = (ipv4 == null) ? "n/a" : ipv4;
@@ -57,6 +55,11 @@ public class SimpleFileLogger implements UpdateLogger {
 
 	@PostConstruct
 	void init() {
+		// determine the max. length of the hosts for nicer logging
+		int maxSize = context.getConfiguredHosts().stream().max(Comparator.comparing(String::length)).get().length();
+		logEntryFormat = "%s  %" + maxSize + "s  %15s  %40s\n";
+		
+		// create the log file
 		Path logPath = Paths.get(logFileName);
 		if(!Files.exists(logPath)) {
 			try {
@@ -68,12 +71,5 @@ public class SimpleFileLogger implements UpdateLogger {
 		} else {
 			logger.debug("Zone log file exists!");
 		}
-	}
-	
-	private void initLogEntryFormat() {
-		// determine the max. length of the hosts for nicer logging
-		// can't be done in PostConstruct, because properties aren't loaded
-		int maxSize = context.getConfiguredHosts().stream().max(Comparator.comparing(String::length)).get().length();
-		logEntryFormat = "%s  %" + maxSize + "s  %15s  %40s\n";
 	}
 }
