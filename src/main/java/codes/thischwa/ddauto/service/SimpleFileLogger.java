@@ -24,7 +24,7 @@ import codes.thischwa.ddauto.DDAutoContext;
  * A very simple logger for zone updates.
  */
 @Service
-public class SimpleFileLogger implements UpdateLogger {
+public class SimpleFileLogger implements ZoneUpdateLogger {
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleFileLogger.class);
 

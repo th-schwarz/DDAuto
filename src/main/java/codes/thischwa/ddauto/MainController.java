@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import codes.thischwa.ddauto.service.UpdateLogger;
+import codes.thischwa.ddauto.service.ZoneUpdateLogger;
 import codes.thischwa.ddauto.service.UpdateLoggerException;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;
@@ -29,7 +29,7 @@ public class MainController implements MainApiRoutes {
 	private ZoneSdk sdk;
 
 	@Autowired
-	private UpdateLogger updateLogger;
+	private ZoneUpdateLogger updateLogger;
 
 	@Override
 	public ResponseEntity<String> exist(String host) {
