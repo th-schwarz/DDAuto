@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -47,13 +49,19 @@
 			<id>repsy_ddauto</id>
 			<name>Maven Repository on Repsy for DDAuto</name>
 			<url>https://repo.repsy.io/mvn/thischwa/ddauto</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</distributionManagement>
-	
+
 	<scm>
-		<developerConnection>scm:git:https://repo.repsy.io/mvn/thischwa/ddauto/trunk</developerConnection>
-	  <tag>v0.2.0</tag>
-  </scm>
+		<developerConnection>scm:git:https://repo.repsy.io/mvn/thischwa/ddauto</developerConnection>
+		<connection>scm:git:https://repo.repsy.io/mvn/thischwa/ddauto</connection>
+	</scm>
 
 	<dependencies>
 		<dependency>
