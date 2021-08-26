@@ -40,8 +40,8 @@ Here is the suggested directory/file structure:
 ```bash
 ├── /opt/ddauto
 │   ├── application.yml
-│   ├── ddauto-0.1.0-SNAPSHOT.jar
-│   ├── ddauto.jar -> ddauto-0.1.0-SNAPSHOT.jar
+│   ├── ddauto-0.1.0.jar
+│   ├── ddauto.jar -> ddauto-0.1.0.jar
 │   ├── zone.log   (log of the zone updates)
 │   ├── log4j2.xml
 ```
