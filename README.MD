@@ -26,7 +26,7 @@ DDAuto is running as a service. A client can access the service via url and basi
 curl -u dyndns:test123 -i \ 
    "http://localhost:8081/update/mydyndns.domain.com/?apitoken=1234567890abcdf&ipv4=127.1.2.4&ipv6=2a03:4000:41:32::2"
 ```
-For each host an api-token can be defined. If the api-token doesn't match the host, the update will be rejected. Because of this security feature, DDAuto can be used by different people. They can't update the IPs each other.
+For each host an api-token must be defined. If the api-token doesn't match the host, the update will be rejected. Because of this security feature, DDAuto can be used by different people. They can't update the IPs each other.
 
 
 ## Configuration and start
