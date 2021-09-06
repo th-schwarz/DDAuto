@@ -70,12 +70,12 @@ ddauto:
 ```
 The last line defines the host ```myhost.dynhost.info``` with the api-token `1234567890abcdef`.
 
+A simple greeting page is enabled by default. It can be disabled with ```greeting.enabled=false```.
+
 
 ## Basic routes
 
 All routes are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
-
-A simple greeting page is enabled by default. It can be disabled with ```greeting.enabled=false```.
 
 
 ## Suggested AutoDNS setup
