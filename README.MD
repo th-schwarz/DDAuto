@@ -59,7 +59,7 @@ java -jar /opt/ddauto/ddauto.jar \
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 
 
-## Configuration of zone and host
+## Configuration of zones and hosts
 
 Example: 
 ```yaml
