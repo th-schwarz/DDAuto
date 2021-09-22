@@ -73,7 +73,7 @@ ddauto:
 ```
 The last line defines the host ```myhost.dynhost.info``` with the api-token `1234567890abcdef`.
 
-A simple greeting page is enabled by default. It can be disabled with the property ```greeting.enabled=false```.
+A simple greeting page is enabled by default. It can be disabled by setting the property ```greeting.enabled=false```.
 
 
 ## Basic routes
