@@ -18,6 +18,9 @@ Requirement: An AutoDNS account! For further details have a look at [AutoDNS: Ef
 
 If you find a bug or you certain features, don't hesitate to file a ticket.
 
+## Disclaimer
+
+I'm not responsible for any data loss, hardware damage or broken keyboards. This guide comes without any warranty!
 
 ## Big picture
 
@@ -56,7 +59,7 @@ java -jar /opt/ddauto/ddauto.jar \
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 
 
-## Configuration of zone and host
+## Configuration of zones and hosts
 
 Example: 
 ```yaml
@@ -70,12 +73,12 @@ ddauto:
 ```
 The last line defines the host ```myhost.dynhost.info``` with the api-token `1234567890abcdef`.
 
+A simple greeting page is enabled by default. It can be disabled by setting the property ```greeting.enabled=false```.
+
 
 ## Basic routes
 
 All routes are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
-
-A simple greeting page is enabled by default. It can be disabled with ```greeting.enabled=false```.
 
 
 ## Suggested AutoDNS setup
