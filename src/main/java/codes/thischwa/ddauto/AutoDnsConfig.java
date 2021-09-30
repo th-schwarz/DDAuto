@@ -4,6 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Holds the AutoDNS credentials for the Domainrobot Sdk.
+ */
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "autodns")

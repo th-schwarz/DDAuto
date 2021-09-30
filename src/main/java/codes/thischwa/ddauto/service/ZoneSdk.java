@@ -18,7 +18,7 @@ import codes.thischwa.ddauto.DDAutoContext;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**
- * A simple wrapper to ZoneClient of the Domainrobot.
+ * A simple wrapper to ZoneClient of the Domainrobot Sdk.
  */
 @Service
 public class ZoneSdk {
