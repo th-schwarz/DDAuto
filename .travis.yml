@@ -1,5 +1,6 @@
-lannguage:  java
-jdk: oraclejdk11
+dist: bionic
+language:  java
+jdk: openjdk11
 
 install: true
 script: mvn clean package
