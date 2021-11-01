@@ -49,7 +49,8 @@ Here is the suggested directory/file structure:
 │   ├── log4j2.xml
 ```
 application.yml defines the properties. An example can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml)<br>
-Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!
+Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
+An configuration example for Log4j2 can be found in the wiki [here](https://github.com/th-schwarz/DDAuto/wiki/Log4j2-Configuration)
 
 The start by command line looks like:
 ```bash
