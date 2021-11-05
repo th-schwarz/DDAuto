@@ -2,12 +2,13 @@ name: sona-cloud
 on:
   push:
     branches:
+      - master
       - develop
       - feature*
   pull_request:
     types: [opened, synchronize, reopened]
+    
 jobs:
-
   build:
     name: Build an scan
     runs-on: ubuntu-latest
