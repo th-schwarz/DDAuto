@@ -7,7 +7,7 @@ Dynamic DNS with AutoDNS
 
 Some measurement values
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=alert_status)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=security_rating)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=coverage)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=ncloc)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=alert_status)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=security_rating)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=th-schwarz_DDAuto&metric=ncloc)](https://sonarcloud.io/dashboard?id=th-schwarz_DDAuto)  
 
 Give it a try!   [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/th-schwarz/DDAuto?include_prereleases)](https://github.com/th-schwarz/DDAuto/releases)
 
