@@ -1,12 +1,3 @@
-## spring security
-spring:
-  config:
-    import: "optional:file:./ddauto.yml"
-  security:
-    user:
-      name: dyndns
-      password: test123
-
 ## server settings
 server:
   address: 127.0.0.1
@@ -16,10 +7,12 @@ server:
     context-path: /
   shutdown: graceful
 
-logging:
-  level:
-    root: debug
-    org.springframework.boot.autoconfigure: WARN
+## spring security
+spring:
+  security:
+    user:
+      name: dyndns
+      password: test123
 
 ## credentials for the domainrobot sdk    
 autodns:
@@ -35,4 +28,19 @@ zone:
       
 file:
   zone:
-    log: ./ddauto-zone.log
+    log: ddauto-zone.log
+
+ddauto:
+  zones:
+    -  
+      name: dynhost0.info
+      ns: ns0.domain.info
+      hosts:
+        - my0:1234567890abcdef
+        - test1:1234567890abcdx
+    -
+      name: dynhost1.info
+      ns: ns1.domain.info
+      hosts:
+        - my1:1234567890abcdef
+        - test1:1234567890abcdx
