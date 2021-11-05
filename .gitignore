@@ -5,4 +5,7 @@
 /.factorypath
 /.springBeans
 /info.txt
+/myapp.properties
+/myapp.yml
+/application.yml
 /ddauto.yml
