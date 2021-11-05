@@ -153,9 +153,6 @@ A simple REST service for update IPs in a zone.</description>
 						--server.port=8080
 						--zone.validation.enabled=false</commandlineArguments>
 					<jvmArguments>-Dspring-boot.run.arguments=--springdoc.writer-with-default-pretty-printer=true</jvmArguments>
-					<!-- for sonar-cloud: Application may need longer than 60 * 500ms to start. Set to 60 
-						* 1000ms. -->
-					<wait>1000</wait>
 				</configuration>
 				<executions>
 					<execution>
