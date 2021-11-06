@@ -36,7 +36,7 @@ public class MainController implements MainApiRoutes {
 		logger.debug("entered #exist: host={}", host);
 		if(context.hostExists(host))
 			return ResponseEntity.ok("Host found.");
-		return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Host not found!", HttpStatus.NOT_FOUND);
 	}
 
 	@Override
