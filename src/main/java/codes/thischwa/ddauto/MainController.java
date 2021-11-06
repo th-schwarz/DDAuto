@@ -45,20 +45,20 @@ public class MainController implements MainApiRoutes {
 
 		// validation
 		if(!context.hostExists(host))
-			return new ResponseEntity<String>("Host not found!", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Host not found!", HttpStatus.NOT_FOUND);
 		String validApitoken = context.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
-			return new ResponseEntity<String>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
 		if(ipv4Str != null && !ZoneUtil.isValidateIP(ipv4Str))
-			return new ResponseEntity<String>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
 		if(ipv6Str != null && !ZoneUtil.isValidateIP(ipv6Str))
-			return new ResponseEntity<String>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
 		if(ipv4Str == null && ipv6Str == null) {
 			logger.debug("Both IP parameters are null, try to fetch the remote IP.");
 			String remoteIP = req.getRemoteAddr();
 			if(remoteIP == null) {
 				logger.error("Couldn't determine the remote ip!");
-				return new ResponseEntity<String>("Couldn't determine the remote ip!", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Couldn't determine the remote ip!", HttpStatus.BAD_REQUEST);
 			}
 			logger.debug("Fetched remote IP: {}", remoteIP);
 			if(ZoneUtil.isIPv6(remoteIP))
@@ -74,7 +74,7 @@ public class MainController implements MainApiRoutes {
 			updateLogger.log(host, ipv4Str, ipv6Str);
 		} catch (ZoneSdkException e) {
 			logger.error("Updated host failed: " + host, e);
-			return new ResponseEntity<String>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (UpdateLoggerException e) {
 			logger.error("Error while writing to zone log.", e);
 		}
@@ -85,14 +85,14 @@ public class MainController implements MainApiRoutes {
 	public ResponseEntity<String> info(String host) {
 		logger.debug("entered #info: host={}", host);
 		if(!context.hostExists(host))
-			return new ResponseEntity<String>("Host not found.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Host not found.", HttpStatus.NOT_FOUND);
 
 		Zone zone = null;
 		try {
 			zone = sdk.zoneInfo(host);
 		} catch (ZoneSdkException e) {
 			logger.error("Zone info failed for: " + host, e);
-			return new ResponseEntity<String>("Zone info failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Zone info failed.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		String sld = host.substring(0, host.indexOf("."));

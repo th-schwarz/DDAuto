@@ -30,7 +30,7 @@ public class DDAutoStarter {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDAutoStarter.class);
 
-	private static String CONST_SWAGGER_ENABLED_CLI = "--swagger.enabled=true";
+	private static String const_swagger_enabled_cli = "--swagger.enabled=true";
 
 	@Value("${zone.validation.enabled:true}")
 	private boolean zoneValidation;
@@ -39,7 +39,7 @@ public class DDAutoStarter {
 		try {
 			SpringApplication app = new SpringApplication(DDAutoStarter.class);
 			List<String> cmdArgs = new ArrayList<>(Arrays.asList(args));
-			if(!cmdArgs.remove(CONST_SWAGGER_ENABLED_CLI)) {
+			if(!cmdArgs.remove(const_swagger_enabled_cli)) {
 				logger.info("*** springdoc disabled!");
 				cmdArgs.add("--springdoc.api-docs.enabled=false");
 			} else {
