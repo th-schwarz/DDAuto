@@ -9,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -56,7 +57,8 @@ public class SimpleFileLogger implements ZoneUpdateLogger {
 	@PostConstruct
 	void init() {
 		// determine the max. length of the hosts for nicer logging
-		int maxSize = context.getConfiguredHosts().stream().max(Comparator.comparing(String::length)).get().length();
+		Optional<String> max = context.getConfiguredHosts().stream().max(Comparator.comparing(String::length));
+		int maxSize = max.isPresent() ? max.get().length() : 12;
 		logEntryFormat = "%s  %" + maxSize + "s  %15s  %40s\n";
 		
 		// create the log file
