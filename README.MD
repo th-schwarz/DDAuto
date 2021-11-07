@@ -42,20 +42,20 @@ Here is the suggested directory/file structure:
 
 ```bash
 ├── /opt/ddauto
-│   ├── application.yml
-│   ├── ddauto-0.1.0.jar
-│   ├── ddauto.jar -> ddauto-0.1.0.jar
-│   ├── zone.log   (log of the zone updates)
+│   ├── ddauto.yml
+│   ├── ddauto-0.2.0.jar
+│   ├── ddauto.jar -> ddauto-0.2.0.jar
+│   ├── ddauto-zone.log   (log of the zone updates)
 │   ├── log4j2.xml
 ```
-application.yml defines the properties. An example can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml)<br>
+ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Minimal-ddauto.yml). The default properties can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml)<br>
 Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
 An configuration example for Log4j2 can be found in the wiki [here](https://github.com/th-schwarz/DDAuto/wiki/Log4j2-Configuration)
 
 The start by command line looks like:
 ```bash
 java -jar /opt/ddauto/ddauto.jar \
-   --spring.config.location=file:///opt/ddauto/application.yml
+   --spring.config.location=optional:file:///opt/ddauto/ddauto.yml
 ```
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 
