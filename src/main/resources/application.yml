@@ -7,8 +7,12 @@ server:
     context-path: /
   shutdown: graceful
 
-## spring security
+## import individual config
 spring:
+  config:
+    import: optional:file:./ddauto.yml
+
+## spring security
   security:
     user:
       name: dyndns
