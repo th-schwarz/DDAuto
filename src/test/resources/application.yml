@@ -5,6 +5,8 @@ server:
     context-path: /
     
 spring:
+  config:
+    import: file:./test-zones.yml
   security:
     user:
       name: dyndns
@@ -19,18 +21,3 @@ autodns:
   password: pwd
   url: https://api.autodns.com/v1
   user: user
-  
-ddauto:
-  zones:
-    -  
-      name: dynhost0.info
-      ns: ns0.domain.info
-      hosts:
-        - my0:1234567890abcdef
-        - test1:1234567890abcdx
-    -
-      name: dynhost1.info
-      ns: ns1.domain.info
-      hosts:
-        - my1:1234567890abcdef
-        - test1:1234567890abcdx

@@ -142,7 +142,7 @@ A simple REST service for update IPs in a zone.</description>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<!-- generates the code coverage report for sonar cube -->
 				<groupId>org.jacoco</groupId>
@@ -164,6 +164,55 @@ A simple REST service for update IPs in a zone.</description>
 						<configuration>
 							<formats>XML</formats>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- starts spring boot for generating the openapi docu -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+					<includeSystemScope>true</includeSystemScope>
+					<commandlineArguments>--swagger.enabled=true
+						--server.address=127.0.0.1
+						--server.port=8080
+						--zone.validation.enabled=false</commandlineArguments>
+					<jvmArguments>-Dspring.application.admin.enabled=true
+						-Dspring.config.import=file:./test-zones.yml</jvmArguments>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pre-integration-test</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- generates the openapi docu -->
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>1.3</version>
+				<configuration>
+					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+					<outputFileName>api.json</outputFileName>
+					<outputDir>${basedir}</outputDir>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
