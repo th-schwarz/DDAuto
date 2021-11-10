@@ -50,14 +50,6 @@ A simple REST service for update IPs in a zone.</description>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-artifact</url>
-		</repository>
-	</distributionManagement>
-
 	<scm>
 		<developerConnection>scm:git:https://github.com/thischwa/ddauto</developerConnection>
 		<connection>scm:git:https://github.com/thischwa/ddauto</connection>
@@ -137,9 +129,6 @@ A simple REST service for update IPs in a zone.</description>
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<altDeploymentRepository>
-						internal.repo::default::file://${project.build.directory}/mvn-artifact
-					</altDeploymentRepository>
 				</configuration>
 			</plugin>
 
