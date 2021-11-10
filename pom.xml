@@ -204,7 +204,6 @@ A simple REST service for update IPs in a zone.</description>
 				<configuration>
 					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
 					<outputFileName>api.json</outputFileName>
-					<outputDir>${basedir}</outputDir>
 				</configuration>
 				<executions>
 					<execution>
