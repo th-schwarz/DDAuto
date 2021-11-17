@@ -18,6 +18,8 @@ Requirement: An AutoDNS account! For further details have a look at [AutoDNS: Ef
 
 If you find a bug or you miss a certain features, don't hesitate to file a ticket.
 
+For completeness, here is the [changelog](changelog.md).
+
 ## Disclaimer
 
 I'm not responsible for any data loss, hardware damage or broken keyboards. This guide comes without any warranty!
