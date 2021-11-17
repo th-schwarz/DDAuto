@@ -59,16 +59,12 @@ public class DDAutoStarter {
 	 */
 	@Bean
 	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk) {
-		return new ApplicationListener<ApplicationReadyEvent>() {
-
-			@Override
-			public void onApplicationEvent(ApplicationReadyEvent event) {
-				if(zoneValidation) {
-					logger.debug("Will be process zone-validation ...");
-					sdk.validateConfiguredZones();
-				} else {
-					logger.debug("Zone validation isn't set.");
-				}
+		return (r) -> {
+			if(zoneValidation) {
+				logger.debug("Process zone-validation ...");
+				sdk.validateConfiguredZones();
+			} else {
+				logger.debug("Zone validation isn't set, no validation processed.");
 			}
 		};
 	}
