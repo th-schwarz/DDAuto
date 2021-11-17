@@ -59,7 +59,7 @@ public class DDAutoStarter {
 	 */
 	@Bean
 	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk) {
-		return (r) -> {
+		return e -> {
 			if(zoneValidation) {
 				logger.debug("Process zone-validation ...");
 				sdk.validateConfiguredZones();
