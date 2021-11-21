@@ -43,29 +43,33 @@ A simple REST service for update IPs in a zone.</description>
 			<name>Just a fake repository.</name>
 			<url>file://${fakerepo.dir}</url>
 		</repository>
-		
-        <repository>
-            <id>myMavenRepo</id>
-            <url>${myMavenRepoReadUrl}</url>
-        </repository>
+		<repository>
+			<id>myrepo</id>
+			<url>https://myrepo.thischwa.codes/repository/ddauto/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>myrepo</id>
+			<url>https://myrepo.thischwa.codes/repository/ddauto/</url>
+		</repository>
+		<snapshotRepository>
+			<id>myrepo</id>
+			<url>https://myrepo.thischwa.codes/repository/ddauto/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<issueManagement>
 		<url>https://github.com/th-schwarz/DDAuto/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 	
-    <distributionManagement>
-        <repository>
-            <id>myMavenRepo</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </repository>
-        <snapshotRepository>
-            <id>myMavenRepo</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 	<scm>
 		<developerConnection>scm:git:git@github.com:th-schwarz/ddauto</developerConnection>
 		<connection>scm:git:git@github.com:th-schwarz/ddauto</connection>
