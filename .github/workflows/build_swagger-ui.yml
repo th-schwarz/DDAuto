@@ -3,7 +3,7 @@ name: Swagger - OpenApi
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   deploy:
