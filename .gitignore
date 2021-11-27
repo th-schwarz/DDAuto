@@ -6,3 +6,5 @@
 /.springBeans
 /info.txt
 /ddauto.yml
+/log4j2.xml
+/log4j2_zone.xml

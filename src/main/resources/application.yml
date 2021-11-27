@@ -29,7 +29,3 @@ autodns:
 zone:
   validation:
     enabled: true
-      
-file:
-  zone:
-    log: ./ddauto-zone.log

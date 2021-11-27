@@ -1,7 +1,5 @@
 package codes.thischwa.ddauto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,22 +28,14 @@ public class DDAutoStarter {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDAutoStarter.class);
 
-	private static String const_swagger_enabled_cli = "--swagger.enabled=true";
-
 	@Value("${zone.validation.enabled:true}")
 	private boolean zoneValidation;
 
 	public static void main(String[] args) {
 		try {
 			SpringApplication app = new SpringApplication(DDAutoStarter.class);
-			List<String> cmdArgs = new ArrayList<>(Arrays.asList(args));
-			if(!cmdArgs.remove(const_swagger_enabled_cli)) {
-				logger.info("*** springdoc disabled!");
-				cmdArgs.add("--springdoc.api-docs.enabled=false");
-			} else {
-				logger.info("*** springdoc enabled!");
-			}
-			app.run(cmdArgs.toArray(new String[0]));
+			List<String> cmdArgs = CommandlineArgsProcessor.process(args);
+			app.run(cmdArgs.toArray(new String[cmdArgs.size()]));
 		} catch (Exception e) {
 			System.err.println("Unexpected exception, Spring Boot stops!");
 			System.exit(10);
