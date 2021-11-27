@@ -27,9 +27,9 @@ class CommandlineArgsProcessorTest {
 
 	@Test
 	final void testProcess_log4j2() {
-		CommandlineArgsProcessor.workingDir = "src/test/resources/test-dir";
+		CommandlineArgsProcessor.workingDir = "src/test/test-dir";
 		List<String> args = CommandlineArgsProcessor.process(testArgs.toArray(new String[testArgs.size()]));
-		assertTrue(args.contains("--logging.log4j2.config.override[1]=src/test/resources/test-dir/log4j2.xml"));
-		assertTrue(args.contains("--logging.log4j2.config.override[2]=src/test/resources/test-dir/log4j2_zone.xml"));
+		assertTrue(args.contains("--logging.log4j2.config.override[1]=src/test/test-dir/log4j2.xml"));
+		assertTrue(args.contains("--logging.log4j2.config.override[2]=src/test/test-dir/log4j2_zone.xml"));
 	}
 }
