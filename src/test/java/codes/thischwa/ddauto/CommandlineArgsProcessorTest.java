@@ -2,6 +2,9 @@ package codes.thischwa.ddauto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,9 +29,12 @@ class CommandlineArgsProcessorTest {
 	}
 
 	@Test
-	final void testProcess_log4j2() {
+	final void testProcess_log4j2() throws Exception {
+		System.out.println("PWD: " + CommandlineArgsProcessor.workingDir);
 		CommandlineArgsProcessor.workingDir = "test-dir";
 		List<String> args = CommandlineArgsProcessor.process(testArgs.toArray(new String[testArgs.size()]));
+		if(!Files.exists(Paths.get("test-dir/log4j2.xml")))
+			throw new FileNotFoundException("missing test-dir/log4j2.xml");
 		assertTrue(args.contains("--logging.log4j2.config.override[1]=test-dir/log4j2.xml"));
 		assertTrue(args.contains("--logging.log4j2.config.override[2]=test-dir/log4j2_zone.xml"));
 	}
