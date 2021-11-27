@@ -11,8 +11,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class CommandlineArgsProcessorTest {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CommandlineArgsProcessorTest.class);
 	
 	final List<String> testArgs = Collections.unmodifiableList(Arrays.asList("--logging.log4j2.config.override=log.xml", "--swagger.enabled=true"));
 
@@ -29,12 +33,12 @@ class CommandlineArgsProcessorTest {
 	}
 
 	@Test
-	final void testProcess_log4j2() throws Exception {
-		System.out.println("PWD: " + CommandlineArgsProcessor.workingDir);
+	final void testProcess_log4j2() {
+		logger.info("PWD: " + CommandlineArgsProcessor.workingDir);
 		CommandlineArgsProcessor.workingDir = "test-dir";
 		List<String> args = CommandlineArgsProcessor.process(testArgs.toArray(new String[testArgs.size()]));
 		if(!Files.exists(Paths.get("test-dir/log4j2.xml")))
-			throw new FileNotFoundException("missing test-dir/log4j2.xml");
+			logger.error("missing test-dir/log4j2.xml");
 		assertTrue(args.contains("--logging.log4j2.config.override[1]=test-dir/log4j2.xml"));
 		assertTrue(args.contains("--logging.log4j2.config.override[2]=test-dir/log4j2_zone.xml"));
 	}
