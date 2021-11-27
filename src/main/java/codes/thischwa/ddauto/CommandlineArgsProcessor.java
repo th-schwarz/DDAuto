@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
  */
 class CommandlineArgsProcessor {
 	
-	private static String const_swagger_enabled_cli = "--swagger.enabled=true";
+	private static final String const_swagger_enabled_cli = "--swagger.enabled=true";
 
-	private static String const_log4j2_cli = "--logging.log4j2.config.override";
+	private static final String const_log4j2_cli = "--logging.log4j2.config.override";
 
-	private static String const_log4j2_name = "log4j2.xml";
-	private static String const_log4j2_zone_name = "log4j2_zone.xml";
+	private static final String const_log4j2_name = "log4j2.xml";
+	private static final String const_log4j2_zone_name = "log4j2_zone.xml";
 	
 	// format string to generate an argument like: --logging.log4j2.config.override[1]=log4j2_ddauto-zone.xml
-	private static String const_log4j2_param_format = const_log4j2_cli +"[%d]=%s";
+	private static final String const_log4j2_param_format = const_log4j2_cli +"[%d]=%s";
 
 	static List<String> process(String[] orgArgs) {
 		List<String> cmdArgs = new ArrayList<>(Arrays.asList(orgArgs));
