@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Updates the command line parameters, if required. Tasks:
  * <ul>
  * <li>Disables springdoc, is <code>--swagger.enabled=true</code> isn't set.
- * <li>Discover log4j2 config files and set the corrisponding arguments.
+ * <li>Discover log4j2 config files and set the corresponding arguments.
  * </ul>
  */
 class CommandlineArgsProcessor {
@@ -24,8 +24,10 @@ class CommandlineArgsProcessor {
 	private static final String const_log4j2_zone_name = "log4j2_zone.xml";
 	
 	// format string to generate an argument like: --logging.log4j2.config.override[1]=log4j2_ddauto-zone.xml
-	private static final String const_log4j2_param_format = const_log4j2_cli +"[%d]=%s";
+	private static final String const_log4j2_param_format = const_log4j2_cli +"[%d]=%s/%s";
 
+	protected static String workingDir = System.getProperty("user.dir");
+	
 	static List<String> process(String[] orgArgs) {
 		List<String> cmdArgs = new ArrayList<>(Arrays.asList(orgArgs));
 		// map swagger property
@@ -36,9 +38,9 @@ class CommandlineArgsProcessor {
 		int log4j2ArgsCount = cmdArgs.stream().filter(arg -> arg.startsWith(const_log4j2_cli))
 				.collect(Collectors.toList()).size();
 		if(Files.exists(Paths.get(const_log4j2_name)))
-			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, const_log4j2_name));
+			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, workingDir, const_log4j2_name));
 		if(Files.exists(Paths.get(const_log4j2_zone_name)))
-			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, const_log4j2_zone_name));
+			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, workingDir, const_log4j2_zone_name));
 		return cmdArgs;
 	}
 }
