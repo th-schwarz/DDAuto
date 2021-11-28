@@ -24,9 +24,7 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	
 	@Override
 	public void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
-		ipv4 = (ipv4 == null) ? "n/a" : ipv4;
-		ipv6 = (ipv6 == null) ? "n/a" : ipv6;
-		logger.info(buildLogEntry(logEntryFormat, host, ipv4, ipv6));
+		logger.info(Log4JZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
 	static String buildLogEntry(String logEntryFormat, String host, String ipv4, String ipv6) throws UpdateLoggerException {
