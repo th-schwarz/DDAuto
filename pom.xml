@@ -155,28 +155,6 @@ A simple REST service for update IPs in a zone.</description>
 			</plugin>
 
 			<plugin>
-				<!-- move some test resources to target -->
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resource-one</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/test-dir</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/test-files</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<!-- generates the code coverage report for sonar cube -->
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

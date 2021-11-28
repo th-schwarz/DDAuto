@@ -37,9 +37,9 @@ class CommandlineArgsProcessor {
 		// check and add the log4j config
 		int log4j2ArgsCount = cmdArgs.stream().filter(arg -> arg.startsWith(const_log4j2_cli))
 				.collect(Collectors.toList()).size();
-		if(Files.exists(Paths.get(const_log4j2_name)))
+		if(Files.exists(Paths.get(workingDir, const_log4j2_name)))
 			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, workingDir, const_log4j2_name));
-		if(Files.exists(Paths.get(const_log4j2_zone_name)))
+		if(Files.exists(Paths.get(workingDir, const_log4j2_zone_name)))
 			cmdArgs.add(String.format(const_log4j2_param_format, log4j2ArgsCount++, workingDir, const_log4j2_zone_name));
 		return cmdArgs;
 	}
