@@ -6,7 +6,7 @@ server:
     
 spring:
   config:
-    import: file:target/test-classes/test-zones.yml
+    import: classpath:/test-zones.yml
   security:
     user:
       name: dyndns
