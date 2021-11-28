@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import codes.thischwa.ddauto.DDAutoContext;
 
@@ -24,6 +25,7 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	
 	@Override
 	public void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
+		Assert.notNull(host, "'host shouldn't be null.");
 		logger.info(Log4JZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
