@@ -49,19 +49,21 @@ Here is the suggested directory/file structure:
 ```bash
 ├── /opt/ddauto
 │   ├── ddauto.yml
-│   ├── ddauto-0.2.0.jar
-│   ├── ddauto.jar -> ddauto-0.2.0.jar
+│   ├── ddauto-0.4.0.jar
+│   ├── ddauto.jar -> ddauto-0.4.0.jar
 │   ├── ddauto-zone.log   (log of the zone updates)
-│   ├── log4j2.xml
+│   ├── log4j2.xml        (common log4j2 config)
+│   ├── log4j2_zone.xml   (log4j2 config for the zone update logs)
 ```
-ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Minimal-ddauto.yml). The default properties can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml).<br>
+Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
+
+ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Minimal-ddauto.yml). If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml).<br>
 Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
-An configuration example for Log4j2 can be found in the wiki [here](https://github.com/th-schwarz/DDAuto/wiki/Log4j2-Configuration).
+The configuration of Log4j2 can be splitted in two files, one for the application and one for the zone update. Further information can be found in the wike can be found in the wiki [Log4j2 Configuration](https://github.com/th-schwarz/DDAuto/wiki/Log4j2-Configuration).
 
 The start by command line looks like:
 ```bash
-java -jar /opt/ddauto/ddauto.jar \
-   --spring.config.location=optional:file:///opt/ddauto/ddauto.yml
+java -jar /opt/ddauto/ddauto.jar
 ```
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 
