@@ -5,8 +5,6 @@ server:
     context-path: /
     
 spring:
-  config:
-    import: file:./test-zones.yml
   security:
     user:
       name: dyndns
@@ -15,7 +13,22 @@ spring:
 zone:
   validation:
     enabled: false
-    
+
+ddauto:
+  zones:
+    -  
+      name: dynhost0.info
+      ns: ns0.domain.info
+      hosts:
+        - my0:1234567890abcdef
+        - test1:1234567890abcdx
+    -
+      name: dynhost1.info
+      ns: ns1.domain.info
+      hosts:
+        - my1:1234567890abcdef
+        - test1:1234567890abcdx
+
 autodns:
   context: 4
   password: pwd
