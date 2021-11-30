@@ -9,7 +9,7 @@ spring:
     user:
       name: dyndns
       password: test123
-      
+
 zone:
   validation:
     enabled: false

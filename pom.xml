@@ -185,11 +185,9 @@ A simple REST service for update IPs in a zone.</description>
 					<executable>true</executable>
 					<includeSystemScope>true</includeSystemScope>
 					<commandlineArguments>--swagger.enabled=true
-						--server.address=127.0.0.1
-						--server.port=8080
 						--zone.validation.enabled=false</commandlineArguments>
 					<jvmArguments>-Dspring.application.admin.enabled=true
-						-Dspring.config.import=file:./test-zones.yml</jvmArguments>
+						-Dspring.config.import=file:target/test-classes/application.yml</jvmArguments>
 				</configuration>
 				<executions>
 					<execution>
