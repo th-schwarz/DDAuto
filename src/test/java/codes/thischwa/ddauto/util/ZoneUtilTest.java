@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 class ZoneUtilTest {
 
 	private Zone zone;
+	
+	private static int rrCount = 5;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -26,33 +28,64 @@ class ZoneUtilTest {
 
 	@Test
 	final void testUpdateIPv4() {
-		assertEquals(4, zone.getResourceRecords().size());
+		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv4(zone, "sub", "128.0.0.1");
-		assertEquals(4, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", "A");
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.RR_A);
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
+	}
+
+	@Test
+	final void testUpdateIPv6() {
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ZoneUtil.addOrUpdateIPv6(zone, "sub", "2a03:4000:41:32::20");
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.RR_AAAA);
+		assertNotNull(rr);
+		assertEquals("2a03:4000:41:32::20", rr.getValue());
 	}
 
 	@Test
 	final void testAddIPv4() {
-		assertEquals(4, zone.getResourceRecords().size());
+		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv4(zone, "sub1", "128.0.0.1");
-		assertEquals(5, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", "A");
+		assertEquals(rrCount+1, zone.getResourceRecords().size());
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.RR_A);
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
 
 	@Test
+	final void testAddIPv6() {
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ZoneUtil.addOrUpdateIPv6(zone, "sub1", "2a03:4000:41:32::20");
+		assertEquals(rrCount+1, zone.getResourceRecords().size());
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.RR_AAAA);
+		assertNotNull(rr);
+		assertEquals("2a03:4000:41:32::20", rr.getValue());
+	}
+	
+	@Test
 	final void testRemoveIPv4() {
-		assertEquals(4, zone.getResourceRecords().size());
+		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv4(zone, "sub2", "128.0.0.2");
-		assertEquals(5, zone.getResourceRecords().size());
+		assertEquals(rrCount+1, zone.getResourceRecords().size());
 		ZoneUtil.removeIPv4(zone, "sub2");
-		assertEquals(4, zone.getResourceRecords().size());
+		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.removeIPv4(zone, "unknownsub");
-		assertEquals(4, zone.getResourceRecords().size());
+		assertEquals(rrCount, zone.getResourceRecords().size());
+	}
+
+	@Test
+	final void testRemoveIPv6() {
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ZoneUtil.addOrUpdateIPv6(zone, "sub2", "2a03:4000:41:32::20");
+		assertEquals(rrCount+1, zone.getResourceRecords().size());
+		ZoneUtil.removeIPv6(zone, "sub2");
+		assertEquals(rrCount, zone.getResourceRecords().size());
+		ZoneUtil.removeIPv6(zone, "unknownsub");
+		assertEquals(rrCount, zone.getResourceRecords().size());
 	}
 	
 	@Test

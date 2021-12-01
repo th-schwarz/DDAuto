@@ -14,24 +14,28 @@ import org.domainrobot.sdk.models.generated.Zone;
 public abstract class ZoneUtil {
 
 	private static final long DEFAULT_TLD = 60;
+	
+	static final String RR_A = "A";
+	
+	static final String RR_AAAA = "AAAA";
 
 	private ZoneUtil() {
 	}
 
 	public static void addOrUpdateIPv4(Zone zone, String sld, String ip) {
-		addOrUpdateIP(zone, sld, ip, "A");
+		addOrUpdateIP(zone, sld, ip, RR_A);
 	}
 
 	public static void addOrUpdateIPv6(Zone zone, String sld, String ip) {
-		addOrUpdateIP(zone, sld, ip, "AAAA");
+		addOrUpdateIP(zone, sld, ip, RR_AAAA);
 	}
 
 	public static void removeIPv4(Zone zone, String sld) {
-		removeIP(zone, sld, "A");
+		removeIP(zone, sld, RR_A);
 	}
 
 	public static void removeIPv6(Zone zone, String sld) {
-		removeIP(zone, sld, "AAAA");
+		removeIP(zone, sld, RR_AAAA);
 	}
 
 	private static void removeIP(Zone zone, String sld, String type) {

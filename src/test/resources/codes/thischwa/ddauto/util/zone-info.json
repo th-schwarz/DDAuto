@@ -7,19 +7,19 @@
 	},
 	"object": {
 		"type": "Zone",
-		"value": "mein-virtuelles-blech.de"
+		"value": "mydomain.info"
 	},
 	"data": [
 		{
 			"created": "2021-04-15T18:18:18.000+0200",
 			"updated": "2021-05-21T13:33:54.000+0200",
-			"origin": "mein-virtuelles-blech.de",
+			"origin": "mydomain.info",
 			"soa": {
 				"refresh": 43200,
 				"retry": 7200,
 				"expire": 1209600,
 				"ttl": 86400,
-				"email": "thilo.schwarz@gmail.com"
+				"email": "me@mydomain.com"
 			},
 			"owner": {
 				"context": 4,
@@ -56,7 +56,7 @@
 					"name": "",
 					"ttl": 360,
 					"type": "MX",
-					"value": "mail.mein-postkasten.info.",
+					"value": "mail.mydomain.com.",
 					"pref": 1
 				},
 				{
@@ -70,6 +70,12 @@
 					"ttl": 360,
 					"type": "A",
 					"value": "85.209.51.215"
+				},
+				{
+					"name": "sub",
+					"ttl": 360,
+					"type": "AAAA",
+					"value": "2a03:4000:41:32::10"
 				},
 				{
 					"name": "_dmarc",
