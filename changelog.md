@@ -1,9 +1,10 @@
 # changelog
 
-- 0.3.0-SNAPSHOT
+- 1.0.0
   - Enhancements
-    - Introduction of automatic loading of special configuration files, one part of that was [#12](https://github.com/th-schwarz/DDAuto/issues/12)
-
+    - Introduction of automatic loading of special configuration files, one part of that was [#12](https://github.com/th-schwarz/DDAuto/issues/12)  
+  - Improvements
+    - added a free repository [#9](https://github.com/th-schwarz/DDAuto/issues/9)
 - 0.2.0
   - Enhancements
     - Split the configuration in 'default' and 'additional' [#4](https://github.com/th-schwarz/DDAuto/issues/4)
