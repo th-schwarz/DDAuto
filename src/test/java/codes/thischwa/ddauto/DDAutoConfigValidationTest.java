@@ -24,8 +24,7 @@ class DDAutoConfigValidationTest {
 
 	@Autowired
 	private DDAutoConfig config;
-		private static Validator validator;
-
+	private static Validator validator;
 
 	@BeforeAll
 	public static void setUp() {
@@ -35,8 +34,8 @@ class DDAutoConfigValidationTest {
 
 	@Test
 	final void testZones() {
-        Set<ConstraintViolation<DDAutoConfig>> violations = validator.validate(config);
-        assertTrue(violations.isEmpty());
+		Set<ConstraintViolation<DDAutoConfig>> violations = validator.validate(config);
+		assertTrue(violations.isEmpty());
 		assertEquals(2, config.getZones().size());
 	}
 
@@ -44,12 +43,11 @@ class DDAutoConfigValidationTest {
 	final void testZone_failName() {
 		DDAutoConfig.Zone z = buildZone();
 		z.setName(null);
-        Set<ConstraintViolation<DDAutoConfig.Zone>> violations = validator.validate(z);
-        assertEquals(1, violations.size());
-        assertEquals("The name of the zone shouldn't be empty.", violations.iterator().next().getMessage());
+		Set<ConstraintViolation<DDAutoConfig.Zone>> violations = validator.validate(z);
+		assertEquals(1, violations.size());
+		assertEquals("The name of the zone shouldn't be empty.", violations.iterator().next().getMessage());
 	}
-	
-	
+
 	final static DDAutoConfig.Zone buildZone() {
 		DDAutoConfig.Zone z = new DDAutoConfig.Zone();
 		z.setName("test.dyndns.org");

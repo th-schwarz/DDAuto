@@ -25,7 +25,7 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	
 	@Override
 	public void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
-		Assert.notNull(host, "'host shouldn't be null.");
+		Assert.notNull(host, "'host' shouldn't be null.");
 		logger.info(Log4JZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
