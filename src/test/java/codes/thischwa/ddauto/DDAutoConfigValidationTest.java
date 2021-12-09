@@ -49,19 +49,6 @@ class DDAutoConfigValidationTest {
         assertEquals("The name of the zone shouldn't be empty.", violations.iterator().next().getMessage());
 	}
 	
-	@Test
-	final void testZone_failHost() {
-		DDAutoConfig.Zone z = buildZone();
-		z.setHosts(Arrays.asList("test1", "test2", ""));
-        Set<ConstraintViolation<DDAutoConfig.Zone>> violations = validator.validate(z);
-        assertEquals(1, violations.size());
-        assertEquals("Host shouldn't be blank.", violations.iterator().next().getMessage());		
-        
-        z.setHosts(null);
-        violations = validator.validate(z);
-        assertEquals(1, violations.size());
-        assertEquals("The hosts of the zone shouldn't be empty.", violations.iterator().next().getMessage());		
-	}
 	
 	final static DDAutoConfig.Zone buildZone() {
 		DDAutoConfig.Zone z = new DDAutoConfig.Zone();
