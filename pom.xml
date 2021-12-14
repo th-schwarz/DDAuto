@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>codes.thischwa</groupId>
 	<artifactId>ddauto</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>DDAuto</name>
 	<description>Dynamic DNS with AutoDNS!
 A simple REST service for update IPs in a zone.</description>
@@ -73,7 +73,8 @@ A simple REST service for update IPs in a zone.</description>
 	<scm>
 		<developerConnection>scm:git:git@github.com:th-schwarz/ddauto</developerConnection>
 		<connection>scm:git:git@github.com:th-schwarz/ddauto</connection>
-	</scm>
+	  <tag>v1.0.1</tag>
+  </scm>
 
 	<dependencies>
 		<dependency>
