@@ -1,5 +1,8 @@
 # changelog
 
+- 1.0.1
+  - Bugs
+    - Log4J2 Vulnerability [#14](https://github.com/th-schwarz/DDAuto/issues/14)
 - 1.0.0
   - Enhancements
     - Introduction of automatic loading of special configuration files, one part of that was [#12](https://github.com/th-schwarz/DDAuto/issues/12)  
