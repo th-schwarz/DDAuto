@@ -1,5 +1,8 @@
 # changelog
 
+- 1.0.2
+  - Bugs
+    - Log4J2 Vulnerability [#14](https://github.com/th-schwarz/DDAuto/issues/14) (updated to 2.17.0)
 - 1.0.1
   - Bugs
     - Log4J2 Vulnerability [#14](https://github.com/th-schwarz/DDAuto/issues/14)
