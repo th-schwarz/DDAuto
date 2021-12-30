@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import codes.thischwa.ddauto.DDAutoContext;
+import codes.thischwa.ddauto.DDAutoConfig;
 
 @Service
 public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
@@ -19,7 +19,7 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	private static final Logger logger = LoggerFactory.getLogger(Log4JZoneUpdateLogger.class);
 
 	@Autowired
-	private DDAutoContext context;
+	private DDAutoConfig conf;
 
 	private String logEntryFormat;
 	
@@ -38,9 +38,8 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	@PostConstruct
 	void init() {
 		// determine the max. length of the hosts for nicer logging
-		Optional<String> max = context.getConfiguredHosts().stream().max(Comparator.comparing(String::length));
+		Optional<String> max = conf.getConfiguredHosts().stream().max(Comparator.comparing(String::length));
 		int maxSize = max.isPresent() ? max.get().length() : 12;
 		logEntryFormat = "%" + maxSize + "s  %16s  %s";
 	}
-
 }

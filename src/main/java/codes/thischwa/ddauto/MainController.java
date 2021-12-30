@@ -23,7 +23,7 @@ public class MainController implements MainApiRoutes {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
-	private DDAutoContext context;
+	private DDAutoConfig conf;
 
 	@Autowired
 	private ZoneSdk sdk;
@@ -34,7 +34,7 @@ public class MainController implements MainApiRoutes {
 	@Override
 	public ResponseEntity<String> exist(String host) {
 		logger.debug("entered #exist: host={}", host);
-		if(context.hostExists(host))
+		if(conf.hostExists(host))
 			return ResponseEntity.ok("Host found.");
 		return new ResponseEntity<>("Host not found!", HttpStatus.NOT_FOUND);
 	}
@@ -44,9 +44,9 @@ public class MainController implements MainApiRoutes {
 		logger.debug("entered #update: host={}, apitoken={}, ipv4={}, ipv6={}", host, apitoken, ipv4Str, ipv6Str);
 
 		// validation
-		if(!context.hostExists(host))
+		if(!conf.hostExists(host))
 			return new ResponseEntity<>("Host not found!", HttpStatus.NOT_FOUND);
-		String validApitoken = context.getApitoken(host);
+		String validApitoken = conf.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
 		if(ipv4Str != null && !ZoneUtil.isValidateIP(ipv4Str))
@@ -84,7 +84,7 @@ public class MainController implements MainApiRoutes {
 	@Override
 	public ResponseEntity<String> info(String host) {
 		logger.debug("entered #info: host={}", host);
-		if(!context.hostExists(host))
+		if(!conf.hostExists(host))
 			return new ResponseEntity<>("Host not found.", HttpStatus.NOT_FOUND);
 
 		Zone zone = null;

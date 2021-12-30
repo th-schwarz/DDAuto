@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import codes.thischwa.ddauto.AutoDnsConfig;
-import codes.thischwa.ddauto.DDAutoContext;
+import codes.thischwa.ddauto.DDAutoConfig;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**
@@ -31,7 +31,7 @@ public class ZoneSdk {
 	private AutoDnsConfig autoDnsConfig;
 
 	@Autowired
-	private DDAutoContext context;
+	private DDAutoConfig config;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
@@ -39,8 +39,8 @@ public class ZoneSdk {
 	}
 
 	public void validateConfiguredZones() {
-		for(String z : context.getConfiguredZones()) {
-			Zone zone = zoneInfo(z, context.getPrimaryNameServer(z));
+		for(String z : config.getConfiguredZones()) {
+			Zone zone = zoneInfo(z, config.getPrimaryNameServer(z));
 			logger.info("Zone correct initialized: {}", zone.getOrigin());
 		}
 	}
@@ -57,10 +57,10 @@ public class ZoneSdk {
 	}
 
 	public Zone zoneInfo(String host) throws ZoneSdkException, IllegalArgumentException {
-		if(!context.hostExists(host))
+		if(!config.hostExists(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = ZoneUtil.deriveZone(host);
-		String primaryNameServer = context.getPrimaryNameServer(zone);
+		String primaryNameServer = config.getPrimaryNameServer(zone);
 		return zoneInfo(zone, primaryNameServer);
 	}
 

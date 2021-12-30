@@ -11,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest(classes = { DDAutoConfig.class, DDAutoContext.class })
+@SpringBootTest(classes = { DDAutoConfig.class })
 @ExtendWith(SpringExtension.class)
-class DDAutoContextFailTest {
-
-	@Autowired
-	private DDAutoContext context;
+class DDAutoConfigFailTest {
 
 	@Autowired
 	private DDAutoConfig config;
@@ -27,7 +24,7 @@ class DDAutoContextFailTest {
 		DDAutoConfig.Zone z = config.getZones().get(0);
 		z.getHosts().add(wrongHost);
 		assertThrows(IllegalArgumentException.class, () -> {
-			context.readData();
+			config.readData();
 		});
 		z.getHosts().remove(wrongHost);
 	}
@@ -38,7 +35,7 @@ class DDAutoContextFailTest {
 		List<String> hosts = new ArrayList<>(z.getHosts());
 		z.getHosts().clear();
 		assertThrows(IllegalArgumentException.class, () -> {
-			context.readData();
+			config.readData();
 		});
 		z.setHosts(hosts);
 	}
