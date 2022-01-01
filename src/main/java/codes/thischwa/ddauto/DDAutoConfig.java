@@ -66,16 +66,16 @@ public class DDAutoConfig {
 
 	@PostConstruct
 	void init() {
-		readAndValidateData();
+		readAndValidate();
 		logger.info("*** Api-token and zone data are read and validated successful!");
 	}
 
-	void readAndValidateData() {
-		readData();
-		validateData();
+	void readAndValidate() {
+		read();
+		validate();
 	}
 	
-	void readData() throws IllegalArgumentException {
+	void read() throws IllegalArgumentException {
 		apitokenData = new HashMap<>();
 		zoneData = new HashMap<>();
 		for(DDAutoConfig.Zone zone : zones) {
@@ -94,7 +94,7 @@ public class DDAutoConfig {
 		}
 	}
 
-	void validateData() {
+	void validate() {
 		if(zoneData == null || zoneData.isEmpty() || apitokenData == null || apitokenData.isEmpty())
 			throw new IllegalArgumentException("Zone or host data are empty.");
 		logger.info("*** Configured hosts:");

@@ -20,7 +20,7 @@ class DDAutoConfigTest {
 	
 	@BeforeEach
 	void setUp() {
-		config.readData();
+		config.read();
 	}
 
 	@Autowired
@@ -65,7 +65,7 @@ class DDAutoConfigTest {
 	
 	@Test
 	final void testValidateData_ok() {
-		config.validateData();
+		config.validate();
 	}
 
 	@Test
@@ -74,7 +74,7 @@ class DDAutoConfigTest {
 		DDAutoConfig.Zone z = config.getZones().get(0);
 		z.getHosts().add(wrongHost);
 		assertThrows(IllegalArgumentException.class, () -> {
-			config.readData();
+			config.read();
 		});
 		z.getHosts().remove(wrongHost);
 	}
@@ -85,7 +85,7 @@ class DDAutoConfigTest {
 		List<String> hosts = new ArrayList<>(z.getHosts());
 		z.getHosts().clear();
 		assertThrows(IllegalArgumentException.class, () -> {
-			config.readData();
+			config.read();
 		});
 		z.setHosts(hosts);
 	}
