@@ -49,9 +49,9 @@ public class MainController implements MainApiRoutes {
 		String validApitoken = conf.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
-		if(ipv4Str != null && !ZoneUtil.isValidateIP(ipv4Str))
+		if(ipv4Str != null && !ZoneUtil.isIPv4(ipv4Str))
 			return new ResponseEntity<>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
-		if(ipv6Str != null && !ZoneUtil.isValidateIP(ipv6Str))
+		if(ipv6Str != null && !ZoneUtil.isIPv6(ipv6Str))
 			return new ResponseEntity<>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
 		if(ipv4Str == null && ipv6Str == null) {
 			logger.debug("Both IP parameters are null, try to fetch the remote IP.");
@@ -96,9 +96,9 @@ public class MainController implements MainApiRoutes {
 		}
 
 		String sld = host.substring(0, host.indexOf("."));
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, sld, "A");
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.RR_A);
 		String ipv4Str = (rr == null) ? "n/a" : rr.getValue();
-		rr = ZoneUtil.searchResourceRecord(zone, sld, "AAAA");
+		rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.RR_AAAA);
 		String ipv6Str = (rr == null) ? "n/a" : rr.getValue();
 		StringBuilder info = new StringBuilder();
 		info.append("IP settings for host: ").append(host).append('\n');

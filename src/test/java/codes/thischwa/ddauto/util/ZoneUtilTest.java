@@ -90,11 +90,11 @@ class ZoneUtilTest {
 	
 	@Test
 	final void testValidIP() {
-		assertTrue(ZoneUtil.isValidateIP("217.229.139.240"));
-		assertTrue(ZoneUtil.isValidateIP("2a03:4000:41:32::1"));
+		assertTrue(ZoneUtil.isIP("217.229.139.240"));
+		assertTrue(ZoneUtil.isIP("2a03:4000:41:32::1"));
 
-		assertFalse(ZoneUtil.isValidateIP("300.229.139.240"));
-		assertFalse(ZoneUtil.isValidateIP("2x03:4000:41:32::1"));
+		assertFalse(ZoneUtil.isIP("300.229.139.240"));
+		assertFalse(ZoneUtil.isIP("2x03:4000:41:32::1"));
 	}
 
 	@Test
@@ -110,22 +110,16 @@ class ZoneUtilTest {
 	}
 	
 	@Test
-	final void testIfIPv6() {
-		assertTrue(ZoneUtil.isIPv6("2a03:4000:41:32::1"));
-		assertFalse(ZoneUtil.isIPv6("217.229.139.240"));
-	}
-
-	@Test
-	final void testIfIPv6_fail1() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ZoneUtil.isIPv6("2a03.4000:41:32::1");
-		});
+	final void testIPv4() {
+		assertTrue(ZoneUtil.isIPv4("217.229.139.240"));
+		assertFalse(ZoneUtil.isIPv4("300.229.139.240"));
 	}
 	
 	@Test
-	final void testIfIPv6_fail() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ZoneUtil.isIPv6("217:229.139.240");
-		});
+	final void testIPv6() {
+		assertTrue(ZoneUtil.isIPv6("2a03:4000:41:32::1"));
+		assertFalse(ZoneUtil.isIPv6("2a03.4000:41:32::1"));
+		assertFalse(ZoneUtil.isIPv6("217.229.139.240"));
 	}
+	
 }

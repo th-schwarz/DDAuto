@@ -15,9 +15,9 @@ public abstract class ZoneUtil {
 
 	private static final long DEFAULT_TLD = 60;
 	
-	static final String RR_A = "A";
+	public static final String RR_A = "A";
 	
-	static final String RR_AAAA = "AAAA";
+	public static final String RR_AAAA = "AAAA";
 
 	private ZoneUtil() {
 	}
@@ -73,20 +73,23 @@ public abstract class ZoneUtil {
 		return host.substring(host.indexOf(".") + 1);
 	}
 
-	public static boolean isValidateIP(String ipStr) {
+	public static boolean isIP(String ipStr) {
+		return isIPv4(ipStr) || isIPv6(ipStr);
+	}
+	
+	public static boolean isIPv4(String ipStr) {
 		try {
-			InetAddress.getByName(ipStr);
-			return true;
+			return (InetAddress.getByName(ipStr) instanceof InetAddress);
 		} catch (UnknownHostException e) {
 			return false;
 		}
 	}
-
-	public static boolean isIPv6(String ipStr) throws IllegalArgumentException {
+	
+	public static boolean isIPv6(String ipStr) {
 		try {
 			return (InetAddress.getByName(ipStr) instanceof Inet6Address);
 		} catch (UnknownHostException e) {
-			throw new IllegalArgumentException(ipStr + " isn't a valid IP.");
+			return false;
 		}
 	}
 }
