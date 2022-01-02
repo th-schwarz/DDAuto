@@ -38,7 +38,7 @@ class DDAutoConfigTest {
 		assertEquals("ns0.domain.info", zone.getNs());
 		
 		assertEquals("my0:1234567890abcdef", zone.getHosts().get(0));
-		assertEquals("test1:1234567890abcdx", zone.getHosts().get(1));
+		assertEquals("test0:1234567890abcdx", zone.getHosts().get(1));
 	}
 
 	@Test

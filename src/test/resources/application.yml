@@ -21,7 +21,7 @@ ddauto:
       ns: ns0.domain.info
       hosts:
         - my0:1234567890abcdef
-        - test1:1234567890abcdx
+        - test0:1234567890abcdx
     -
       name: dynhost1.info
       ns: ns1.domain.info
