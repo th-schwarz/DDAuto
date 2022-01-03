@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "ddauto")
-public class DDAutoConfig {
+public class DDAutoConfig implements InitializingBean {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DDAutoConfig.class);
 
@@ -64,8 +64,8 @@ public class DDAutoConfig {
 		return zoneData.get(zone);
 	}
 
-	@PostConstruct
-	void init() {
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		readAndValidate();
 		logger.info("*** Api-token and zone data are read and validated successful!");
 	}
