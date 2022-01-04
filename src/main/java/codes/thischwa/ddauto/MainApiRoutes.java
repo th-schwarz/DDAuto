@@ -60,7 +60,7 @@ public interface MainApiRoutes {
 			@PathVariable String host);
 
 	@Operation(summary = "Generates basic memory informations")
-	@ApiResponse(responseCode = "200", description = "Textual information about the memory.")
+	@ApiResponse(responseCode = "200", description = "Textual information about the memory usage.")
 	@GetMapping(value = "meminfo", produces = MediaType.TEXT_PLAIN_VALUE)
 	ResponseEntity<String> getMemoryStatistics();
 
