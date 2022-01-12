@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.ddauto.AutoDnsConfig;
-import codes.thischwa.ddauto.DDAutoConfig;
+import codes.thischwa.ddauto.config.AutoDnsConfig;
+import codes.thischwa.ddauto.config.DDAutoConfig;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**

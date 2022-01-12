@@ -1,4 +1,4 @@
-package codes.thischwa.ddauto;
+package codes.thischwa.ddauto.config;
 
 import java.util.HashMap;
 import java.util.List;

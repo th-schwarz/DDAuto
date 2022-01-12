@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import codes.thischwa.ddauto.service.ZoneUpdateLogger;
+import codes.thischwa.ddauto.config.DDAutoConfig;
 import codes.thischwa.ddauto.service.UpdateLoggerException;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;

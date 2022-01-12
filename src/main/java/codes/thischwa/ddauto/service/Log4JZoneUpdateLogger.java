@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import codes.thischwa.ddauto.DDAutoConfig;
+import codes.thischwa.ddauto.config.DDAutoConfig;
 
 @Service
 public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {

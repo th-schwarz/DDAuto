@@ -2,22 +2,9 @@ package codes.thischwa.ddauto;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import codes.thischwa.ddauto.service.ZoneSdk;
-import io.swagger.v3.oas.models.Components;
-import io.swagger.v3.oas.models.ExternalDocumentation;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 
 /**
  * The starter and config.
@@ -26,44 +13,16 @@ import io.swagger.v3.oas.models.info.License;
 @Configuration
 public class DDAutoStarter {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDAutoStarter.class);
-
-	@Value("${zone.validation.enabled:true}")
-	private boolean zoneValidation;
-
 	public static void main(String[] args) {
 		try {
 			SpringApplication app = new SpringApplication(DDAutoStarter.class);
 			List<String> cmdArgs = CommandlineArgsProcessor.process(args);
 			app.run(cmdArgs.toArray(new String[cmdArgs.size()]));
 		} catch (Exception e) {
-			System.err.println("Unexpected exception, Spring Boot stops!");
-			System.exit(10);
+			System.err.println("Unexpected exception, Spring Boot stops! Message: " + e.getMessage());
+			//System.exit(10);
 		}
 	}
 
-	/**
-	 * Creates a listener for the ApplicationReadyEvent, that validates the configured zones.
-	 * 
-	 * @return the required ApplicationListener
-	 */
-	@Bean
-	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk) {
-		return e -> {
-			if(zoneValidation) {
-				logger.debug("Process zone-validation ...");
-				sdk.validateConfiguredZones();
-			} else {
-				logger.debug("Zone validation isn't set, no validation processed.");
-			}
-		};
-	}
 
-	@Bean
-	public OpenAPI customizeOpenAPI() {
-		return new OpenAPI().components(new Components())
-				.externalDocs(new ExternalDocumentation().description("DDAuto on Github").url("https://github.com/th-schwarz/DDAuto"))
-				.info(new Info().title("DDAuto :: Dynamic DNS with AutoDNS").description("The routes of the dynamic DNS API").version("1.0")
-						.license(new License().name("MIT").url("https://github.com/th-schwarz/DDAuto/blob/develop/LICENSE")));
-	}
 }

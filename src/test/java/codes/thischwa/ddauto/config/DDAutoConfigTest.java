@@ -1,4 +1,4 @@
-package codes.thischwa.ddauto;
+package codes.thischwa.ddauto.config;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import codes.thischwa.ddauto.config.DDAutoConfig;
 
 @SpringBootTest(classes = { DDAutoConfig.class })
 @ExtendWith(SpringExtension.class)
