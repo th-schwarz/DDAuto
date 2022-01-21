@@ -14,9 +14,9 @@ import org.springframework.util.Assert;
 import codes.thischwa.ddauto.config.DDAutoConfig;
 
 @Service
-public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
+public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
 
-	private static final Logger logger = LoggerFactory.getLogger(Log4JZoneUpdateLogger.class);
+	private static final Logger logger = LoggerFactory.getLogger(Slf4jZoneUpdateLogger.class);
 
 	@Autowired
 	private DDAutoConfig conf;
@@ -26,7 +26,7 @@ public class Log4JZoneUpdateLogger implements ZoneUpdateLogger {
 	@Override
 	public void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
 		Assert.notNull(host, "'host' shouldn't be null.");
-		logger.info(Log4JZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
+		logger.info(Slf4jZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
 	static String buildLogEntry(String logEntryFormat, String host, String ipv4, String ipv6) throws UpdateLoggerException {
