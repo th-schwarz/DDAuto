@@ -49,11 +49,11 @@ Here is the suggested directory/file structure:
 ```bash
 ├── /opt/ddauto
 │   ├── ddauto.yml
-│   ├── ddauto-0.4.0.jar
-│   ├── ddauto.jar -> ddauto-0.4.0.jar
+│   ├── ddauto-1.1.0.jar
+│   ├── ddauto.jar -> ddauto-1.1.0.jar
 │   ├── ddauto-zone.log   (log of the zone updates)
-│   ├── log4j2.xml        (common log4j2 config)
-│   ├── log4j2_zone.xml   (log4j2 config for the zone update logs)
+│   ├── logback.xml        (common logback config, optional)
+│   ├── logback_zone.xml   (logback config for the zone update logs, optional)
 ```
 Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
 
