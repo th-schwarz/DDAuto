@@ -16,7 +16,7 @@ import codes.thischwa.ddauto.config.DDAutoConfig;
 @Service
 public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
 
-	private static final Logger logger = LoggerFactory.getLogger(Slf4jZoneUpdateLogger.class);
+	private static final Logger logger = LoggerFactory.getLogger("ZoneUpdateLogger");
 
 	@Autowired
 	private DDAutoConfig conf;
