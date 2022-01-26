@@ -36,7 +36,7 @@ public interface MainApiRoutes {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Update successful.") })),
-			@ApiResponse(responseCode = "400", description = "If the 'apitoken' doesn't match the 'host', IP addresses aren't valid or the remote IP couldn't determine."),
+			@ApiResponse(responseCode = "400", description = "If the 'apitoken' doesn't belong to the host, IP addresses aren't valid or the remote IP couldn't determine."),
 			@ApiResponse(responseCode = "500", description = "If the zone update fails.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, examples = {
 					@ExampleObject(value = "Zone update failed.") })) })
 	@GetMapping(value = "/update/{host}", produces = MediaType.TEXT_PLAIN_VALUE)
