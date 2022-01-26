@@ -29,6 +29,7 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
 		logger.info(Slf4jZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
+	// it's static, just for testing
 	static String buildLogEntry(String logEntryFormat, String host, String ipv4, String ipv6) throws UpdateLoggerException {
 		ipv4 = (ipv4 == null) ? "n/a" : ipv4;
 		ipv6 = (ipv6 == null) ? "n/a" : ipv6;
