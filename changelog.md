@@ -1,5 +1,10 @@
 # changelog
 
+- 1.1.0
+  - Enhancements
+    - Switch from log4j2 to logback [#16](https://github.com/th-schwarz/DDAuto/issues/16)
+  - Improvements
+    - update spring-boot to 2.6.3 [#15](https://github.com/th-schwarz/DDAuto/issues/15) 
 - 1.0.2
   - Bugs
     - Log4J2 Vulnerability [#14](https://github.com/th-schwarz/DDAuto/issues/14) (updated to 2.17.0)
