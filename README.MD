@@ -20,7 +20,7 @@ DDAuto can be executed by `commandline`, `init.d` or `systemd`.
 
 Requirement: An AutoDNS account! For further details have a look at [AutoDNS: Efficient Domain-Management for Resellers](https://www.internetx.com/en/domains/autodns)
 
-If you find a bug or you miss a certain features, don't hesitate to file a ticket on [Github](https://github.com/th-schwarz/DDAuto/issues).
+If you find a bug or you miss a certain features, don't hesitate to file an issue on [Github](https://github.com/th-schwarz/DDAuto/issues).
 
 For completeness, here is the [changelog](changelog.md).
 
