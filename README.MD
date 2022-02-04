@@ -24,6 +24,8 @@ If you find a bug or you miss a certain features, don't hesitate to file an issu
 
 For completeness, here is the [changelog](changelog.md).
 
+DDAuto is kindly supported by <br> <a href="https://jb.gg/OpenSourceSupport"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA.png" width="300px" alt="IntelliJ IDEA logo."></a>
+
 ## Disclaimer
 
 I'm not responsible for any data loss, hardware damage or broken keyboards. This guide comes without any warranty!
