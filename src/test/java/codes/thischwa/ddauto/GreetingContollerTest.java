@@ -19,7 +19,7 @@ class GreetingContollerTest {
 	private TestRestTemplate restTemplate;
 
 	@Test
-	void greetingShouldReturnDefaultMessage() throws Exception {
+	void greetingShouldReturnDefaultMessage() {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("DDAuto");
 	}
 }

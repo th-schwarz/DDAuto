@@ -24,13 +24,13 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
 	private String logEntryFormat;
 	
 	@Override
-	public void log(String host, String ipv4, String ipv6) throws UpdateLoggerException {
+	public void log(String host, String ipv4, String ipv6) {
 		Assert.notNull(host, "'host' shouldn't be null.");
 		logger.info(Slf4jZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 	}
 	
 	// it's static, just for testing
-	static String buildLogEntry(String logEntryFormat, String host, String ipv4, String ipv6) throws UpdateLoggerException {
+	static String buildLogEntry(String logEntryFormat, String host, String ipv4, String ipv6) {
 		ipv4 = (ipv4 == null) ? "n/a" : ipv4;
 		ipv6 = (ipv6 == null) ? "n/a" : ipv6;
 		return String.format(logEntryFormat, host, ipv4, ipv6);

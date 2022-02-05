@@ -1,10 +1,5 @@
 package codes.thischwa.ddauto.config;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import codes.thischwa.ddauto.config.DDAutoConfig;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = { DDAutoConfig.class })
 @ExtendWith(SpringExtension.class)
@@ -46,17 +45,13 @@ class DDAutoConfigTest {
 	@Test
 	final void testGetApiToken() {
 		assertEquals("1234567890abcdef", config.getApitoken("my0.dynhost0.info"));
-		assertThrows(IllegalArgumentException.class, () -> {
-			config.getApitoken("unknown.host.info");
-		});
+		assertThrows(IllegalArgumentException.class, () -> config.getApitoken("unknown.host.info"));
 	}
 
 	@Test
 	final void testgetPrimaryNameServer() {
 		assertEquals("ns1.domain.info", config.getPrimaryNameServer("dynhost1.info"));
-		assertThrows(IllegalArgumentException.class, () -> {
-			config.getPrimaryNameServer("unknown-host.info");
-		});
+		assertThrows(IllegalArgumentException.class, () -> config.getPrimaryNameServer("unknown-host.info"));
 	}
 
 	@Test
@@ -75,9 +70,7 @@ class DDAutoConfigTest {
 		String wrongHost = "wrong-formatted.host";
 		DDAutoConfig.Zone z = config.getZones().get(0);
 		z.getHosts().add(wrongHost);
-		assertThrows(IllegalArgumentException.class, () -> {
-			config.read();
-		});
+		assertThrows(IllegalArgumentException.class, config::read);
 		z.getHosts().remove(wrongHost);
 	}
 
@@ -86,9 +79,7 @@ class DDAutoConfigTest {
 		DDAutoConfig.Zone z = config.getZones().get(1);
 		List<String> hosts = new ArrayList<>(z.getHosts());
 		z.getHosts().clear();
-		assertThrows(IllegalArgumentException.class, () -> {
-			config.read();
-		});
+		assertThrows(IllegalArgumentException.class, config::read);
 		z.setHosts(hosts);
 	}
 }

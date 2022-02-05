@@ -17,7 +17,7 @@ class ZoneUtilTest {
 
 	private Zone zone;
 	
-	private static int rrCount = 5;
+	private static final int rrCount = 5;
 
 	@BeforeEach
 	void setUp() throws Exception {

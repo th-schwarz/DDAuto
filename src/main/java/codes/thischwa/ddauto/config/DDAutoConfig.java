@@ -65,7 +65,7 @@ public class DDAutoConfig implements InitializingBean {
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		readAndValidate();
 		logger.info("*** Api-token and zone data are read and validated successful!");
 	}

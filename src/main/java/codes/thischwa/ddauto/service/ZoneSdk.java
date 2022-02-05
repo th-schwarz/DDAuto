@@ -25,7 +25,7 @@ public class ZoneSdk {
 
 	private static final Logger logger = LoggerFactory.getLogger(ZoneSdk.class);
 
-	private static Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
+	private static final Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
 	@Autowired
 	private AutoDnsConfig autoDnsConfig;
@@ -75,6 +75,7 @@ public class ZoneSdk {
 	 * @param ipv6
 	 *            Add or update the ipv6 address. If it's null, it will be dropped from the zone.
 	 * @throws ZoneSdkException
+	 *            If an known exception DomainrobotApiException or an unknown exception was happened.
 	 */
 	public void zoneUpdate(String host, String ipv4, String ipv6) throws ZoneSdkException {
 		String sld = host.substring(0, host.indexOf("."));

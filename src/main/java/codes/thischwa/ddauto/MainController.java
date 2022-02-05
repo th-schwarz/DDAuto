@@ -1,7 +1,10 @@
 package codes.thischwa.ddauto;
 
-import javax.servlet.http.HttpServletRequest;
-
+import codes.thischwa.ddauto.config.DDAutoConfig;
+import codes.thischwa.ddauto.service.ZoneSdk;
+import codes.thischwa.ddauto.service.ZoneSdkException;
+import codes.thischwa.ddauto.service.ZoneUpdateLogger;
+import codes.thischwa.ddauto.util.ZoneUtil;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
@@ -11,12 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import codes.thischwa.ddauto.service.ZoneUpdateLogger;
-import codes.thischwa.ddauto.config.DDAutoConfig;
-import codes.thischwa.ddauto.service.UpdateLoggerException;
-import codes.thischwa.ddauto.service.ZoneSdk;
-import codes.thischwa.ddauto.service.ZoneSdkException;
-import codes.thischwa.ddauto.util.ZoneUtil;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class MainController implements MainApiRoutes {
@@ -76,8 +74,6 @@ public class MainController implements MainApiRoutes {
 		} catch (ZoneSdkException e) {
 			logger.error("Updated host failed: " + host, e);
 			return new ResponseEntity<>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
-		} catch (UpdateLoggerException e) {
-			logger.error("Error while writing to zone log.", e);
 		}
 		return ResponseEntity.ok("Update successful.");
 	}
@@ -88,7 +84,7 @@ public class MainController implements MainApiRoutes {
 		if(!conf.hostExists(host))
 			return new ResponseEntity<>("Host not found.", HttpStatus.NOT_FOUND);
 
-		Zone zone = null;
+		Zone zone;
 		try {
 			zone = sdk.zoneInfo(host);
 		} catch (ZoneSdkException e) {
@@ -112,9 +108,9 @@ public class MainController implements MainApiRoutes {
 	public ResponseEntity<String> getMemoryStatistics() {
 		StringBuilder memInfo = new StringBuilder();
 		memInfo.append("Basic memory Information:\n");
-		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / (1024l * 1024l)));
-		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / (1024l * 1024l)));
-		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / (1024l * 1024l)));
+		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / (1024L * 1024l)));
+		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / (1024L * 1024l)));
+		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / (1024L * 1024l)));
 		return ResponseEntity.ok(memInfo.toString());
 	}
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class Slf4jZoneUpdateLoggerTest {
 	
 	@Test
-	final void testBuildLogEntry() throws Exception {
+	final void testBuildLogEntry() {
 		assertEquals("mydyndns.domain.org         127.1.2.4  2a03:4000:41:32::3", 
 				Slf4jZoneUpdateLogger.buildLogEntry("%s  %16s  %s" ,"mydyndns.domain.org", "127.1.2.4", "2a03:4000:41:32::3"));
 		assertEquals("mydyndns.domain.org         127.1.2.4  n/a", 
