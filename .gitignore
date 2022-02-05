@@ -4,6 +4,7 @@
 /.project
 /.factorypath
 /.springBeans
+/.idea
 /info.txt
 /ddauto.yml
 /logback.xml
