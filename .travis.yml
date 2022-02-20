@@ -3,4 +3,4 @@ language:  java
 jdk: openjdk11
 
 install: true
-script: mvn clean package
+script: mvn clean verify
