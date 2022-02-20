@@ -29,3 +29,7 @@ autodns:
 zone:
   validation:
     enabled: true
+  log-file-pattern: ./ddauto-zone*
+
+## regex-pattern to parse the entries ddauto-zone.log
+  log-pattern: "(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)"

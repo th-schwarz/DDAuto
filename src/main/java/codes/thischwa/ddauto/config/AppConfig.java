@@ -1,5 +1,7 @@
 package codes.thischwa.ddauto.config;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import codes.thischwa.ddauto.service.ZoneSdk;
+import codes.thischwa.ddauto.service.ZoneUpdateCache;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -27,18 +30,25 @@ public class AppConfig {
 	private boolean zoneValidation;
 
 	/**
-	 * Creates a listener for the ApplicationReadyEvent, that validates the configured zones.
+	 * Creates a listener for the ApplicationReadyEvent, that validates the configured zones and prefills the cache.
 	 * 
 	 * @return the required ApplicationListener
 	 */
 	@Bean
-	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk) {
+	ApplicationListener<ApplicationReadyEvent> createApplicationReadyListener(ZoneSdk sdk, ZoneUpdateCache cache) {
 		return e -> {
 			if(zoneValidation) {
 				logger.debug("Process zone-validation ...");
 				sdk.validateConfiguredZones();
 			} else {
 				logger.debug("Zone validation isn't set, no validation processed.");
+			}
+
+			try {
+				cache.prefill();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		};
 	}
