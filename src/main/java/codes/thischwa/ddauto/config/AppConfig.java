@@ -1,7 +1,5 @@
 package codes.thischwa.ddauto.config;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,13 +40,6 @@ public class AppConfig {
 				sdk.validateConfiguredZones();
 			} else {
 				logger.debug("Zone validation isn't set, no validation processed.");
-			}
-
-			try {
-				cache.prefill();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 		};
 	}

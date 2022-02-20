@@ -14,13 +14,14 @@ import java.util.zip.GZIPInputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ZoneUpdateCache {
+public class ZoneUpdateCache implements InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(ZoneUpdateCache.class);
 
@@ -36,7 +37,8 @@ public class ZoneUpdateCache {
 		return zoneLogFilePattern != null;
 	}
 
-	public void prefill() throws IOException {
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		if(!enabled()) {
 			logger.info("No log-pattern set, prefill is canceled.");
 			return;

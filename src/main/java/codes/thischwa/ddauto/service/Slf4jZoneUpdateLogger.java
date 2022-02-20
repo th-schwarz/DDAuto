@@ -3,10 +3,9 @@ package codes.thischwa.ddauto.service;
 import java.util.Comparator;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -14,7 +13,7 @@ import org.springframework.util.Assert;
 import codes.thischwa.ddauto.config.DDAutoConfig;
 
 @Service
-public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
+public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger("ZoneUpdateLogger");
 
@@ -36,8 +35,8 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger {
 		return String.format(logEntryFormat, host, ipv4, ipv6);
 	}
 	
-	@PostConstruct
-	void init() {
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		// determine the max. length of the hosts for nicer logging
 		Optional<String> max = conf.getConfiguredHosts().stream().max(Comparator.comparing(String::length));
 		int maxSize = max.isPresent() ? max.get().length() : 12;
