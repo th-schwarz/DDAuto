@@ -13,6 +13,7 @@ spring:
 zone:
   validation:
     enabled: false
+  log-file-pattern: ./ddauto-zone*
 
 ddauto:
   zones:
