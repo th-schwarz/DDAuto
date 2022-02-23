@@ -19,6 +19,9 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 
 	@Autowired
 	private DDAutoConfig conf;
+	
+	@Autowired
+	private ZoneUpdateCache cache;
 
 	private String logEntryFormat;
 	
@@ -26,6 +29,7 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 	public void log(String host, String ipv4, String ipv6) {
 		Assert.notNull(host, "'host' shouldn't be null.");
 		logger.info(Slf4jZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
+		cache.addLogEntry(host, ipv4, ipv6);
 	}
 	
 	// it's static, just for testing

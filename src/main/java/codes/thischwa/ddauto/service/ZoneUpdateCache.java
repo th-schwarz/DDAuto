@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,20 +27,31 @@ public class ZoneUpdateCache implements InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(ZoneUpdateCache.class);
 
-	@Value("${zone.log-pattern:(.*) - (.*) (.*)}")
+	@Value("${zone.log-pattern:(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)}")
 	private String zoneLogPattern;
 
 	@Value("${zone.log-file-pattern}")
 	private String zoneLogFilePattern;
 
+	@Value("${zone.log-date-pattern:yyyy-MM-dd HH:mm:SSS}")
+	private String zoneLogDatePattern;
+
 	private List<ZoneUpdateItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
+	
+	private DateTimeFormatter dateTimeFormatter;
 
 	public boolean enabled() {
 		return zoneLogFilePattern != null;
 	}
 
+	public int length() {
+		return zoneUpdateItems.size();
+	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		dateTimeFormatter = DateTimeFormatter.ofPattern(zoneLogDatePattern);
+		
 		if(!enabled()) {
 			logger.info("No log-pattern set, prefill is canceled.");
 			return;
@@ -48,7 +61,6 @@ public class ZoneUpdateCache implements InitializingBean {
 		Resource[] logs = new PathMatchingResourcePatternResolver().getResources("file:" + zoneLogFilePattern);
 		for(Resource log : logs) {
 			String filename = log.getFilename();
-			logger.debug("found: {}", filename);
 			if(filename.endsWith(".log") || filename.endsWith(".gz")) {
 				read(log, logEntries);
 			}
@@ -62,6 +74,16 @@ public class ZoneUpdateCache implements InitializingBean {
 				.filter(i -> i != null)
 				.collect(Collectors.toList()));
 		logger.debug("{} log entries successful read and parsed.", zoneUpdateItems.size());
+	}
+	
+	public void addLogEntry(String host, String ipv4, String ipv6) {
+		String now = dateTimeFormatter.format(LocalDateTime.now());
+		ZoneUpdateItem item = new ZoneUpdateItem(now, host, ipv4, ipv6);
+		zoneUpdateItems.add(item);
+	}
+	
+	public List<ZoneUpdateItem> get() {
+		return zoneUpdateItems;
 	}
 
 	ZoneUpdateItem parseLogEntry(String logEntry, Pattern pattern) {

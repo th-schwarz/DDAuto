@@ -3,6 +3,8 @@ package codes.thischwa.ddauto;
 import codes.thischwa.ddauto.config.DDAutoConfig;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;
+import codes.thischwa.ddauto.service.ZoneUpdateCache;
+import codes.thischwa.ddauto.service.ZoneUpdateItem;
 import codes.thischwa.ddauto.service.ZoneUpdateLogger;
 import codes.thischwa.ddauto.util.ZoneUtil;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +33,9 @@ public class MainController implements MainApiRoutes {
 
 	@Autowired
 	private ZoneUpdateLogger updateLogger;
+	
+	@Autowired
+	private ZoneUpdateCache cache;
 
 	@Override
 	public ResponseEntity<String> exist(String host) {
@@ -113,4 +120,10 @@ public class MainController implements MainApiRoutes {
 		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / (1024L * 1024l)));
 		return ResponseEntity.ok(memInfo.toString());
 	}
+	
+	@Override
+	public ResponseEntity<List<ZoneUpdateItem>> getZoneUpdateLogs() {
+		return ResponseEntity.ok(cache.get());
+	}
+	
 }
