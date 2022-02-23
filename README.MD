@@ -56,8 +56,8 @@ Here is the suggested directory/file structure:
 │   ├── ddauto-1.1.0.jar
 │   ├── ddauto.jar -> ddauto-1.1.0.jar
 │   ├── ddauto-zone.log   (log of the zone updates)
-│   ├── logback.xml       (logback configuration for application and zone update logging, optional)
-│   ├── logback_zone.xml  (extra logback configuration for zone update logging, optinal, can be included in logback.xml) 
+│   ├── logback.xml       (logback configuration for application and zone update logoging, optional)
+│   ├── logback_zone.xml  (extra logback configuration for zone update logging, optional include) 
 ```
 Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
 
