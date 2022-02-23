@@ -57,12 +57,13 @@ Here is the suggested directory/file structure:
 │   ├── ddauto.jar -> ddauto-1.1.0.jar
 │   ├── ddauto-zone.log   (log of the zone updates)
 │   ├── logback.xml       (logback configuration for application and zone update logging, optional)
+│   ├── logback_zone.xml  (extra logback configuration for zone update logging, optinal, can be included in logback.xml) 
 ```
 Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
 
 ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found further below. If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml). <br>
 Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
-The configuration of Logback defines the application logging and the well-formatted zone update log. Further information can be found in the wiki [Logback Configuration](https://github.com/th-schwarz/DDAuto/wiki/Logback-Configuration).
+The configuration of Logback is splitted in two files, one for the application logging and one for a the well-formatted zone update log. Further information can be found in the wiki [Logback Configuration](https://github.com/th-schwarz/DDAuto/wiki/Logback-Configuration).
 
 The start by command line looks like:
 ```bash
