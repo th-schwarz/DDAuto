@@ -10,7 +10,9 @@ import org.domainrobot.sdk.models.DomainrobotApiException;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import codes.thischwa.ddauto.config.AutoDnsConfig;
@@ -21,12 +23,15 @@ import codes.thischwa.ddauto.util.ZoneUtil;
  * A simple wrapper to ZoneClient of the Domainrobot Sdk.
  */
 @Service
-public class ZoneSdk {
+public class ZoneSdk implements InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(ZoneSdk.class);
 
 	private static final Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
+	@Value("${zone.validation.enabled:true}")
+	private boolean zoneValidation;
+	
 	@Autowired
 	private AutoDnsConfig autoDnsConfig;
 
@@ -36,6 +41,12 @@ public class ZoneSdk {
 	private ZoneClient getInstance() {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
 				autoDnsConfig.getUrl()).getZone();
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if(zoneValidation)
+			validateConfiguredZones();
 	}
 
 	public void validateConfiguredZones() {
