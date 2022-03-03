@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<div id="grid"></div>
+	<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+	<script th:inline="javascript">
+	var server_url = [[${server_url}]];
+	var header_basicauth = [[${header_basicauth}]];
+    new gridjs.Grid({
+    	columns: [{id: 'dateTime', name: 'Timestamp'}, 
+    		{id: 'host', name: 'Host'}, 
+    		{id: 'ipv4', name: 'IPv4'}, 
+    		{id: 'ipv6', name: 'IPv6'}],
+    	  search: true,
+    	  pagination: {limit: 100},
+    	  server: {
+    		  url: server_url,
+    		  headers: {'Authorization': header_basicauth},
+    		  then: data => {
+                  return data.map(res => [res.dateTime, res.host, res.ipv4, res.ipv6]) 
+                } 
+    	  }
+    	}).render(document.getElementById("grid"));
+    </script>
+</body>
+</html>
