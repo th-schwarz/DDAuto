@@ -93,7 +93,7 @@ All routes that belong to zones and hosts are secured by basic-auth. A detailed 
 
 There are two additional routes which deliver web pages:
 * [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```greeting.enabled=false```.
-* [/log]: Delivers a simple web page to view the zone update logs and is secured by basic-auth.
+* [/log]: Delivers a simple web page to view the zone update logs and is secured by basic-auth. It is enabled by default but it can be disabled by setting the property ```log-page.enabled=false```.
 
 
 ## Suggested AutoDNS setup
