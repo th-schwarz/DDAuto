@@ -18,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DDAutoConfigTest {
 
 	private final int configuredEntries = 2;
+
+	@Autowired
+	private DDAutoConfig config;
 	
 	@BeforeEach
 	void setUp() {
 		config.read();
 	}
 
-	@Autowired
-	private DDAutoConfig config;
-	
 	@Test
 	final void testCountZones() {
 		assertEquals(2, config.getZones().size());
