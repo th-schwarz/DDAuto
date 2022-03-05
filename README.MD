@@ -72,28 +72,38 @@ java -jar /opt/ddauto/ddauto.jar
 DDAuto can also be started easily as a service. For further information, see https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#deployment.installing.nix-services
 
 
-## Configuration of zones and hosts
+## Configuration
+
+### Zones and Hosts
 
 Minimal example: 
 ```yaml
-ddauto:
-  zones:
-    -  
-      name: dynhost.info   # the zone
-      ns: ns.domain.info   # the primary nameserver of the zone
-      hosts:
-        - myhost:1234567890abcdef
+zones:
+  -  
+    name: dynhost.info   # the zone
+    ns: ns.domain.info   # the primary nameserver of the zone
+    hosts:
+      - myhost:1234567890abcdef
 ```
 The last line defines the host ```myhost.dynhost.info``` with the api-token `1234567890abcdef`.
 
+
+### AutoDNS (DomainRobot)
+
+Minimal example: 
+```yaml
+autodns:
+  user: ddauto
+  password: test123
+```
 
 ## Routes
 
 All routes that belong to zones and hosts are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
 
 There are two additional routes which deliver web pages:
-* [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```greeting.enabled=false```.
-* [/log]: Delivers a simple web page to view the zone update logs and is secured by basic-auth. It is enabled by default but it can be disabled by setting the property ```log-page.enabled=false```.
+* [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```ddauto.greeting.enabled=false```.
+* [/log]: Delivers a simple web page to view the zone update logs and is secured by basic-auth. It is enabled by default but it can be disabled by setting the property ```ddauto.zone.log-page.enabled=false```.
 
 
 ## Suggested AutoDNS setup
