@@ -59,6 +59,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		
 		// build location pattern
 		String locPattern = (conf.getZoneLogFilePattern().contains(":")) ? conf.getZoneLogFilePattern() : "file:" + conf.getZoneLogFilePattern();
+		logger.debug("Using the following log file patter: {}", locPattern);
 
 		List<String> logEntries = new ArrayList<>();
 		Resource[] logs = new PathMatchingResourcePatternResolver().getResources(locPattern);
