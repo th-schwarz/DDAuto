@@ -1,11 +1,12 @@
 package codes.thischwa.ddauto;
 
-import codes.thischwa.ddauto.config.DDAutoConfig;
+import codes.thischwa.ddauto.config.ZoneConfig;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;
-import codes.thischwa.ddauto.service.ZoneUpdateCache;
+import codes.thischwa.ddauto.service.ZoneUpdateLogCache;
 import codes.thischwa.ddauto.service.ZoneUpdateItem;
 import codes.thischwa.ddauto.service.ZoneUpdateLogger;
+import codes.thischwa.ddauto.util.NetUtil;
 import codes.thischwa.ddauto.util.ZoneUtil;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
@@ -26,7 +27,7 @@ public class MainController implements MainApiRoutes {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
-	private DDAutoConfig conf;
+	private ZoneConfig conf;
 
 	@Autowired
 	private ZoneSdk sdk;
@@ -35,7 +36,7 @@ public class MainController implements MainApiRoutes {
 	private ZoneUpdateLogger updateLogger;
 	
 	@Autowired
-	private ZoneUpdateCache cache;
+	private ZoneUpdateLogCache cache;
 
 	@Override
 	public ResponseEntity<String> exist(String host) {
@@ -55,9 +56,9 @@ public class MainController implements MainApiRoutes {
 		String validApitoken = conf.getApitoken(host);
 		if(!validApitoken.equals(apitoken))
 			return new ResponseEntity<>("Stop processing, unknown 'apitoken': " + apitoken, HttpStatus.BAD_REQUEST);
-		if(ipv4Str != null && !ZoneUtil.isIPv4(ipv4Str))
+		if(ipv4Str != null && !NetUtil.isIPv4(ipv4Str))
 			return new ResponseEntity<>("Request parameter 'ipv4' isn't valid: " + ipv4Str, HttpStatus.BAD_REQUEST);
-		if(ipv6Str != null && !ZoneUtil.isIPv6(ipv6Str))
+		if(ipv6Str != null && !NetUtil.isIPv6(ipv6Str))
 			return new ResponseEntity<>("Request parameter 'ipv6' isn't valid: " + ipv6Str, HttpStatus.BAD_REQUEST);
 		if(ipv4Str == null && ipv6Str == null) {
 			logger.debug("Both IP parameters are null, try to fetch the remote IP.");
@@ -67,7 +68,7 @@ public class MainController implements MainApiRoutes {
 				return new ResponseEntity<>("Couldn't determine the remote ip!", HttpStatus.BAD_REQUEST);
 			}
 			logger.debug("Fetched remote IP: {}", remoteIP);
-			if(ZoneUtil.isIPv6(remoteIP))
+			if(NetUtil.isIPv6(remoteIP))
 				ipv6Str = remoteIP;
 			else
 				ipv4Str = remoteIP;

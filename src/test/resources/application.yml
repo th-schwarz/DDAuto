@@ -10,25 +10,25 @@ spring:
       name: dyndns
       password: test123
 
-zone:
-  validation:
-    enabled: false
-  log-file-pattern: ./ddauto-zone*
-
 ddauto:
-  zones:
-    -  
-      name: dynhost0.info
-      ns: ns0.domain.info
-      hosts:
-        - my0:1234567890abcdef
-        - test0:1234567890abcdx
-    -
-      name: dynhost1.info
-      ns: ns1.domain.info
-      hosts:
-        - my1:1234567890abcdef
-        - test1:1234567890abcdx
+  zone:
+    validation:
+      enabled: false
+    log-file-pattern: classpath:/test-files/ddauto-zone*
+
+zones:
+  -  
+    name: dynhost0.info
+    ns: ns0.domain.info
+    hosts:
+      - my0:1234567890abcdef
+      - test0:1234567890abcdx
+  -
+    name: dynhost1.info
+    ns: ns1.domain.info
+    hosts:
+      - my1:1234567890abcdef
+      - test1:1234567890abcdx
 
 autodns:
   context: 4

@@ -1,8 +1,5 @@
 package codes.thischwa.ddauto;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import codes.thischwa.ddauto.util.NetUtil;
+
 /**
  * A controller that delivers a page to show the zone update logs.
  */
 @Controller
-@ConditionalOnProperty(name = "log-page.enabled", matchIfMissing = true)
-public class LogContoller {
+@ConditionalOnProperty(name = "ddauto.zone.log-page.enabled", matchIfMissing = true)
+public class ZoneUpdateLogContoller {
 	
 	@Value("${spring.security.user.name}")
 	private String user;
@@ -40,15 +39,9 @@ public class LogContoller {
 
 		model.addAttribute("server_url", baseUrl + "/info/zone-log");
 		if(user != null && password != null) {
-			String basicAuth = buildBasicAuth(user, password);
+			String basicAuth = NetUtil.buildBasicAuth(user, password);
 			model.addAttribute("header_basicauth", basicAuth);
 		}
 		return "log-zone.html";
-	}
-	
-	static String buildBasicAuth(String user, String pwd) {
-		String authStr = String.format("%s:%s", user, pwd);
-	    String base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes(StandardCharsets.UTF_8));
-	    return "Basic " + base64Creds;
 	}
 }

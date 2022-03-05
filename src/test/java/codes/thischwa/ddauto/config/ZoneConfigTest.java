@@ -13,14 +13,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest(classes = { DDAutoConfig.class })
+@SpringBootTest(classes = { ZoneConfig.class })
 @ExtendWith(SpringExtension.class)
-class DDAutoConfigTest {
+class ZoneConfigTest {
 
 	private final int configuredEntries = 2;
 
 	@Autowired
-	private DDAutoConfig config;
+	private ZoneConfig config;
 	
 	@BeforeEach
 	void setUp() {
@@ -34,7 +34,7 @@ class DDAutoConfigTest {
 
 	@Test
 	final void testZoneDetails() {
-		DDAutoConfig.Zone zone = config.getZones().get(0);
+		ZoneConfig.Zone zone = config.getZones().get(0);
 		assertEquals("dynhost0.info", zone.getName());
 		assertEquals("ns0.domain.info", zone.getNs());
 		
@@ -68,7 +68,7 @@ class DDAutoConfigTest {
 	@Test
 	final void testWrongHostFormat() {
 		String wrongHost = "wrong-formatted.host";
-		DDAutoConfig.Zone z = config.getZones().get(0);
+		ZoneConfig.Zone z = config.getZones().get(0);
 		z.getHosts().add(wrongHost);
 		assertThrows(IllegalArgumentException.class, config::read);
 		z.getHosts().remove(wrongHost);
@@ -76,7 +76,7 @@ class DDAutoConfigTest {
 
 	@Test
 	final void testEmptyHosts() {
-		DDAutoConfig.Zone z = config.getZones().get(1);
+		ZoneConfig.Zone z = config.getZones().get(1);
 		List<String> hosts = new ArrayList<>(z.getHosts());
 		z.getHosts().clear();
 		assertThrows(IllegalArgumentException.class, config::read);

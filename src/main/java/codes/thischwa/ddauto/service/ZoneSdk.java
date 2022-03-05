@@ -12,11 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import codes.thischwa.ddauto.config.AutoDnsConfig;
 import codes.thischwa.ddauto.config.DDAutoConfig;
+import codes.thischwa.ddauto.config.ZoneConfig;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**
@@ -29,14 +29,14 @@ public class ZoneSdk implements InitializingBean {
 
 	private static final Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
-	@Value("${zone.validation.enabled:true}")
-	private boolean zoneValidation;
+	@Autowired
+	private DDAutoConfig conf;
 	
 	@Autowired
 	private AutoDnsConfig autoDnsConfig;
 
 	@Autowired
-	private DDAutoConfig config;
+	private ZoneConfig zoneConfig;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
@@ -45,13 +45,13 @@ public class ZoneSdk implements InitializingBean {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if(zoneValidation)
+		if(conf.isZoneValidationEnabled())
 			validateConfiguredZones();
 	}
 
 	public void validateConfiguredZones() {
-		for(String z : config.getConfiguredZones()) {
-			Zone zone = zoneInfo(z, config.getPrimaryNameServer(z));
+		for(String z : zoneConfig.getConfiguredZones()) {
+			Zone zone = zoneInfo(z, zoneConfig.getPrimaryNameServer(z));
 			logger.info("Zone correct initialized: {}", zone.getOrigin());
 		}
 	}
@@ -68,10 +68,10 @@ public class ZoneSdk implements InitializingBean {
 	}
 
 	public Zone zoneInfo(String host) throws ZoneSdkException, IllegalArgumentException {
-		if(!config.hostExists(host))
+		if(!zoneConfig.hostExists(host))
 			throw new IllegalArgumentException("Host isn't configured: " + host);
 		String zone = ZoneUtil.deriveZone(host);
-		String primaryNameServer = config.getPrimaryNameServer(zone);
+		String primaryNameServer = zoneConfig.getPrimaryNameServer(zone);
 		return zoneInfo(zone, primaryNameServer);
 	}
 

@@ -1,14 +1,12 @@
 package codes.thischwa.ddauto.config;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import codes.thischwa.ddauto.config.AutoDnsConfig;
 
 @SpringBootTest(classes = { AutoDnsConfig.class })
 @ExtendWith(SpringExtension.class)

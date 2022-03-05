@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import codes.thischwa.ddauto.config.DDAutoConfig;
+import codes.thischwa.ddauto.config.ZoneConfig;
 
 @Service
 public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean {
@@ -18,10 +18,10 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 	private static final Logger logger = LoggerFactory.getLogger("ZoneUpdateLogger");
 
 	@Autowired
-	private DDAutoConfig conf;
+	private ZoneConfig conf;
 	
 	@Autowired
-	private ZoneUpdateCache cache;
+	private ZoneUpdateLogCache cache;
 
 	private String logEntryFormat;
 	

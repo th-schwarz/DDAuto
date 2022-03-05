@@ -17,31 +17,31 @@ import java.util.zip.GZIPInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
+import codes.thischwa.ddauto.config.DDAutoConfig;
+
+/**
+ * A cache to hold the zone update logs
+ *
+ */
 @Service
-public class ZoneUpdateCache implements InitializingBean {
+public class ZoneUpdateLogCache implements InitializingBean {
 
-	private static final Logger logger = LoggerFactory.getLogger(ZoneUpdateCache.class);
+	private static final Logger logger = LoggerFactory.getLogger(ZoneUpdateLogCache.class);
 
-	@Value("${zone.log-pattern:(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)}")
-	private String zoneLogPattern;
-
-	@Value("${zone.log-file-pattern}")
-	private String zoneLogFilePattern;
-
-	@Value("${zone.log-date-pattern:yyyy-MM-dd HH:mm:SSS}")
-	private String zoneLogDatePattern;
-
+	@Autowired
+	private DDAutoConfig conf;
+	
 	private List<ZoneUpdateItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
 	
 	private DateTimeFormatter dateTimeFormatter;
 
 	public boolean enabled() {
-		return zoneLogFilePattern != null;
+		return conf.isLogPageEnabled() && conf.getZoneLogFilePattern() != null;
 	}
 
 	public int length() {
@@ -50,15 +50,18 @@ public class ZoneUpdateCache implements InitializingBean {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		dateTimeFormatter = DateTimeFormatter.ofPattern(zoneLogDatePattern);
-		
 		if(!enabled()) {
-			logger.info("No log-pattern set, prefill is canceled.");
+			logger.info("Log page is disabled or log-pattern set, prefill is canceled.");
 			return;
 		}
+		
+		dateTimeFormatter = DateTimeFormatter.ofPattern(conf.getZoneLogDatePattern());
+		
+		// build location pattern
+		String locPattern = (conf.getZoneLogFilePattern().contains(":")) ? conf.getZoneLogFilePattern() : "file:" + conf.getZoneLogFilePattern();
 
 		List<String> logEntries = new ArrayList<>();
-		Resource[] logs = new PathMatchingResourcePatternResolver().getResources("file:" + zoneLogFilePattern);
+		Resource[] logs = new PathMatchingResourcePatternResolver().getResources(locPattern);
 		for(Resource log : logs) {
 			String filename = log.getFilename();
 			if(filename.endsWith(".log") || filename.endsWith(".gz")) {
@@ -68,7 +71,7 @@ public class ZoneUpdateCache implements InitializingBean {
 		
 		// ordering and parsing
 		logEntries.sort(null);
-		Pattern pattern = Pattern.compile(zoneLogPattern);
+		Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
 		zoneUpdateItems = new CopyOnWriteArrayList<ZoneUpdateItem>(logEntries.stream()
 				.map(i -> parseLogEntry(i, pattern))
 				.filter(i -> i != null)

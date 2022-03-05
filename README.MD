@@ -61,7 +61,7 @@ Here is the suggested directory/file structure:
 ```
 Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
 
-ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found further below. If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/blob/develop/src/main/resources/application.yml). <br>
+ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found further below. If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Complete-Configuration-Example). <br>
 Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
 The configuration of Logback is splitted in two files, one for the application logging and one for a the well-formatted zone update log. Further information can be found in the wiki [Logback Configuration](https://github.com/th-schwarz/DDAuto/wiki/Logback-Configuration).
 

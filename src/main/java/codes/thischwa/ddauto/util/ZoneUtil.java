@@ -1,8 +1,5 @@
 package codes.thischwa.ddauto.util;
 
-import java.net.Inet6Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Optional;
 
 import org.domainrobot.sdk.models.generated.ResourceRecord;
@@ -71,25 +68,5 @@ public abstract class ZoneUtil {
 		if(cnt < 2)
 			throw new IllegalArgumentException("'host' must be a sub domain.");
 		return host.substring(host.indexOf(".") + 1);
-	}
-
-	public static boolean isIP(String ipStr) {
-		return isIPv4(ipStr) || isIPv6(ipStr);
-	}
-	
-	public static boolean isIPv4(String ipStr) {
-		try {
-			return (InetAddress.getByName(ipStr) instanceof InetAddress);
-		} catch (UnknownHostException e) {
-			return false;
-		}
-	}
-	
-	public static boolean isIPv6(String ipStr) {
-		try {
-			return (InetAddress.getByName(ipStr) instanceof Inet6Address);
-		} catch (UnknownHostException e) {
-			return false;
-		}
 	}
 }

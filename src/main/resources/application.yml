@@ -7,6 +7,18 @@ server:
     context-path: /
   shutdown: graceful
 
+## credentials for the domainrobot sdk    
+autodns:
+  context: 4
+  password: pwd
+  url: https://api.autodns.com/v1
+  user: user
+
+## enables the validation of the configured zones
+ddauto:
+  zone:
+    log-file-pattern: ./ddauto-zone*
+
 ## import individual config
 spring:
   config:
@@ -17,19 +29,3 @@ spring:
     user:
       name: dyndns
       password: test123
-
-## credentials for the domainrobot sdk    
-autodns:
-  context: 4
-  password: pwd
-  url: https://api.autodns.com/v1
-  user: user
-
-## enables the validation of the configured zones
-zone:
-  validation:
-    enabled: true
-  log-file-pattern: ./ddauto-zone*
-
-## regex-pattern to parse the entries ddauto-zone.log
-  # log-pattern: "(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)"

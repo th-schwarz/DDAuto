@@ -18,14 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import codes.thischwa.ddauto.config.DDAutoConfig;
-
-@SpringBootTest(classes = { DDAutoConfig.class })
+@SpringBootTest(classes = { ZoneConfig.class })
 @ExtendWith(SpringExtension.class)
 class DDAutoConfigValidationTest {
 
 	@Autowired
-	private DDAutoConfig config;
+	private ZoneConfig config;
 	private static Validator validator;
 
 	@BeforeAll
@@ -36,22 +34,22 @@ class DDAutoConfigValidationTest {
 
 	@Test
 	final void testZones() {
-		Set<ConstraintViolation<DDAutoConfig>> violations = validator.validate(config);
+		Set<ConstraintViolation<ZoneConfig>> violations = validator.validate(config);
 		assertTrue(violations.isEmpty());
 		assertEquals(2, config.getZones().size());
 	}
 
 	@Test
 	final void testZone_failName() {
-		DDAutoConfig.Zone z = buildZone();
+		ZoneConfig.Zone z = buildZone();
 		z.setName(null);
-		Set<ConstraintViolation<DDAutoConfig.Zone>> violations = validator.validate(z);
+		Set<ConstraintViolation<ZoneConfig.Zone>> violations = validator.validate(z);
 		assertEquals(1, violations.size());
 		assertEquals("The name of the zone shouldn't be empty.", violations.iterator().next().getMessage());
 	}
 
-	final static DDAutoConfig.Zone buildZone() {
-		DDAutoConfig.Zone z = new DDAutoConfig.Zone();
+	final static ZoneConfig.Zone buildZone() {
+		ZoneConfig.Zone z = new ZoneConfig.Zone();
 		z.setName("test.dyndns.org");
 		z.setNs("ns.dyndns.org");
 		z.setHosts(Arrays.asList("test1", "test2"));

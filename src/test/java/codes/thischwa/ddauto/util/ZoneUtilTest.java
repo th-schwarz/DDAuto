@@ -90,11 +90,11 @@ class ZoneUtilTest {
 	
 	@Test
 	final void testValidIP() {
-		assertTrue(ZoneUtil.isIP("217.229.139.240"));
-		assertTrue(ZoneUtil.isIP("2a03:4000:41:32::1"));
+		assertTrue(NetUtil.isIP("217.229.139.240"));
+		assertTrue(NetUtil.isIP("2a03:4000:41:32::1"));
 
-		assertFalse(ZoneUtil.isIP("300.229.139.240"));
-		assertFalse(ZoneUtil.isIP("2x03:4000:41:32::1"));
+		assertFalse(NetUtil.isIP("300.229.139.240"));
+		assertFalse(NetUtil.isIP("2x03:4000:41:32::1"));
 	}
 
 	@Test
@@ -107,19 +107,6 @@ class ZoneUtilTest {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			ZoneUtil.deriveZone("example.com");
 		});
-	}
-	
-	@Test
-	final void testIPv4() {
-		assertTrue(ZoneUtil.isIPv4("217.229.139.240"));
-		assertFalse(ZoneUtil.isIPv4("300.229.139.240"));
-	}
-	
-	@Test
-	final void testIPv6() {
-		assertTrue(ZoneUtil.isIPv6("2a03:4000:41:32::1"));
-		assertFalse(ZoneUtil.isIPv6("2a03.4000:41:32::1"));
-		assertFalse(ZoneUtil.isIPv6("217.229.139.240"));
 	}
 	
 }
