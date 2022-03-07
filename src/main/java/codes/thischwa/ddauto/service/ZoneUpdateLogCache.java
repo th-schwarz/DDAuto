@@ -51,7 +51,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if(!enabled()) {
-			logger.info("Log page is disabled or log-pattern set, prefill is canceled.");
+			logger.info("Log page is disabled or ddauto.zone.log-file-pattern isn't set, prefill is canceled.");
 			return;
 		}
 		
