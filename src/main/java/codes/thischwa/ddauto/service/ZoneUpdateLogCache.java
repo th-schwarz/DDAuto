@@ -63,6 +63,10 @@ public class ZoneUpdateLogCache implements InitializingBean {
 
 		List<String> logEntries = new ArrayList<>();
 		Resource[] logs = new PathMatchingResourcePatternResolver().getResources(locPattern);
+		if(logs == null || logs.length == 0) {
+			logger.debug("No log files found.");
+			return;
+		}
 		for(Resource log : logs) {
 			String filename = log.getFilename();
 			if(filename.endsWith(".log") || filename.endsWith(".gz")) {
