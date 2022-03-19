@@ -18,7 +18,7 @@ DDAuto can be executed by `commandline`, `init.d` or `systemd`.
 
 Requirement: An AutoDNS account! For further details have a look at [AutoDNS: Efficient Domain-Management for Resellers](https://www.internetx.com/en/domains/autodns)
 
-If you find a bug or you miss a certain features, don't hesitate to file an issue on [Github](https://github.com/th-schwarz/DDAuto/issues).
+If you find a bug or certain features are missing, don't hesitate to file an issue on [Github](https://github.com/th-schwarz/DDAuto/issues).
 
 For completeness, here is the [changelog](changelog.md).
 
@@ -37,7 +37,7 @@ DDAuto is running as a service. A client can access the service via url and basi
 curl -u dyndns:test123 -i \ 
    "http://localhost:8081/update/mydyndns.domain.com/?apitoken=1234567890abcdf&ipv4=127.1.2.4&ipv6=2a03:4000:41:32::2"
 ```
-For each host an api-token must be defined. If the api-token doesn't match the host, the update will be rejected. Because of this security feature, DDAuto can be used by different people. They can't update the IPs each other.
+For each host an api-token must be defined. If the api-token doesn't match the host, the update will be rejected. Due to this security feature, DDAuto can be used by different people. They can't update the IPs each other.
 
 
 ## Configuration and start
@@ -59,9 +59,9 @@ Here is the suggested directory/file structure:
 ```
 Side note: If the names of the configuration files are kept as above, they will be found and loaded automatically.
 
-ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can kept as small as possible. An minimal configuration example can be found further below. If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Complete-Configuration-Example). <br>
+ddauto.yml defines the individual properties and will be merged with the default one in the classpath, therefore the file can be kept as small as possible. A minimal configuration example can be found further below. If the file is inside the working directory, it is loaded automatically. The default properties can be found [here](https://github.com/th-schwarz/DDAuto/wiki/Complete-Configuration-Example). <br>
 Important: The basic-auth, the api-tokens and the credentials for AutoDNS should be defined in this file!<br>
-The configuration of Logback is splitted in two files, one for the application logging and one for a the well-formatted zone update log. Further information can be found in the wiki [Logback Configuration](https://github.com/th-schwarz/DDAuto/wiki/Logback-Configuration).
+The configuration of Logback is split into two files, one for the application logging and one for a the well-formatted zone update log. Further information can be found in the wiki [Logback Configuration](https://github.com/th-schwarz/DDAuto/wiki/Logback-Configuration).
 
 The start by command line looks like:
 ```bash
@@ -106,7 +106,7 @@ There are two additional routes which deliver web pages:
 
 ## Suggested AutoDNS setup
 
-For security reasons, it makes sense to create a separate owner for the zone updated by DDAuto. This owner just needs the permissions for zone-info and zone-update!
+For security reasons, it makes sense to create a separate owner for the zone updated by DDAuto. This owner just needs the permission for zone-info and zone-updates!
 
 
 ## Setup a router for dynamic DNS
