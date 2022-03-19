@@ -1,13 +1,7 @@
 package codes.thischwa.ddauto;
 
-import codes.thischwa.ddauto.config.ZoneConfig;
-import codes.thischwa.ddauto.service.ZoneSdk;
-import codes.thischwa.ddauto.service.ZoneSdkException;
-import codes.thischwa.ddauto.service.ZoneUpdateLogCache;
-import codes.thischwa.ddauto.service.ZoneUpdateItem;
-import codes.thischwa.ddauto.service.ZoneUpdateLogger;
-import codes.thischwa.ddauto.util.NetUtil;
-import codes.thischwa.ddauto.util.ZoneUtil;
+import javax.servlet.http.HttpServletRequest;
+
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
@@ -17,9 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import codes.thischwa.ddauto.config.ZoneConfig;
+import codes.thischwa.ddauto.service.LogWrapper;
+import codes.thischwa.ddauto.service.ZoneSdk;
+import codes.thischwa.ddauto.service.ZoneSdkException;
+import codes.thischwa.ddauto.service.ZoneUpdateLogCache;
+import codes.thischwa.ddauto.service.ZoneUpdateLogger;
+import codes.thischwa.ddauto.util.NetUtil;
+import codes.thischwa.ddauto.util.ZoneUtil;
 
 @RestController
 public class MainController implements MainApiRoutes {
@@ -123,8 +122,8 @@ public class MainController implements MainApiRoutes {
 	}
 	
 	@Override
-	public ResponseEntity<List<ZoneUpdateItem>> getZoneUpdateLogs() {
-		return ResponseEntity.ok(cache.get());
+	public ResponseEntity<LogWrapper> getZoneUpdateLogs() {
+		return ResponseEntity.ok(cache.getResponseAll());
 	}
 	
 }

@@ -89,6 +89,13 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	public List<ZoneUpdateItem> get() {
 		return zoneUpdateItems;
 	}
+	
+	public LogWrapper getResponseAll() {
+		LogWrapper logs = new LogWrapper();
+		logs.setTotal(zoneUpdateItems.size());
+		logs.setItems(zoneUpdateItems);
+		return logs;
+	}
 
 	ZoneUpdateItem parseLogEntry(String logEntry, Pattern pattern) {
 		if(logEntry == null)
@@ -113,4 +120,5 @@ public class ZoneUpdateLogCache implements InitializingBean {
 			throw new IllegalArgumentException("Couldn't read: " + res.getFilename());
 		}
 	}
+
 }

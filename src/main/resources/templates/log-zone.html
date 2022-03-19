@@ -21,9 +21,7 @@
     	  server: {
     		  url: server_url,
     		  headers: {'Authorization': header_basicauth},
-    		  then: data => {
-                  return data.map(res => [res.dateTime, res.host, res.ipv4, res.ipv6]) 
-                } 
+    		  then: data => data.items.map(item => [item.dateTime, item.host, item.ipv4, item.ipv6])
     	  }
     	}).render(document.getElementById("grid"));
     </script>
