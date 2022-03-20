@@ -41,7 +41,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	private DateTimeFormatter dateTimeFormatter;
 
 	public boolean enabled() {
-		return conf.isLogPageEnabled() && conf.getZoneLogFilePattern() != null;
+		return conf.isZoneLogPageEnabled() && conf.getZoneLogFilePattern() != null;
 	}
 
 	public int length() {

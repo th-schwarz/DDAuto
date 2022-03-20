@@ -100,7 +100,7 @@ autodns:
 All routes that belong to zones and hosts are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
 
 There are two additional routes which deliver web pages:
-* [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```ddauto.greeting.enabled=false```.
+* [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```ddauto.greeting_enabled=false```.
 * [/log]: Delivers a simple web page to view the zone update logs and is secured by basic-auth. It is enabled by default but it can be disabled by setting the property ```ddauto.zone.log-page.enabled=false```.
 
 

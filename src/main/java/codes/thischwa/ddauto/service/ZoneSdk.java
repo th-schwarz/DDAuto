@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import codes.thischwa.ddauto.config.AutoDnsConfig;
 import codes.thischwa.ddauto.config.DDAutoConfig;
-import codes.thischwa.ddauto.config.ZoneConfig;
+import codes.thischwa.ddauto.config.ZoneHostConfig;
 import codes.thischwa.ddauto.util.ZoneUtil;
 
 /**
@@ -36,7 +36,7 @@ public class ZoneSdk implements InitializingBean {
 	private AutoDnsConfig autoDnsConfig;
 
 	@Autowired
-	private ZoneConfig zoneConfig;
+	private ZoneHostConfig zoneConfig;
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),

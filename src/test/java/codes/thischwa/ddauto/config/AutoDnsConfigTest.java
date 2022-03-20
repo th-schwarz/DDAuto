@@ -30,12 +30,12 @@ class AutoDnsConfigTest {
 
 	@Test
 	final void testGetUser() {
-		assertEquals("user", config.getUser());
+		assertEquals("user_t", config.getUser());
 	}
 
 	@Test
 	final void testGetPassword() {
-		assertEquals("pwd", config.getPassword());
+		assertEquals("pwd_t", config.getPassword());
 	}
 
 }

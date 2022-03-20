@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import codes.thischwa.ddauto.config.ZoneConfig;
+import codes.thischwa.ddauto.config.ZoneHostConfig;
 import codes.thischwa.ddauto.service.LogWrapper;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;
@@ -26,7 +26,7 @@ public class MainController implements MainApiRoutes {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
-	private ZoneConfig conf;
+	private ZoneHostConfig conf;
 
 	@Autowired
 	private ZoneSdk sdk;

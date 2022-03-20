@@ -1,36 +1,34 @@
 package codes.thischwa.ddauto.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "ddauto")
 public class DDAutoConfig {
 
-	@Value("${ddauto.zone.log-file-pattern}")
 	private String zoneLogFilePattern;
 
-	@Value("${ddauto.zone.log-page.enabled:true}")
-	private boolean logPageEnabled;
+	private boolean zoneLogPageEnabled;
 
-	@Value("${ddautozone.log-pattern:(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)}")
-	private String zoneLogPattern;
+	private String zoneLogPattern = "(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)";
 
-	@Value("${ddauto.zone.log-date-pattern:yyyy-MM-dd HH:mm:SSS}")
-	private String zoneLogDatePattern;
+	private String zoneLogDatePattern = "yyyy-MM-dd HH:mm:SSS";
 
-	@Value("${ddauto.zone.validation.enabled:true}")
-	private boolean zoneValidationEnabled;
+	private boolean zoneValidationEnabled = true;
 	
 	public String getZoneLogFilePattern() {
 		return zoneLogFilePattern;
 	}
 
-	public boolean isLogPageEnabled() {
-		return logPageEnabled;
+	public boolean isZoneLogPageEnabled() {
+		return zoneLogPageEnabled;
 	}
 
-	public void setLogPageEnabled(boolean logPageEnabled) {
-		this.logPageEnabled = logPageEnabled;
+	public void setZoneLogPageEnabled(boolean logPageEnabled) {
+		this.zoneLogPageEnabled = logPageEnabled;
 	}
 
 	public String getZoneLogPattern() {

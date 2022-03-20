@@ -19,9 +19,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties()
-public class ZoneConfig implements InitializingBean {
+public class ZoneHostConfig implements InitializingBean {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ZoneConfig.class);
+	private static final Logger logger = LoggerFactory.getLogger(ZoneHostConfig.class);
 
 	// <zone, ns>
 	private Map<String, String> zoneData = null;
@@ -78,7 +78,7 @@ public class ZoneConfig implements InitializingBean {
 	void read() throws IllegalArgumentException {
 		apitokenData = new HashMap<>();
 		zoneData = new HashMap<>();
-		for(ZoneConfig.Zone zone : zones) {
+		for(ZoneHostConfig.Zone zone : zones) {
 			zoneData.put(zone.getName(), zone.getNs());
 			List<String> hostRawData = zone.getHosts();
 			if(hostRawData == null || hostRawData.isEmpty())

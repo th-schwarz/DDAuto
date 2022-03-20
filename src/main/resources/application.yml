@@ -10,14 +10,13 @@ server:
 ## credentials for the domainrobot sdk    
 autodns:
   context: 4
-  password: pwd
   url: https://api.autodns.com/v1
-  user: user
 
 ## enables the validation of the configured zones
 ddauto:
-  zone:
-    log-file-pattern: ./ddauto-zone*
+  zone-validation-enabled: true
+  zone-log-page-enabled: false
+  zone-log-file-pattern: ./ddauto-zone*
 
 ## import individual config
 spring:

@@ -1,5 +1,7 @@
 package codes.thischwa.ddauto.config;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +16,12 @@ public class AutoDnsConfig {
 
 	private String url;
 	private int context;
+	
+
+	@NotBlank(message = "The user name shouldn't be empty.")
 	private String user;
+	
+	@NotBlank(message = "The password shouldn't be empty.")
 	private String password;
 
 	public String getUrl() {
