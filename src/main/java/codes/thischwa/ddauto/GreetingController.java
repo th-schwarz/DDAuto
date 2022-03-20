@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 @ConditionalOnProperty(name = "ddauto.greeting-enabled", matchIfMissing = true)
-public class GreetingContoller {
+public class GreetingController {
 
 	/**
 	 * Delivers a welcome page.
