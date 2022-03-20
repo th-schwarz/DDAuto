@@ -19,6 +19,10 @@ public class DDAutoConfig {
 
 	private boolean zoneValidationEnabled = true;
 	
+	private String zoneLogUserName;
+
+	private String zoneLogUserPassword;
+	
 	public String getZoneLogFilePattern() {
 		return zoneLogFilePattern;
 	}
@@ -57,6 +61,22 @@ public class DDAutoConfig {
 
 	public void setZoneValidationEnabled(boolean zoneValidationEnabled) {
 		this.zoneValidationEnabled = zoneValidationEnabled;
+	}
+
+	public String getZoneLogUserName() {
+		return zoneLogUserName;
+	}
+
+	public void setZoneLogUserName(String zoneLogUserName) {
+		this.zoneLogUserName = zoneLogUserName;
+	}
+
+	public String getZoneLogUserPassword() {
+		return zoneLogUserPassword;
+	}
+
+	public void setZoneLogUserPassword(String zoneLogUserPassword) {
+		this.zoneLogUserPassword = zoneLogUserPassword;
 	}
 
 }

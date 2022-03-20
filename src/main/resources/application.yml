@@ -12,7 +12,7 @@ autodns:
   context: 4
   url: https://api.autodns.com/v1
 
-## enables the validation of the configured zones
+## ddauto congig
 ddauto:
   zone-validation-enabled: true
   zone-log-page-enabled: false
