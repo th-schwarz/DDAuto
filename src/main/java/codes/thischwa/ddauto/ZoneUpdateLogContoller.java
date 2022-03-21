@@ -1,14 +1,11 @@
 package codes.thischwa.ddauto;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import codes.thischwa.ddauto.util.NetUtil;
 
@@ -31,11 +28,8 @@ public class ZoneUpdateLogContoller {
 	 * @return the zone update logs page
 	 */
 	@GetMapping(value = "/log", produces = MediaType.TEXT_HTML_VALUE)
-	public String log(Model model, HttpServletRequest request) {
-		String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
-		        .replacePath(null)
-		        .build()
-		        .toUriString();
+	public String log(Model model) {
+		String baseUrl = NetUtil.getBaseUrl();
 
 		model.addAttribute("server_url", baseUrl + "/info/zone-log");
 		if(user != null && password != null) {

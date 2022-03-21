@@ -6,6 +6,8 @@ import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 /**
  * Some network relevant utils.
  */
@@ -39,5 +41,11 @@ public class NetUtil {
 	    String base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes(StandardCharsets.UTF_8));
 	    return "Basic " + base64Creds;
 	}
-
+	
+	public static String getBaseUrl() {
+		return ServletUriComponentsBuilder.fromCurrentServletMapping()
+		        .replacePath(null)
+		        .build()
+		        .toUriString();
+	}
 }
