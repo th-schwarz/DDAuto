@@ -16,7 +16,7 @@ import codes.thischwa.ddauto.util.NetUtil;
  * A controller that delivers a page to show the zone update logs.
  */
 @Controller
-@ConditionalOnProperty(name = "ddauto.zone.log-page.enabled", matchIfMissing = true)
+@ConditionalOnProperty(name = "ddauto.zone-log-page-enabled", matchIfMissing = true)
 public class ZoneUpdateLogContoller {
 	
 	@Value("${spring.security.user.name}")
