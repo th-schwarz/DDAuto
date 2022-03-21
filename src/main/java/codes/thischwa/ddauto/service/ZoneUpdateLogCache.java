@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,9 +78,9 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		// ordering and parsing
 		logEntries.sort(null);
 		Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
-		zoneUpdateItems = new CopyOnWriteArrayList<ZoneUpdateItem>(logEntries.stream()
+		zoneUpdateItems = new CopyOnWriteArrayList<>(logEntries.stream()
 				.map(i -> parseLogEntry(i, pattern))
-				.filter(i -> i != null)
+				.filter(Objects::nonNull)
 				.collect(Collectors.toList()));
 		logger.debug("{} log entries successful read and parsed.", zoneUpdateItems.size());
 	}

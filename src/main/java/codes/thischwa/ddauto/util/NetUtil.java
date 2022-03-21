@@ -11,6 +11,9 @@ import java.util.Base64;
  */
 public class NetUtil {
 
+	private NetUtil() {
+	}
+	
 	public static boolean isIP(String ipStr) {
 		return NetUtil.isIPv4(ipStr) || NetUtil.isIPv6(ipStr);
 	}
