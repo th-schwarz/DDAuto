@@ -113,14 +113,17 @@ public class ZoneUpdateLogCache implements InitializingBean {
 
 	private void read(Resource res, List<String> logItems) {
 		logger.debug("Process log zone update file: {}", res.getFilename());
-		try (InputStream in = res.getFilename().endsWith(".gz") ? new GZIPInputStream(res.getInputStream()) : res.getInputStream();) {
+		String filename = res.getFilename();
+		if(filename == null)
+			return;
+		try (InputStream in = filename.endsWith(".gz") ? new GZIPInputStream(res.getInputStream()) : res.getInputStream();) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			while(reader.ready()) {
 				logItems.add(reader.readLine());
 			}
 		} catch (IOException e) {
-			logger.error("Couldn't process log zone update file: {}", res.getFilename());
-			throw new IllegalArgumentException("Couldn't read: " + res.getFilename());
+			logger.error("Couldn't process log zone update file: {}", filename);
+			throw new IllegalArgumentException("Couldn't read: " + filename);
 		}
 	}
 
