@@ -21,6 +21,9 @@ class CommandlineArgsProcessor {
 	static String workingDir = System.getProperty("user.dir");
 
 	private static final String const_logback_name = "logback.xml";
+	
+	private CommandlineArgsProcessor() {
+	}
 
 	static List<String> process(String[] orgArgs) {
 		List<String> cmdArgs = new ArrayList<>(Arrays.asList(orgArgs));

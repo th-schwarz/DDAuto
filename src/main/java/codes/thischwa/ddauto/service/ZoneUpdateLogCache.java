@@ -58,13 +58,13 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		
 		dateTimeFormatter = DateTimeFormatter.ofPattern(conf.getZoneLogDatePattern());
 		
-		// build location pattern
+		// build location pattern, if no url type is found 'file:' will be assumed
 		String locPattern = (conf.getZoneLogFilePattern().contains(":")) ? conf.getZoneLogFilePattern() : "file:" + conf.getZoneLogFilePattern();
 		logger.debug("Using the following log file pattern: {}", locPattern);
 
 		List<String> logEntries = new ArrayList<>();
 		Resource[] logs = new PathMatchingResourcePatternResolver().getResources(locPattern);
-		if(logs == null || logs.length == 0) {
+		if(logs.length == 0) {
 			logger.debug("No log files found.");
 			return;
 		}
