@@ -25,7 +25,8 @@ class ZoneUpdateLogCacheTest {
 	private ZoneUpdateLogCache cache;
 
 	@Test
-	final void testCacheSize() {
+	final void testCache() {
+		assertTrue(cache.enabled());
 		assertEquals(startCnt, cache.length());
 		assertEquals(startCnt, cache.get().size());
 	}
