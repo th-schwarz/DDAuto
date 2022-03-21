@@ -36,9 +36,9 @@ public class ZoneUpdateLogCache implements InitializingBean {
 
 	@Autowired
 	private DDAutoConfig conf;
-	
+
 	private List<ZoneUpdateItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
-	
+
 	private DateTimeFormatter dateTimeFormatter;
 
 	public boolean enabled() {
@@ -48,18 +48,19 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	public int length() {
 		return zoneUpdateItems.size();
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if(!enabled()) {
 			logger.info("Log page is disabled or ddauto.zone.log-file-pattern isn't set, prefill is canceled.");
 			return;
 		}
-		
+
 		dateTimeFormatter = DateTimeFormatter.ofPattern(conf.getZoneLogDatePattern());
-		
+
 		// build location pattern, if no url type is found 'file:' will be assumed
-		String locPattern = (conf.getZoneLogFilePattern().contains(":")) ? conf.getZoneLogFilePattern() : "file:" + conf.getZoneLogFilePattern();
+		String locPattern = (conf.getZoneLogFilePattern().contains(":")) ? conf.getZoneLogFilePattern()
+				: "file:" + conf.getZoneLogFilePattern();
 		logger.debug("Using the following log file pattern: {}", locPattern);
 
 		List<String> logEntries = new ArrayList<>();
@@ -74,27 +75,25 @@ public class ZoneUpdateLogCache implements InitializingBean {
 				read(log, logEntries);
 			}
 		}
-		
+
 		// ordering and parsing
 		logEntries.sort(null);
 		Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
-		zoneUpdateItems = new CopyOnWriteArrayList<>(logEntries.stream()
-				.map(i -> parseLogEntry(i, pattern))
-				.filter(Objects::nonNull)
-				.collect(Collectors.toList()));
+		zoneUpdateItems = new CopyOnWriteArrayList<>(
+				logEntries.stream().map(i -> parseLogEntry(i, pattern)).filter(Objects::nonNull).collect(Collectors.toList()));
 		logger.debug("{} log entries successful read and parsed.", zoneUpdateItems.size());
 	}
-	
+
 	public void addLogEntry(String host, String ipv4, String ipv6) {
 		String now = dateTimeFormatter.format(LocalDateTime.now());
 		ZoneUpdateItem item = new ZoneUpdateItem(now, host, ipv4, ipv6);
 		zoneUpdateItems.add(item);
 	}
-	
+
 	public List<ZoneUpdateItem> get() {
 		return zoneUpdateItems;
 	}
-	
+
 	public LogWrapper getResponseAll() {
 		LogWrapper logs = new LogWrapper();
 		logs.setTotal(zoneUpdateItems.size());
@@ -111,11 +110,10 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		}
 		return null;
 	}
-	
+
 	private void read(Resource res, List<String> logItems) {
 		logger.debug("Process log zone update file: {}", res.getFilename());
-		try {
-			InputStream in = res.getFilename().endsWith(".gz") ? new GZIPInputStream(res.getInputStream()) : res.getInputStream();
+		try (InputStream in = res.getFilename().endsWith(".gz") ? new GZIPInputStream(res.getInputStream()) : res.getInputStream();) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			while(reader.ready()) {
 				logItems.add(reader.readLine());
