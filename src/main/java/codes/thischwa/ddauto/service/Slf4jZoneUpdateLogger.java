@@ -28,7 +28,7 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 	@Override
 	public void log(String host, String ipv4, String ipv6) {
 		Assert.notNull(host, "'host' shouldn't be null.");
-		logger.info(Slf4jZoneUpdateLogger.buildLogEntry(logEntryFormat, host, ipv4, ipv6));
+		logger.info(buildLogEntry(logEntryFormat, host, ipv4, ipv6));
 		cache.addLogEntry(host, ipv4, ipv6);
 	}
 	
