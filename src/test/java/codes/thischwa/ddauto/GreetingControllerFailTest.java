@@ -25,6 +25,6 @@ class GreetingControllerFailTest {
 	@Test
 	void greetingShouldReturnDefaultMessage() throws URISyntaxException {
 		String url = "http://localhost:" + port + "/";
-		assertEquals(HttpStatus.UNAUTHORIZED, restTemplate.getForEntity(new URI(url), String.class).getStatusCode());
+		assertEquals(HttpStatus.NOT_FOUND, restTemplate.getForEntity(new URI(url), String.class).getStatusCode());
 	}
 }

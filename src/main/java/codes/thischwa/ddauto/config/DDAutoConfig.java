@@ -23,6 +23,8 @@ public class DDAutoConfig {
 
 	private String zoneLogUserPassword;
 	
+	private boolean greetingEnabled;
+	
 	public String getZoneLogFilePattern() {
 		return zoneLogFilePattern;
 	}
@@ -77,6 +79,14 @@ public class DDAutoConfig {
 
 	public void setZoneLogUserPassword(String zoneLogUserPassword) {
 		this.zoneLogUserPassword = zoneLogUserPassword;
+	}
+
+	public boolean isGreetingEnabled() {
+		return greetingEnabled;
+	}
+
+	public void setGreetingEnabled(boolean greetingEnabled) {
+		this.greetingEnabled = greetingEnabled;
 	}
 
 }
