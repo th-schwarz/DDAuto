@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Holds the AutoDNS credentials for the Domainrobot Sdk.
+ * Holds the AutoDNS base url and credentials for the Domainrobot Sdk.
  */
 @Configuration
 @EnableConfigurationProperties
@@ -16,11 +16,10 @@ public class AutoDnsConfig {
 
 	private String url;
 	private int context;
-	
 
 	@NotBlank(message = "The user name shouldn't be empty.")
 	private String user;
-	
+
 	@NotBlank(message = "The password shouldn't be empty.")
 	private String password;
 
