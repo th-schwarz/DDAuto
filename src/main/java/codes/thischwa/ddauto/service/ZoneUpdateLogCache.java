@@ -26,8 +26,7 @@ import org.springframework.stereotype.Service;
 import codes.thischwa.ddauto.config.DDAutoConfig;
 
 /**
- * A cache to hold the zone update logs
- *
+ * A cache to hold the zone update logs.
  */
 @Service
 public class ZoneUpdateLogCache implements InitializingBean {
