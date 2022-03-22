@@ -12,6 +12,10 @@ import org.springframework.util.Assert;
 
 import codes.thischwa.ddauto.config.ZoneHostConfig;
 
+/**
+ * Implementation of {@link ZoneUpdateLogger} that implies an extra log configuration for "ZoneUpdateLogger"
+ * witch logs into an extra file.
+ */
 @Service
 public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean {
 
