@@ -11,7 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 /**
  * Some network relevant utils.
  */
-public class NetUtil {
+public abstract class NetUtil {
 
 	private NetUtil() {
 	}
@@ -43,7 +43,7 @@ public class NetUtil {
 	}
 	
 	public static String getBaseUrl() {
-		return ServletUriComponentsBuilder.fromCurrentServletMapping()
+		return ServletUriComponentsBuilder.fromCurrentContextPath()
 		        .replacePath(null)
 		        .build()
 		        .toUriString();
