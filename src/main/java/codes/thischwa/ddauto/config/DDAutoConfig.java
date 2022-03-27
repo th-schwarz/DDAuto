@@ -12,6 +12,8 @@ public class DDAutoConfig {
 	private String zoneLogFilePattern;
 
 	private boolean zoneLogPageEnabled;
+	
+	private int zoneLogPageSize;
 
 	private String zoneLogPattern = "(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)";
 
@@ -39,6 +41,15 @@ public class DDAutoConfig {
 
 	public String getZoneLogPattern() {
 		return zoneLogPattern;
+	}
+
+	
+	public int getZoneLogPageSize() {
+		return zoneLogPageSize;
+	}
+
+	public void setZoneLogPageSize(int zoneLogPageSize) {
+		this.zoneLogPageSize = zoneLogPageSize;
 	}
 
 	public void setZoneLogPattern(String zoneLogPattern) {

@@ -1,6 +1,6 @@
 package codes.thischwa.ddauto.service;
 
-public class ZoneUpdateItem {
+public class ZoneLogItem {
 
 	private String dateTime;
 
@@ -10,7 +10,7 @@ public class ZoneUpdateItem {
 
 	private String ipv6;
 		
-	ZoneUpdateItem(String dateTime, String host, String ipv4, String ipv6) {
+	ZoneLogItem(String dateTime, String host, String ipv4, String ipv6) {
 		this.dateTime = dateTime;
 		this.host = host;
 		this.ipv4 = ipv4 == null ? "n/a" : ipv4;
@@ -35,7 +35,7 @@ public class ZoneUpdateItem {
 
 	@Override
 	public String toString() {
-		return "ZoneUpdateItem [dateTime=" + dateTime + ", host=" + host + ", ipv4=" + ipv4 + ", ipv6=" + ipv6 + "]";
+		return "ZoneLogItem [dateTime=" + dateTime + ", host=" + host + ", ipv4=" + ipv4 + ", ipv6=" + ipv6 + "]";
 	}
 	
 }

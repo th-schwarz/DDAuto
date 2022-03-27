@@ -16,6 +16,7 @@ autodns:
 ddauto:
   zone-validation-enabled: true
   zone-log-page-enabled: false
+  zone-log-page-size: 30
   zone-log-file-pattern: ./ddauto-zone*
 
 ## import individual config

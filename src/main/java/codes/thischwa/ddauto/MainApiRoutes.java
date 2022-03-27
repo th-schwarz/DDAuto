@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import codes.thischwa.ddauto.service.LogWrapper;
+import codes.thischwa.ddauto.service.ZoneLogPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -68,5 +68,5 @@ public interface MainApiRoutes {
 	@Operation(summary = "Zone update log.")
 	@ApiResponse(responseCode = "200", description = "All zone update log.")
 	@GetMapping(value = "info/zone-log", produces = MediaType.APPLICATION_JSON_VALUE)	
-	ResponseEntity<LogWrapper> getZoneUpdateLogs();
+	ResponseEntity<ZoneLogPage> getZoneUpdateLogs();
 }

@@ -16,6 +16,7 @@ spring:
 ddauto:
   zone-validation-enabled: false
   zone-log-page-enabled: true
+  zone-log-page-size: 4
   #zone-log-file-pattern: classpath:/test-files/ddauto-zone*
   zone-log-file-pattern: file:target/test-classes/test-files/ddauto-zone*
 

@@ -36,7 +36,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	@Autowired
 	private DDAutoConfig conf;
 
-	private List<ZoneUpdateItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
+	private List<ZoneLogItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
 
 	private DateTimeFormatter dateTimeFormatter;
 
@@ -85,27 +85,55 @@ public class ZoneUpdateLogCache implements InitializingBean {
 
 	public void addLogEntry(String host, String ipv4, String ipv6) {
 		String now = dateTimeFormatter.format(LocalDateTime.now());
-		ZoneUpdateItem item = new ZoneUpdateItem(now, host, ipv4, ipv6);
+		ZoneLogItem item = new ZoneLogItem(now, host, ipv4, ipv6);
 		zoneUpdateItems.add(item);
 	}
 
-	public List<ZoneUpdateItem> get() {
+	public List<ZoneLogItem> get() {
 		return zoneUpdateItems;
 	}
 
-	public LogWrapper getResponseAll() {
-		LogWrapper logs = new LogWrapper();
+	public ZoneLogPage getResponseAll() {
+		ZoneLogPage logs = new ZoneLogPage();
+		logs.setPageSize(conf.getZoneLogPageSize());
 		logs.setTotal(zoneUpdateItems.size());
 		logs.setItems(zoneUpdateItems);
 		return logs;
 	}
+	
 
-	ZoneUpdateItem parseLogEntry(String logEntry, Pattern pattern) {
+	public ZoneLogPage getResponsePage(int page) {
+		ZoneLogPage lw = new ZoneLogPage();
+		if(page < 1)
+			return lw;
+		lw.setPage(page);
+		
+		int currentIdx = (conf.getZoneLogPageSize() * page) - conf.getZoneLogPageSize();
+		List<ZoneLogItem> pageItems = new ArrayList<>();
+		int nextIdx = currentIdx + conf.getZoneLogPageSize();
+		for(int i = currentIdx; i < nextIdx; i++) {
+			if(currentIdx >= length())
+				break;
+			pageItems.add(zoneUpdateItems.get(i));
+		}
+
+		if(nextIdx < length()-1)
+			lw.setQueryStringNext(String.format("?p=%d", page+1));
+		if(page > 1)
+			lw.setQueryStringPrev(String.format("?p=%d", page-1));
+		lw.setPageSize(conf.getZoneLogPageSize());
+		lw.setItems(pageItems);
+		lw.setTotalPage(((length()-1) / conf.getZoneLogPageSize()));
+		lw.setTotal(length());
+		return lw;
+	}
+
+	ZoneLogItem parseLogEntry(String logEntry, Pattern pattern) {
 		if(logEntry == null)
 			return null;
 		Matcher matcher = pattern.matcher(logEntry);
 		if(matcher.matches() && matcher.groupCount() == 4) {
-			return new ZoneUpdateItem(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
+			return new ZoneLogItem(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
 		}
 		return null;
 	}

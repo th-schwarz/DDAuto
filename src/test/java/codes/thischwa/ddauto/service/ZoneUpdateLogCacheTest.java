@@ -17,7 +17,7 @@ import codes.thischwa.ddauto.DDAutoStarter;
 @ExtendWith(SpringExtension.class)
 class ZoneUpdateLogCacheTest {
 
-	private final int startCnt = 4;
+	private final int startCnt = 38;
 
 	private final Pattern logEntryPattern = Pattern.compile("(.*)\\s+-\\s+([a-zA-Z\\.-]*)\\s+(\\S*)\\s+(\\S*)");
 
@@ -37,7 +37,7 @@ class ZoneUpdateLogCacheTest {
 		cache.addLogEntry("my.dyndns.com", "91.0.0.1", null);
 		assertEquals(startCnt + 1, cache.length());
 
-		ZoneUpdateItem item = cache.get().remove(startCnt);
+		ZoneLogItem item = cache.get().remove(startCnt);
 		assertEquals("my.dyndns.com", item.getHost());
 		assertEquals("91.0.0.1", item.getIpv4());
 		assertEquals("n/a", item.getIpv6());
@@ -51,7 +51,7 @@ class ZoneUpdateLogCacheTest {
 
 	@Test
 	final void testItem() {
-		assertEquals("ZoneUpdateItem [dateTime=2022-02-01 03:28:11.497, host=ursa.mydyndns.com, ipv4=217.229.130.11, ipv6=n/a]",
+		assertEquals("ZoneLogItem [dateTime=2022-02-01 03:28:11.497, host=ursa.mydyndns.com, ipv4=217.229.130.11, ipv6=n/a]",
 				cache.get().get(0).toString());
 	}
 
@@ -60,7 +60,7 @@ class ZoneUpdateLogCacheTest {
 		assertNull(cache.parseLogEntry(null, logEntryPattern));
 		assertNull(cache.parseLogEntry("abc", logEntryPattern));
 
-		ZoneUpdateItem item = cache.parseLogEntry(
+		ZoneLogItem item = cache.parseLogEntry(
 				"2022-02-23 19:51:19.924 -   test.mein-virtuelles-blech.de        127.1.2.27  2a03:4000:41:32::2", logEntryPattern);
 		assertEquals("2022-02-23 19:51:19.924", item.getDateTime());
 		assertEquals("test.mein-virtuelles-blech.de", item.getHost());
@@ -69,11 +69,12 @@ class ZoneUpdateLogCacheTest {
 	}
 
 	@Test
-	final void getResponseAll() {
-		LogWrapper lw = cache.getResponseAll();
-		assertEquals(startCnt, lw.getTotal());
-		assertEquals(startCnt, lw.getItems().size());
-		assertEquals(0, lw.getTotalPage());
-		assertEquals(0, lw.getPage());
+	final void testResponseAll() {
+		ZoneLogPage lp = cache.getResponseAll();
+		assertEquals(startCnt, lp.getTotal());
+		assertEquals(startCnt, lp.getItems().size());
+		assertEquals(0, lp.getTotalPage());
+		assertEquals(0, lp.getPage());
+		assertEquals(4, lp.getPageSize());
 	}
 }

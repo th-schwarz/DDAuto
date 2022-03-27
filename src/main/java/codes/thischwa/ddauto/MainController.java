@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import codes.thischwa.ddauto.config.ZoneHostConfig;
-import codes.thischwa.ddauto.service.LogWrapper;
+import codes.thischwa.ddauto.service.ZoneLogPage;
 import codes.thischwa.ddauto.service.ZoneSdk;
 import codes.thischwa.ddauto.service.ZoneSdkException;
 import codes.thischwa.ddauto.service.ZoneUpdateLogCache;
@@ -122,7 +122,7 @@ public class MainController implements MainApiRoutes {
 	}
 	
 	@Override
-	public ResponseEntity<LogWrapper> getZoneUpdateLogs() {
+	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs() {
 		return ResponseEntity.ok(cache.getResponseAll());
 	}
 	
