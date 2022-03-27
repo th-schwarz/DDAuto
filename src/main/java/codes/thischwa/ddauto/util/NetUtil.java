@@ -11,11 +11,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 /**
  * Some network relevant utils.
  */
-public abstract class NetUtil {
+public interface NetUtil {
 
-	private NetUtil() {
-	}
-	
 	public static boolean isIP(String ipStr) {
 		return NetUtil.isIPv4(ipStr) || NetUtil.isIPv6(ipStr);
 	}
