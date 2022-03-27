@@ -29,6 +29,7 @@ A simple REST service for update IPs in a zone.</description>
 			src/main/java/codes/thischwa/ddauto/MainController.java,
 			src/main/java/codes/thischwa/ddauto/LogController.java,
 			src/main/java/codes/thischwa/ddauto/ZoneUpdateLogContoller.java,
+			src/main/java/codes/thischwa/ddauto/FaviconController.java,
 			src/main/java/codes/thischwa/ddauto/service/UpdateLoggerException.java,
 			src/main/java/codes/thischwa/ddauto/service/ZoneSdk.java,
 			src/main/java/codes/thischwa/ddauto/service/ZoneSdkException.java
