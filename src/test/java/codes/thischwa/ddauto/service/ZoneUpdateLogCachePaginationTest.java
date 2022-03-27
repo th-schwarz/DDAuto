@@ -13,7 +13,7 @@ import codes.thischwa.ddauto.DDAutoStarter;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class })
 @ExtendWith(SpringExtension.class)
-class ZoneUpdateLogPaginationCache {
+class ZoneUpdateLogCachePaginationTest {
 
 	@Autowired
 	private ZoneUpdateLogCache cache;
