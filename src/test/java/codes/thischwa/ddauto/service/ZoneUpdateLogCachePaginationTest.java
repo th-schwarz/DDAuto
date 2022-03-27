@@ -23,7 +23,7 @@ class ZoneUpdateLogCachePaginationTest {
 		ZoneLogPage lp = cache.getResponsePage(1);
 		assertEquals(1, lp.getPage());
 		assertEquals(4, lp.getPageSize());
-		assertEquals(9, lp.getTotalPage());
+		assertEquals(10, lp.getTotalPage());
 		assertEquals(38, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
 		assertNull(lp.getQueryStringPrev());
@@ -37,7 +37,7 @@ class ZoneUpdateLogCachePaginationTest {
 		ZoneLogPage lp = cache.getResponsePage(2);
 		assertEquals(2, lp.getPage());
 		assertEquals(4, lp.getPageSize());
-		assertEquals(9, lp.getTotalPage());
+		assertEquals(10, lp.getTotalPage());
 		assertEquals(38, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
 		assertEquals("?p=1", lp.getQueryStringPrev());
@@ -48,13 +48,13 @@ class ZoneUpdateLogCachePaginationTest {
 
 	@Test
 	final void testPageLast() {
-		ZoneLogPage lp = cache.getResponsePage(9);
-		assertEquals(9, lp.getPage());
+		ZoneLogPage lp = cache.getResponsePage(10);
+		assertEquals(10, lp.getPage());
 		assertEquals(4, lp.getPageSize());
-		assertEquals(9, lp.getTotalPage());
+		assertEquals(10, lp.getTotalPage());
 		assertEquals(38, lp.getTotal());
 		assertEquals(2, lp.getItems().size());
-		assertEquals("?p=8", lp.getQueryStringPrev());
+		assertEquals("?p=9", lp.getQueryStringPrev());
 		assertNull(lp.getQueryStringNext());
 		assertEquals("2022-02-17 03:08:17.401", lp.getItems().get(0).getDateTime());
 		assertEquals("2022-02-17 03:39:37.606", lp.getItems().get(1).getDateTime());

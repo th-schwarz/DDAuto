@@ -80,8 +80,23 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
 		zoneUpdateItems = new CopyOnWriteArrayList<>(
 				logEntries.stream().map(i -> parseLogEntry(i, pattern)).filter(Objects::nonNull).collect(Collectors.toList()));
-		logger.debug("{} log entries successful read and parsed.", zoneUpdateItems.size());
+		logger.info("{} log entries successful read and parsed.", zoneUpdateItems.size());
 	}
+	
+//	void printPages() {
+//		for(int i=0; i<length(); i++)
+//			System.out.println(String.format("%d: %s", i, zoneUpdateItems.get(i)));
+//		System.out.println("-----------------");
+//		int cnt = 0;
+//		for(int i=1; i<=10; i++) {
+//			System.out.println("*** Page "+i);
+//			ZoneLogPage lp = getResponsePage(i);
+//			for(ZoneLogItem item: lp.getItems()) {
+//				System.out.println(String.format("%d: %s", cnt, item));
+//				cnt++;
+//			}
+//		}
+//	}
 
 	public void addLogEntry(String host, String ipv4, String ipv6) {
 		String now = dateTimeFormatter.format(LocalDateTime.now());
@@ -112,7 +127,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		List<ZoneLogItem> pageItems = new ArrayList<>();
 		int nextIdx = currentIdx + conf.getZoneLogPageSize();
 		for(int i = currentIdx; i < nextIdx; i++) {
-			if(currentIdx >= length())
+			if(i >= length())
 				break;
 			pageItems.add(zoneUpdateItems.get(i));
 		}
@@ -123,7 +138,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 			lw.setQueryStringPrev(String.format("?p=%d", page-1));
 		lw.setPageSize(conf.getZoneLogPageSize());
 		lw.setItems(pageItems);
-		lw.setTotalPage(((length()-1) / conf.getZoneLogPageSize()));
+		lw.setTotalPage(((length()-1) / conf.getZoneLogPageSize())+1);
 		lw.setTotal(length());
 		return lw;
 	}
