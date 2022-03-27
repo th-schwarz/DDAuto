@@ -10,5 +10,6 @@ public class FaviconController {
     @GetMapping("favicon.ico")
     @ResponseBody
     void returnNoFavicon() {
+    	// just for reducing 404 errors in the logs
     }
 }
