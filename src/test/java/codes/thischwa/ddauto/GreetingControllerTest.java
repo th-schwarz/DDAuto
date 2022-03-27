@@ -10,7 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class })
 @ExtendWith(SpringExtension.class)
@@ -24,6 +27,18 @@ class GreetingControllerTest {
 
 	@Test
 	void greetingShouldReturnDefaultMessage() {
-		assertTrue(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class).contains("DDAuto"));
+		assertTrue(this.restTemplate.getForObject("http://localhost:" + port, String.class).contains("DDAuto"));
+	}
+
+	@Test
+	void baseUrlTestP() {
+		// feed the mock
+		MockHttpServletRequest mockRequest = new MockHttpServletRequest();
+		mockRequest.setContextPath("/");
+		mockRequest.setServerPort(port);
+		ServletRequestAttributes attrs = new ServletRequestAttributes(mockRequest);
+		RequestContextHolder.setRequestAttributes(attrs);
+
+		assertEquals("http://localhost:" + port, NetUtil.getBaseUrl());
 	}
 }
