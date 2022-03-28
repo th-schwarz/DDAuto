@@ -57,7 +57,7 @@ public interface ZoneUtil {
 	static ResourceRecord searchResourceRecord(Zone zone, String name, String type) {
 		Optional<ResourceRecord> rrO = zone.getResourceRecords().stream()
 				.filter(rr -> rr.getType().equals(type) && rr.getName().equals(name)).findFirst();
-		return rrO.isPresent() ? rrO.get() : null;
+		return rrO.orElse(null);
 	}
 
 	static String deriveZone(String host) {
