@@ -1,7 +1,5 @@
 package codes.thischwa.ddauto.util;
 
-import java.util.Optional;
-
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 
