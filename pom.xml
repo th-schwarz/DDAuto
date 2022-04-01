@@ -18,10 +18,12 @@ A simple REST service for update IPs in a zone.</description>
 
 	<properties>
 		<java.version>11</java.version>
-		<domainrobot.version>0.2.8</domainrobot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<sonar.organization>th-schwarz</sonar.organization>
+		<domainrobot.version>0.2.8</domainrobot.version>
+		<springdoc.version>1.6.6</springdoc.version>
+		<swagger-v3.version>2.1.12</swagger-v3.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.exclusions>
 			src/main/java/codes/thischwa/ddauto/DDAutoStarter.java,
@@ -110,11 +112,6 @@ A simple REST service for update IPs in a zone.</description>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-webmvc-core</artifactId>
-			<version>1.6.6</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.domainrobot</groupId>
@@ -127,6 +124,24 @@ A simple REST service for update IPs in a zone.</description>
 			<version>${domainrobot.version}</version>
 		</dependency>
 
+		<!-- extra swagger deps because we won't have springdoc at runrtime -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>${swagger-v3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger-v3.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webmvc-core</artifactId>
+			<version>${springdoc.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -138,6 +153,7 @@ A simple REST service for update IPs in a zone.</description>
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<build>
