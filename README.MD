@@ -97,7 +97,7 @@ autodns:
 
 ## Routes
 
-All routes that belong to zones and hosts are secured by basic-auth. A detailed description of the routes can be found here: https://th-schwarz.github.io/DDAuto/
+All routes that belong to zones and hosts are secured by basic-auth. A detailed description of the routes can be found at the [OAS3 documentation](https://htmlpreview.github.io/?https://github.com/th-schwarz/DDAuto/blob/develop/docs/index.html).
 
 There are two additional routes which deliver web pages:
 * [/]: A simple greeting page which is enabled by default. It can be disabled by setting the property ```ddauto.greeting-enabled=false```.
