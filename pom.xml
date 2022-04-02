@@ -184,7 +184,7 @@ A simple REST service for update IPs in a zone.</description>
 				<configuration>
 					<executable>true</executable>
 					<includeSystemScope>true</includeSystemScope>
-					<commandlineArguments>--swagger.enabled=true
+					<commandlineArguments>--swagger.enabled=true --springdoc.writer-with-default-pretty-printer=true
 						--zone.validation.enabled=false --server.port=8080</commandlineArguments>
 					<jvmArguments>-Dspring.application.admin.enabled=true
 						-Dspring.config.import=file:target/test-classes/application.yml</jvmArguments>
