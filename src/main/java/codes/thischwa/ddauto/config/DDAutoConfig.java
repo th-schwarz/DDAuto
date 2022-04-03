@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class DDAutoConfig {
 
 	private String zoneLogFilePattern;
-
-	private boolean zoneLogPageEnabled;
 	
 	private int zoneLogPageSize;
 
@@ -32,18 +30,13 @@ public class DDAutoConfig {
 	}
 
 	public boolean isZoneLogPageEnabled() {
-		return zoneLogPageEnabled;
-	}
-
-	public void setZoneLogPageEnabled(boolean logPageEnabled) {
-		this.zoneLogPageEnabled = logPageEnabled;
+		return zoneLogUserName != null;
 	}
 
 	public String getZoneLogPattern() {
 		return zoneLogPattern;
 	}
 
-	
 	public int getZoneLogPageSize() {
 		return zoneLogPageSize;
 	}

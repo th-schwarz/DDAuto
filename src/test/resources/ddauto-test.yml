@@ -1,6 +1,5 @@
 ddauto:
   zone-validation-enabled: false
-  zone-log-page-enabled: true
   zone-log-user-name: log
   zone-log-user-password: l0g
   #zone-log-file-pattern: classpath:/test-files/ddauto-zone*
