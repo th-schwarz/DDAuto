@@ -1,20 +1,16 @@
 package codes.thischwa.ddauto.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.regex.Pattern;
-
+import codes.thischwa.ddauto.DDAutoStarter;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import codes.thischwa.ddauto.DDAutoStarter;
+import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class })
-@ExtendWith(SpringExtension.class)
 class ZoneUpdateLogCacheTest {
 
 	private final int startCnt = 38;

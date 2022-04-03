@@ -1,28 +1,23 @@
 package codes.thischwa.ddauto.config;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Arrays;
-import java.util.Set;
+import codes.thischwa.ddauto.DDAutoStarter;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Arrays;
+import java.util.Set;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import codes.thischwa.ddauto.DDAutoStarter;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class, ZoneHostConfig.class })
-@ExtendWith(SpringExtension.class)
 class DDAutoConfigValidationTest {
 
 	@Autowired
@@ -51,7 +46,7 @@ class DDAutoConfigValidationTest {
 		assertEquals("The name of the zone shouldn't be empty.", violations.iterator().next().getMessage());
 	}
 
-	final static ZoneHostConfig.Zone buildZone() {
+	static ZoneHostConfig.Zone buildZone() {
 		ZoneHostConfig.Zone z = new ZoneHostConfig.Zone();
 		z.setName("test.dyndns.org");
 		z.setNs("ns.dyndns.org");

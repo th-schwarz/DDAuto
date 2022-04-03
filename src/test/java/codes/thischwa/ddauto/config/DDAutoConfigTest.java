@@ -1,18 +1,14 @@
 package codes.thischwa.ddauto.config;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import codes.thischwa.ddauto.DDAutoStarter;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import codes.thischwa.ddauto.DDAutoStarter;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class, DDAutoConfig.class })
-@ExtendWith(SpringExtension.class)
 class DDAutoConfigTest {
 
 	@Autowired
