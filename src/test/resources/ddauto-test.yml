@@ -1,4 +1,5 @@
 ddauto:
+  zone-log-page-enabled: true
   zone-validation-enabled: false
   zone-log-user-name: log
   zone-log-user-password: l0g

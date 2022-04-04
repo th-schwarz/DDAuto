@@ -17,20 +17,20 @@ public class DDAutoConfig {
 
 	private String zoneLogDatePattern = "yyyy-MM-dd HH:mm:SSS";
 
+	private boolean zoneLogPageEnabled;
+
 	private boolean zoneValidationEnabled = true;
 	
 	private String zoneLogUserName;
 
 	private String zoneLogUserPassword;
 	
+	private boolean zoneLogRestForcehttps;
+	
 	private boolean greetingEnabled;
 	
 	public String getZoneLogFilePattern() {
 		return zoneLogFilePattern;
-	}
-
-	public boolean isZoneLogPageEnabled() {
-		return zoneLogUserName != null;
 	}
 
 	public String getZoneLogPattern() {
@@ -55,6 +55,14 @@ public class DDAutoConfig {
 
 	public void setZoneLogDatePattern(String zoneLogDatePattern) {
 		this.zoneLogDatePattern = zoneLogDatePattern;
+	}
+
+	public void setZoneLogPageEnabled(boolean zoneLogPageEnabled) {
+		this.zoneLogPageEnabled = zoneLogPageEnabled;
+	}
+
+	public boolean isZoneLogPageEnabled() {
+		return zoneLogPageEnabled;
 	}
 
 	public void setZoneLogFilePattern(String zoneLogFilePattern) {
@@ -83,6 +91,14 @@ public class DDAutoConfig {
 
 	public void setZoneLogUserPassword(String zoneLogUserPassword) {
 		this.zoneLogUserPassword = zoneLogUserPassword;
+	}
+
+	public boolean isZoneLogRestForcehttps() {
+		return zoneLogRestForcehttps;
+	}
+
+	public void setZoneLogRestForcehttps(boolean zoneLogRestForcehttps) {
+		this.zoneLogRestForcehttps = zoneLogRestForcehttps;
 	}
 
 	public boolean isGreetingEnabled() {

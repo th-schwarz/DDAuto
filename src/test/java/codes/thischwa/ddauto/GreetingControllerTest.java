@@ -37,6 +37,7 @@ class GreetingControllerTest {
 		ServletRequestAttributes attrs = new ServletRequestAttributes(mockRequest);
 		RequestContextHolder.setRequestAttributes(attrs);
 
-		assertEquals("http://localhost:" + port, NetUtil.getBaseUrl());
+		assertEquals("http://localhost:" + port, NetUtil.getBaseUrl(false));
+		assertEquals("https://localhost:" + port, NetUtil.getBaseUrl(true));
 	}
 }
