@@ -1,7 +1,5 @@
 package codes.thischwa.ddauto;
 
-import java.net.URI;
-
 import codes.thischwa.ddauto.config.DDAutoConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
