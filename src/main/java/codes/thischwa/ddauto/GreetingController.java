@@ -19,6 +19,6 @@ public class GreetingController {
 	 */
 	@GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
 	public String greeting() {
-		return "about.html";
+		return "about";
 	}
 }

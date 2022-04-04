@@ -41,6 +41,6 @@ public class ZoneUpdateLogContoller {
 			String basicAuth = NetUtil.buildBasicAuth(user, password);
 			model.addAttribute("header_basicauth", basicAuth);
 		}
-		return "log-zone.html";
+		return "log-zone";
 	}
 }
