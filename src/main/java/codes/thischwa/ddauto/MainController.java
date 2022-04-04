@@ -1,41 +1,38 @@
 package codes.thischwa.ddauto;
 
-import javax.servlet.http.HttpServletRequest;
-
+import codes.thischwa.ddauto.config.ZoneHostConfig;
+import codes.thischwa.ddauto.service.*;
+import codes.thischwa.ddauto.util.NetUtil;
+import codes.thischwa.ddauto.util.ZoneUtil;
 import org.domainrobot.sdk.models.generated.ResourceRecord;
 import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import codes.thischwa.ddauto.config.ZoneHostConfig;
-import codes.thischwa.ddauto.service.ZoneLogPage;
-import codes.thischwa.ddauto.service.ZoneSdk;
-import codes.thischwa.ddauto.service.ZoneSdkException;
-import codes.thischwa.ddauto.service.ZoneUpdateLogCache;
-import codes.thischwa.ddauto.service.ZoneUpdateLogger;
-import codes.thischwa.ddauto.util.NetUtil;
-import codes.thischwa.ddauto.util.ZoneUtil;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class MainController implements MainApiRoutes {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-	@Autowired
-	private ZoneHostConfig conf;
+	private final ZoneHostConfig conf;
 
-	@Autowired
-	private ZoneSdk sdk;
+	private final ZoneSdk sdk;
 
-	@Autowired
-	private ZoneUpdateLogger updateLogger;
+	private final ZoneUpdateLogger updateLogger;
 	
-	@Autowired
-	private ZoneUpdateLogCache cache;
+	private final ZoneUpdateLogCache cache;
+
+	public MainController(ZoneHostConfig conf, ZoneSdk sdk, ZoneUpdateLogger updateLogger, ZoneUpdateLogCache cache) {
+		this.conf = conf;
+		this.sdk = sdk;
+		this.updateLogger = updateLogger;
+		this.cache = cache;
+	}
 
 	@Override
 	public ResponseEntity<String> exist(String host) {
@@ -115,9 +112,10 @@ public class MainController implements MainApiRoutes {
 	public ResponseEntity<String> getMemoryStatistics() {
 		StringBuilder memInfo = new StringBuilder();
 		memInfo.append("Basic memory Information:\n");
-		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / (1024L * 1024l)));
-		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / (1024L * 1024l)));
-		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / (1024L * 1024l)));
+		long mb = 1024L * 1024L;
+		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / mb));
+		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / mb));
+		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / mb));
 		return ResponseEntity.ok(memInfo.toString());
 	}
 	

@@ -1,15 +1,13 @@
 package codes.thischwa.ddauto;
 
 import codes.thischwa.ddauto.config.DDAutoConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import codes.thischwa.ddauto.util.NetUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import codes.thischwa.ddauto.util.NetUtil;
 
 /**
  * A controller that delivers a page to show the zone update logs.
@@ -18,15 +16,18 @@ import codes.thischwa.ddauto.util.NetUtil;
 @ConditionalOnProperty(name = "ddauto.zone-log-page-enabled")
 public class ZoneUpdateLogContoller {
 
-	@Autowired
-	private DDAutoConfig config;
+	private final DDAutoConfig config;
 
 	@Value("${spring.security.user.name}")
 	private String user;
 	
 	@Value("${spring.security.user.password}")
 	private String password;
-	
+
+	public ZoneUpdateLogContoller(DDAutoConfig config) {
+		this.config = config;
+	}
+
 	/**
 	 * Delivers page to show the zone update logs.
 	 * 
