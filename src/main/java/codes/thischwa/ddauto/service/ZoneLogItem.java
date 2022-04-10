@@ -1,6 +1,6 @@
 package codes.thischwa.ddauto.service;
 
-public class ZoneLogItem {
+public class ZoneLogItem implements Comparable<ZoneLogItem> {
 
 	private String dateTime;
 
@@ -37,5 +37,12 @@ public class ZoneLogItem {
 	public String toString() {
 		return "ZoneLogItem [dateTime=" + dateTime + ", host=" + host + ", ipv4=" + ipv4 + ", ipv6=" + ipv6 + "]";
 	}
+
+	@Override
+	public int compareTo(ZoneLogItem o2) {
+		return dateTime.compareTo(o2.getDateTime());
+	}
+
+	
 	
 }

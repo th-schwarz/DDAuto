@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -97,7 +98,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		ZoneLogPage logs = new ZoneLogPage();
 		logs.setPageSize(conf.getZoneLogPageSize());
 		logs.setTotal(zoneUpdateItems.size());
-		logs.setItems(zoneUpdateItems);
+		logs.setItems(zoneUpdateItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
 		return logs;
 	}
 	
