@@ -1,5 +1,7 @@
 package codes.thischwa.ddauto.service;
 
+import java.util.Objects;
+
 public class ZoneLogItem implements Comparable<ZoneLogItem> {
 
 	private String dateTime;
@@ -43,6 +45,20 @@ public class ZoneLogItem implements Comparable<ZoneLogItem> {
 		return dateTime.compareTo(o2.getDateTime());
 	}
 
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(dateTime, host, ipv4, ipv6);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		if(!(obj instanceof ZoneLogItem))
+			return false;
+		ZoneLogItem other = (ZoneLogItem) obj;
+		return Objects.equals(dateTime, other.dateTime) && Objects.equals(host, other.host) && Objects.equals(ipv4, other.ipv4)
+				&& Objects.equals(ipv6, other.ipv6);
+	}
 	
 }
