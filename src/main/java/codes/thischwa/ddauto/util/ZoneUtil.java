@@ -10,34 +10,35 @@ public interface ZoneUtil {
 
 	long DEFAULT_TLD = 60;
 	
-	String RR_A = "A";
-	
-	String RR_AAAA = "AAAA";
+	public enum ResouceRecordTypeIP {
+		A,
+		AAAA;
+	}
 
 	static void addOrUpdateIPv4(Zone zone, String sld, String ip) {
-		addOrUpdateIP(zone, sld, ip, RR_A);
+		addOrUpdateIP(zone, sld, ip, ResouceRecordTypeIP.A);
 	}
 
 	static void addOrUpdateIPv6(Zone zone, String sld, String ip) {
-		addOrUpdateIP(zone, sld, ip, RR_AAAA);
+		addOrUpdateIP(zone, sld, ip, ResouceRecordTypeIP.AAAA);
 	}
 
 	static void removeIPv4(Zone zone, String sld) {
-		removeIP(zone, sld, RR_A);
+		removeIP(zone, sld, ResouceRecordTypeIP.A);
 	}
 
 	static void removeIPv6(Zone zone, String sld) {
-		removeIP(zone, sld, RR_AAAA);
+		removeIP(zone, sld, ResouceRecordTypeIP.AAAA);
 	}
 
-	private static void removeIP(Zone zone, String sld, String type) {
+	private static void removeIP(Zone zone, String sld, ResouceRecordTypeIP type) {
 		ResourceRecord rr = searchResourceRecord(zone, sld, type);
 		if(rr != null) {
 			zone.getResourceRecords().remove(rr);
 		}
 	}
 
-	private static void addOrUpdateIP(Zone zone, String sld, String ip, String type) {
+	private static void addOrUpdateIP(Zone zone, String sld, String ip, ResouceRecordTypeIP type) {
 		ResourceRecord rr = searchResourceRecord(zone, sld, type);
 		if(rr != null) {
 			rr.setValue(ip);
@@ -46,15 +47,15 @@ public interface ZoneUtil {
 			ResourceRecord rrSld = new ResourceRecord();
 			rrSld.setName(sld);
 			rrSld.setValue(ip);
-			rrSld.setType(type);
+			rrSld.setType(type.toString());
 			rrSld.setTtl(DEFAULT_TLD);
 			zone.getResourceRecords().add(rrSld);
 		}
 	}
 
-	static ResourceRecord searchResourceRecord(Zone zone, String name, String type) {
+	static ResourceRecord searchResourceRecord(Zone zone, String name, ResouceRecordTypeIP type) {
 		return zone.getResourceRecords().stream()
-				.filter(rr -> rr.getType().equals(type) && rr.getName().equals(name))
+				.filter(rr -> rr.getType().equals(type.toString()) && rr.getName().equals(name))
 				.findFirst()
 				.orElse(null);
 	}
@@ -64,5 +65,17 @@ public interface ZoneUtil {
 		if(cnt < 2)
 			throw new IllegalArgumentException("'host' must be a sub domain.");
 		return host.substring(host.indexOf(".") + 1);
+	}
+	
+	static boolean hasIPsChanged(Zone zone, String sld, String ipv4, String ipv6) {
+		ResourceRecord rrv4 = searchResourceRecord(zone, sld, ResouceRecordTypeIP.A);
+		ResourceRecord rrv6 = searchResourceRecord(zone, sld, ResouceRecordTypeIP.AAAA);
+		boolean ipv4Changed = !equals(rrv4, ipv4);
+		boolean ipv6Changed = !equals(rrv6, ipv6);
+		return ipv4Changed || ipv6Changed;
+	}
+	
+	private static boolean equals(ResourceRecord rr, String ip) {
+		return (rr == null && ip == null) || (rr != null && ip != null && ip.equals(rr.getValue()));
 	}
 }

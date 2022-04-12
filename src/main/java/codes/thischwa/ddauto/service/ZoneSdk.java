@@ -31,7 +31,7 @@ public class ZoneSdk implements InitializingBean {
 
 	@Autowired
 	private DDAutoConfig conf;
-	
+
 	@Autowired
 	private AutoDnsConfig autoDnsConfig;
 
@@ -42,7 +42,7 @@ public class ZoneSdk implements InitializingBean {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
 				autoDnsConfig.getUrl()).getZone();
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if(conf.isZoneValidationEnabled())
@@ -85,14 +85,17 @@ public class ZoneSdk implements InitializingBean {
 	 *            Add or update the ipv4 address. If it's null, it will be dropped from the zone.
 	 * @param ipv6
 	 *            Add or update the ipv6 address. If it's null, it will be dropped from the zone.
+	 * @return true if an update was processed, otherwise false
 	 * @throws ZoneSdkException
-	 *            If an known exception DomainrobotApiException or an unknown exception was happened.
+	 *             If an known exception DomainrobotApiException or an unknown exception was happened.
 	 */
-	public void zoneUpdate(String host, String ipv4, String ipv6) throws ZoneSdkException {
+	public boolean zoneUpdate(String host, String ipv4, String ipv6) throws ZoneSdkException {
 		String sld = host.substring(0, host.indexOf("."));
 
 		// set the IPs in the zone object
 		Zone zone = zoneInfo(host);
+		if(!ZoneUtil.hasIPsChanged(zone, sld, ipv4, ipv6))
+			return false;
 		if(ipv4 != null)
 			ZoneUtil.addOrUpdateIPv4(zone, sld, ipv4);
 		else
@@ -111,5 +114,6 @@ public class ZoneSdk implements InitializingBean {
 		} catch (Exception e) {
 			throw new ZoneSdkException("Unknown exception", e);
 		}
+		return true;
 	}
 }

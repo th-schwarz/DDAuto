@@ -72,14 +72,19 @@ public class MainController implements MainApiRoutes {
 
 		// processing the update
 		try {
-			sdk.zoneUpdate(host, ipv4Str, ipv6Str);
-			logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
-			updateLogger.log(host, ipv4Str, ipv6Str);
+			boolean processed = sdk.zoneUpdate(host, ipv4Str, ipv6Str);
+			if(processed) {
+				logger.info("Updated host {} successful with ipv4={}, ipv6={}", host, ipv4Str, ipv6Str);
+				updateLogger.log(host, ipv4Str, ipv6Str);
+				return ResponseEntity.ok("Update successful.");
+			} else {
+				logger.debug("IPs hasn't changed for {}, no update required!", host);
+				return ResponseEntity.ok("Update not required. IPs hasn't changed");
+			}
 		} catch (ZoneSdkException e) {
 			logger.error("Updated host failed: " + host, e);
 			return new ResponseEntity<>("Update failed!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return ResponseEntity.ok("Update successful.");
 	}
 
 	@Override
@@ -97,9 +102,9 @@ public class MainController implements MainApiRoutes {
 		}
 
 		String sld = host.substring(0, host.indexOf("."));
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.RR_A);
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.ResouceRecordTypeIP.A);
 		String ipv4Str = (rr == null) ? "n/a" : rr.getValue();
-		rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.RR_AAAA);
+		rr = ZoneUtil.searchResourceRecord(zone, sld, ZoneUtil.ResouceRecordTypeIP.AAAA);
 		String ipv6Str = (rr == null) ? "n/a" : rr.getValue();
 		StringBuilder info = new StringBuilder();
 		info.append("IP settings for host: ").append(host).append('\n');

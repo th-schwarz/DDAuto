@@ -31,7 +31,7 @@ class ZoneUtilTest {
 		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv4(zone, "sub", "128.0.0.1");
 		assertEquals(rrCount, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.RR_A);
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.ResouceRecordTypeIP.A);
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
@@ -41,7 +41,7 @@ class ZoneUtilTest {
 		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv6(zone, "sub", "2a03:4000:41:32::20");
 		assertEquals(rrCount, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.RR_AAAA);
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub", ZoneUtil.ResouceRecordTypeIP.AAAA);
 		assertNotNull(rr);
 		assertEquals("2a03:4000:41:32::20", rr.getValue());
 	}
@@ -51,7 +51,7 @@ class ZoneUtilTest {
 		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv4(zone, "sub1", "128.0.0.1");
 		assertEquals(rrCount+1, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.RR_A);
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.ResouceRecordTypeIP.A);
 		assertNotNull(rr);
 		assertEquals("128.0.0.1", rr.getValue());
 	}
@@ -61,7 +61,7 @@ class ZoneUtilTest {
 		assertEquals(rrCount, zone.getResourceRecords().size());
 		ZoneUtil.addOrUpdateIPv6(zone, "sub1", "2a03:4000:41:32::20");
 		assertEquals(rrCount+1, zone.getResourceRecords().size());
-		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.RR_AAAA);
+		ResourceRecord rr = ZoneUtil.searchResourceRecord(zone, "sub1", ZoneUtil.ResouceRecordTypeIP.AAAA);
 		assertNotNull(rr);
 		assertEquals("2a03:4000:41:32::20", rr.getValue());
 	}
@@ -87,15 +87,6 @@ class ZoneUtilTest {
 		ZoneUtil.removeIPv6(zone, "unknownsub");
 		assertEquals(rrCount, zone.getResourceRecords().size());
 	}
-	
-	@Test
-	final void testValidIP() {
-		assertTrue(NetUtil.isIP("217.229.139.240"));
-		assertTrue(NetUtil.isIP("2a03:4000:41:32::1"));
-
-		assertFalse(NetUtil.isIP("300.229.139.240"));
-		assertFalse(NetUtil.isIP("2x03:4000:41:32::1"));
-	}
 
 	@Test
 	final void testDeriveZone() {
@@ -109,4 +100,15 @@ class ZoneUtilTest {
 		});
 	}
 	
+	@Test
+	final void testIPsHasChanged() {
+		assertFalse(ZoneUtil.hasIPsChanged(zone, "sub", "85.209.51.215", "2a03:4000:41:32::10"));		
+		assertTrue(ZoneUtil.hasIPsChanged(zone, "unknownsub", "85.209.51.216", "2a03:4000:41:32::10"));
+
+		assertTrue(ZoneUtil.hasIPsChanged(zone, "sub", "85.209.51.216", "2a03:4000:41:32::10"));
+		assertTrue(ZoneUtil.hasIPsChanged(zone, "sub", "85.209.51.215", "2a03:4000:41:32::11"));
+
+		assertTrue(ZoneUtil.hasIPsChanged(zone, "sub", null, "2a03:4000:41:32::10"));
+		assertTrue(ZoneUtil.hasIPsChanged(zone, "sub", "85.209.51.215", null));
+	}
 }

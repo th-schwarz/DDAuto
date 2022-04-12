@@ -5,6 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class NetUtilTest {
+	
+	@Test
+	final void testValidIP() {
+		assertTrue(NetUtil.isIP("217.229.139.240"));
+		assertTrue(NetUtil.isIP("2a03:4000:41:32::1"));
+
+		assertFalse(NetUtil.isIP("300.229.139.240"));
+		assertFalse(NetUtil.isIP("2x03:4000:41:32::1"));
+	}
 
 	@Test
 	final void testIPv4() {
