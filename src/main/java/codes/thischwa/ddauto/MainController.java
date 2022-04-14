@@ -79,7 +79,7 @@ public class MainController implements MainApiRoutes {
 				return ResponseEntity.ok("Update successful.");
 			} else {
 				logger.debug("IPs hasn't changed for {}, no update required!", host);
-				return ResponseEntity.ok("Update not required. IPs hasn't changed");
+				return ResponseEntity.ok("Update not required. IPs haven't changed.");
 			}
 		} catch (ZoneSdkException e) {
 			logger.error("Updated host failed: " + host, e);
