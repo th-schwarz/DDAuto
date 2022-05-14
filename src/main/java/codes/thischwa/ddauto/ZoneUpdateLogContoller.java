@@ -44,4 +44,9 @@ public class ZoneUpdateLogContoller {
 		}
 		return "log-zone";
 	}
+
+	@GetMapping(value = "/log-ex", produces = MediaType.TEXT_HTML_VALUE)
+	public String logEx(Model model) {
+		return "log-ex.html";
+	}
 }

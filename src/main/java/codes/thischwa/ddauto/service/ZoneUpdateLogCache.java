@@ -101,30 +101,32 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		logs.setItems(zoneUpdateItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
 		return logs;
 	}
-	
 
-	public ZoneLogPage getResponsePage(int page) {
+	public ZoneLogPage getResponsePage(Integer page, String search) {
 		ZoneLogPage lw = new ZoneLogPage();
 		if(page < 1)
 			return lw;
 		lw.setPage(page);
-		
+
+		List<ZoneLogItem> items = (search == null || search.isEmpty()) ? zoneUpdateItems
+				: zoneUpdateItems.stream().filter(i -> i.getHost().contains(search)).collect(Collectors.toList());
+
 		int currentIdx = (conf.getZoneLogPageSize() * page) - conf.getZoneLogPageSize();
 		List<ZoneLogItem> pageItems = new ArrayList<>();
 		int nextIdx = currentIdx + conf.getZoneLogPageSize();
 		for(int i = currentIdx; i < nextIdx; i++) {
 			if(i >= size())
 				break;
-			pageItems.add(zoneUpdateItems.get(i));
+			pageItems.add(items.get(i));
 		}
 
-		if(nextIdx < size()-1)
-			lw.setQueryStringNext(String.format("?p=%d", page+1));
+		if(nextIdx < items.size() - 1)
+			lw.setQueryStringNext(String.format("?p=%d", page + 1));
 		if(page > 1)
-			lw.setQueryStringPrev(String.format("?p=%d", page-1));
+			lw.setQueryStringPrev(String.format("?p=%d", page - 1));
 		lw.setPageSize(conf.getZoneLogPageSize());
 		lw.setItems(pageItems);
-		lw.setTotalPage(((size()-1) / conf.getZoneLogPageSize())+1);
+		lw.setTotalPage(((size() - 1) / conf.getZoneLogPageSize()) + 1);
 		lw.setTotal(size());
 		return lw;
 	}

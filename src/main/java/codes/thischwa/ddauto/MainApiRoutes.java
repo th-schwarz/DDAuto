@@ -84,5 +84,5 @@ public interface MainApiRoutes {
 	@Operation(summary = "Zone update log.")
 	@ApiResponse(responseCode = "200", description = "All zone update log.")
 	@GetMapping(value = "info/zone-log", produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<ZoneLogPage> getZoneUpdateLogs();
+	ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam(required = false) Integer page, @RequestParam(required = false) String search);
 }

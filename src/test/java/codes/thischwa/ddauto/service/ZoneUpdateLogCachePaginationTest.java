@@ -17,7 +17,7 @@ class ZoneUpdateLogCachePaginationTest {
 	
 	@Test 
 	final void testPageFirst() {
-		ZoneLogPage lp = cache.getResponsePage(1);
+		ZoneLogPage lp = cache.getResponsePage(1, null);
 		assertEquals(1, lp.getPage());
 		assertEquals(4, lp.getPageSize());
 		assertEquals(10, lp.getTotalPage());
@@ -26,12 +26,30 @@ class ZoneUpdateLogCachePaginationTest {
 		assertNull(lp.getQueryStringPrev());
 		assertEquals("?p=2", lp.getQueryStringNext());
 		assertEquals("2022-02-01 03:28:11.497", lp.getItems().get(0).getDateTime());
+		assertEquals("ursa.mydyndns.com", lp.getItems().get(0).getHost());
 		assertEquals("2022-02-02 03:32:27.796", lp.getItems().get(3).getDateTime());
+		assertEquals("master.mydyndns.com", lp.getItems().get(3).getHost());
+	}
+
+	@Test 
+	final void testPageFirstSearch() {
+		ZoneLogPage lp = cache.getResponsePage(1, "master");
+		assertEquals(1, lp.getPage());
+		assertEquals(4, lp.getPageSize());
+		assertEquals(10, lp.getTotalPage());
+		assertEquals(38, lp.getTotal());
+		assertEquals(4, lp.getItems().size());
+		assertNull(lp.getQueryStringPrev());
+		assertEquals("?p=2", lp.getQueryStringNext());
+		assertEquals("2022-02-01 03:33:17.476", lp.getItems().get(0).getDateTime());
+		assertEquals("master.mydyndns.com", lp.getItems().get(0).getHost());
+		assertEquals("2022-02-04 03:30:19.210", lp.getItems().get(3).getDateTime());
+		assertEquals("master.mydyndns.com", lp.getItems().get(3).getHost());
 	}
 
 	@Test
 	final void testPageSecond() {
-		ZoneLogPage lp = cache.getResponsePage(2);
+		ZoneLogPage lp = cache.getResponsePage(2, "");
 		assertEquals(2, lp.getPage());
 		assertEquals(4, lp.getPageSize());
 		assertEquals(10, lp.getTotalPage());
@@ -45,7 +63,7 @@ class ZoneUpdateLogCachePaginationTest {
 
 	@Test
 	final void testPageLast() {
-		ZoneLogPage lp = cache.getResponsePage(10);
+		ZoneLogPage lp = cache.getResponsePage(10, null);
 		assertEquals(10, lp.getPage());
 		assertEquals(4, lp.getPageSize());
 		assertEquals(10, lp.getTotalPage());

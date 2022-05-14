@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -125,8 +126,8 @@ public class MainController implements MainApiRoutes {
 	}
 	
 	@Override
-	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs() {
-		return ResponseEntity.ok(cache.getResponseAll());
+	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam(required = false) Integer page, @RequestParam(required = false) String search) {
+		return (page == null && search == null) ? ResponseEntity.ok(cache.getResponseAll()) : ResponseEntity.ok(cache.getResponsePage(0, search));
 	}
 	
 }
