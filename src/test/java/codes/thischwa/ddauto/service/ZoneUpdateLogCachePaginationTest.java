@@ -36,8 +36,8 @@ class ZoneUpdateLogCachePaginationTest {
 		ZoneLogPage lp = cache.getResponsePage(1, "master");
 		assertEquals(1, lp.getPage());
 		assertEquals(4, lp.getPageSize());
-		assertEquals(10, lp.getTotalPage());
-		assertEquals(38, lp.getTotal());
+		assertEquals(6, lp.getTotalPage());
+		assertEquals(22, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
 		assertNull(lp.getQueryStringPrev());
 		assertEquals("?p=2", lp.getQueryStringNext());
