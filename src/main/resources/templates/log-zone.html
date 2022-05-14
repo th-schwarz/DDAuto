@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
 	rel="stylesheet" />
-	<title>DDAuto :: Log</title>
+<title>DDAuto :: Log</title>
 </head>
 <body>
 	<div id="grid"></div>
@@ -17,8 +17,12 @@
     		{id: 'host', name: 'Host'}, 
     		{id: 'ipv4', name: 'IPv4'}, 
     		{id: 'ipv6', name: 'IPv6'}],
-    	  search: true,
-    	  pagination: {limit: 100},
+    		search: {
+    			server: {
+    				url: (prev, keyword) => `${prev}?search=${keyword}`
+    					}
+    		},
+    	  // pagination: {limit: 100},
     	  server: {
     		  url: server_url,
     		  headers: {'Authorization': header_basicauth},

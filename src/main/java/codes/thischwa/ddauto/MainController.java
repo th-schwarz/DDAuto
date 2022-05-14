@@ -127,7 +127,7 @@ public class MainController implements MainApiRoutes {
 	
 	@Override
 	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam(required = false) Integer page, @RequestParam(required = false) String search) {
-		return (page == null && search == null) ? ResponseEntity.ok(cache.getResponseAll()) : ResponseEntity.ok(cache.getResponsePage(0, search));
+		return (page == null && search == null) ? ResponseEntity.ok(cache.getResponseAll()) : ResponseEntity.ok(cache.getResponsePage(page, search));
 	}
 	
 }

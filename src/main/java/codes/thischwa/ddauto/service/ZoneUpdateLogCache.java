@@ -103,6 +103,8 @@ public class ZoneUpdateLogCache implements InitializingBean {
 	}
 
 	public ZoneLogPage getResponsePage(Integer page, String search) {
+		if(page == null)
+			page = Integer.valueOf(1);
 		ZoneLogPage lw = new ZoneLogPage();
 		if(page < 1)
 			return lw;
@@ -115,7 +117,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
 		List<ZoneLogItem> pageItems = new ArrayList<>();
 		int nextIdx = currentIdx + conf.getZoneLogPageSize();
 		for(int i = currentIdx; i < nextIdx; i++) {
-			if(i >= size())
+			if(i >= items.size())
 				break;
 			pageItems.add(items.get(i));
 		}
@@ -126,8 +128,8 @@ public class ZoneUpdateLogCache implements InitializingBean {
 			lw.setQueryStringPrev(String.format("?p=%d", page - 1));
 		lw.setPageSize(conf.getZoneLogPageSize());
 		lw.setItems(pageItems);
-		lw.setTotalPage(((size() - 1) / conf.getZoneLogPageSize()) + 1);
-		lw.setTotal(size());
+		lw.setTotalPage(((items.size() - 1) / conf.getZoneLogPageSize()) + 1);
+		lw.setTotal(items.size());
 		return lw;
 	}
 
