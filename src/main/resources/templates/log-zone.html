@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
-	rel="stylesheet" />
-<title>DDAuto :: Log</title>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+          rel="stylesheet"/>
+    <title>DDAuto :: Log</title>
 </head>
 <body>
-	<div id="grid"></div>
-	<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-	<script th:inline="javascript">
-	let server_url = [[${server_url}]];
-	let header_basicauth = [[${header_basicauth}]];
+<div id="grid"></div>
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+<script th:inline="javascript">
+    let server_url = [[${server_url}]];
+    let header_basicauth = [[${header_basicauth}]];
+    let page_size = [[${page_size}]];
+
     new gridjs.Grid({
-    	columns: [{id: 'dateTime', name: 'Timestamp'}, 
-    		{id: 'host', name: 'Host'}, 
-    		{id: 'ipv4', name: 'IPv4'}, 
-    		{id: 'ipv6', name: 'IPv6'}],
-    		search: {
-    			server: {
-    				url: (prev, keyword) => `${prev}?search=${keyword}`
-    					}
-    		},
-    	  // pagination: {limit: 100},
-    	  server: {
-    		  url: server_url,
-    		  headers: {'Authorization': header_basicauth},
-    		  then: data => data.items.map(item => [item.dateTime, item.host, item.ipv4, item.ipv6])
-    	  }
-    	}).render(document.getElementById("grid"));
-    </script>
+        columns: [{id: 'dateTime', name: 'Timestamp'},
+            {id: 'host', name: 'Host'},
+            {id: 'ipv4', name: 'IPv4'},
+            {id: 'ipv6', name: 'IPv6'}],
+        /*search: {
+            server: {
+                url: (prev, keyword) => `${prev}?search=${keyword}`
+            }
+        },*/
+        // pagination: {limit: 100},
+        pagination: {
+            enabled: true,
+            limit: page_size,
+            server: {
+                url: (prev, page, limit) => `${prev}?page=${page}`
+            }
+        },
+        server: {
+            url: server_url,
+            headers: {'Authorization': header_basicauth},
+            then: data => data.items.map(item => [item.dateTime, item.host, item.ipv4, item.ipv6]),
+            total: data => data.total
+        }
+    }).render(document.getElementById("grid"));
+
+</script>
 </body>
 </html>

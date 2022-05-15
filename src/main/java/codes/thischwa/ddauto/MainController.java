@@ -127,8 +127,9 @@ public class MainController implements MainApiRoutes {
 	
 	@Override
 	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam(required = false) Integer page, @RequestParam(required = false) String search) {
-		Integer currentPage = (page == null) ? Integer.valueOf(1) : page;
-		return ResponseEntity.ok(cache.getResponsePage(currentPage, search));
+		if(page != null) // grid.js: pagination starts with 0
+			page++;
+		return ResponseEntity.ok(cache.getResponsePage(page, search));
 	}
 	
 }

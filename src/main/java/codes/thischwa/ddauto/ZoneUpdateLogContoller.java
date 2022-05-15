@@ -41,6 +41,7 @@ public class ZoneUpdateLogContoller {
 		if(user != null && password != null) {
 			String basicAuth = NetUtil.buildBasicAuth(user, password);
 			model.addAttribute("header_basicauth", basicAuth);
+			model.addAttribute("page_size", config.getZoneLogPageSize());
 		}
 		return "log-zone";
 	}
