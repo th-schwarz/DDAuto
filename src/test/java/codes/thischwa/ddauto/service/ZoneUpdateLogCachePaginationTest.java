@@ -24,7 +24,7 @@ class ZoneUpdateLogCachePaginationTest {
 		assertEquals(38, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
 		assertNull(lp.getQueryStringPrev());
-		assertEquals("?p=2", lp.getQueryStringNext());
+		assertEquals("page=2", lp.getQueryStringNext());
 		assertEquals("2022-02-01 03:28:11.497", lp.getItems().get(0).getDateTime());
 		assertEquals("ursa.mydyndns.com", lp.getItems().get(0).getHost());
 		assertEquals("2022-02-02 03:32:27.796", lp.getItems().get(3).getDateTime());
@@ -40,10 +40,10 @@ class ZoneUpdateLogCachePaginationTest {
 		assertEquals(22, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
 		assertNull(lp.getQueryStringPrev());
-		assertEquals("?p=2", lp.getQueryStringNext());
-		assertEquals("2022-02-01 03:33:17.476", lp.getItems().get(0).getDateTime());
+		assertEquals("page=2", lp.getQueryStringNext());
+		assertEquals("2022-02-17 03:39:37.606", lp.getItems().get(0).getDateTime());
 		assertEquals("master.mydyndns.com", lp.getItems().get(0).getHost());
-		assertEquals("2022-02-04 03:30:19.210", lp.getItems().get(3).getDateTime());
+		assertEquals("2022-02-13 03:44:13.713", lp.getItems().get(3).getDateTime());
 		assertEquals("master.mydyndns.com", lp.getItems().get(3).getHost());
 	}
 
@@ -55,8 +55,8 @@ class ZoneUpdateLogCachePaginationTest {
 		assertEquals(10, lp.getTotalPage());
 		assertEquals(38, lp.getTotal());
 		assertEquals(4, lp.getItems().size());
-		assertEquals("?p=1", lp.getQueryStringPrev());
-		assertEquals("?p=3", lp.getQueryStringNext());
+		assertEquals("page=1", lp.getQueryStringPrev());
+		assertEquals("page=3", lp.getQueryStringNext());
 		assertEquals("2022-02-03 03:25:34.745", lp.getItems().get(0).getDateTime());
 		assertEquals("2022-02-04 03:30:19.210", lp.getItems().get(3).getDateTime());
 	}
@@ -69,7 +69,7 @@ class ZoneUpdateLogCachePaginationTest {
 		assertEquals(10, lp.getTotalPage());
 		assertEquals(38, lp.getTotal());
 		assertEquals(2, lp.getItems().size());
-		assertEquals("?p=9", lp.getQueryStringPrev());
+		assertEquals("page=9", lp.getQueryStringPrev());
 		assertNull(lp.getQueryStringNext());
 		assertEquals("2022-02-17 03:08:17.401", lp.getItems().get(0).getDateTime());
 		assertEquals("2022-02-17 03:39:37.606", lp.getItems().get(1).getDateTime());
