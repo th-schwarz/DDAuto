@@ -102,9 +102,9 @@ public class ZoneUpdateLogCache implements InitializingBean {
     }
 
     public ZoneLogPage getResponsePage(Integer page, String search) {
-        logger.debug("Entered #getResponsePage with: page={}, search={}", (page == null) ? "null" : page, (search == null) ? "null" : search);
-        if (page == null || page.intValue() == 0)
-            page = Integer.valueOf(1);
+        logger.debug("Entered #getResponsePage with: page={}, search={}", page, search);
+        if (page == null || page == 0)
+            page = 1;
         ZoneLogPage lw = new ZoneLogPage();
         lw.setPage(page);
 
