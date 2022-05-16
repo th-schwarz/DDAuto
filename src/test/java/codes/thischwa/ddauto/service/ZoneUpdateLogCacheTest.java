@@ -47,7 +47,7 @@ class ZoneUpdateLogCacheTest {
 
 	@Test
 	final void testItem() {
-		assertEquals("ZoneLogItem [dateTime=2022-02-01 03:28:11.497, host=ursa.mydyndns.com, ipv4=217.229.130.11, ipv6=n/a]",
+		assertEquals("ZoneLogItem [dateTime=2022-02-17 03:39:37.606, host=master.mydyndns.com, ipv4=84.157.246.196, ipv6=2003:cc:2fff:108e:2e91:abff:febf:d839s]",
 				cache.getItems().get(0).toString());
 	}
 
