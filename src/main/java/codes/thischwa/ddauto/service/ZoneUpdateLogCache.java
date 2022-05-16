@@ -75,11 +75,12 @@ public class ZoneUpdateLogCache implements InitializingBean {
             }
         }
 
-        // ordering and parsing
+        // ordering and parsing, must be asc because new items will be added at the end
         logEntries.sort(null);
         Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
-        zoneUpdateItems = new CopyOnWriteArrayList<>(
-                logEntries.stream().map(i -> parseLogEntry(i, pattern)).filter(Objects::nonNull).sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+        zoneUpdateItems = logEntries.stream().map(i -> parseLogEntry(i, pattern)).filter(Objects::nonNull)
+                .sorted(Comparator.comparing(ZoneLogItem::getDateTime))
+                .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         logger.info("{} log entries successful read and parsed.", zoneUpdateItems.size());
     }
 
@@ -97,7 +98,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
         ZoneLogPage logs = new ZoneLogPage();
         logs.setPageSize(conf.getZoneLogPageSize());
         logs.setTotal(zoneUpdateItems.size());
-        logs.setItems(zoneUpdateItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+        logs.setItems(zoneUpdateItems.stream().sorted(Comparator.comparing(ZoneLogItem::getDateTime, Comparator.reverseOrder())).collect(Collectors.toList()));
         return logs;
     }
 
@@ -105,11 +106,16 @@ public class ZoneUpdateLogCache implements InitializingBean {
         logger.debug("Entered #getResponsePage with: page={}, search={}", page, search);
         if (page == null || page == 0)
             page = 1;
-        ZoneLogPage lw = new ZoneLogPage();
-        lw.setPage(page);
+        ZoneLogPage lp = new ZoneLogPage();
+        lp.setPage(page);
 
-        List<ZoneLogItem> items = (search == null || search.isEmpty()) ? zoneUpdateItems
-                : zoneUpdateItems.stream().filter(i -> i.getHost().contains(search)).collect(Collectors.toList());
+        // searching in host und timestamp
+        List<ZoneLogItem> items = (search == null || search.isEmpty()) ? new ArrayList<>(zoneUpdateItems)
+                : zoneUpdateItems.stream().filter(i -> i.getHost().contains(search) || i.getDateTime().contains(search))
+                .collect(Collectors.toList());
+
+        // respect ordering of dateTime, must be desc!
+        items = items.stream().sorted(Comparator.comparing(ZoneLogItem::getDateTime, Comparator.reverseOrder())).collect(Collectors.toList());
 
         int currentIdx = (conf.getZoneLogPageSize() * page) - conf.getZoneLogPageSize();
         List<ZoneLogItem> pageItems = new ArrayList<>();
@@ -120,11 +126,11 @@ public class ZoneUpdateLogCache implements InitializingBean {
             pageItems.add(items.get(i));
         }
 
-        lw.setPageSize(conf.getZoneLogPageSize());
-        lw.setItems(pageItems);
-        lw.setTotalPage(((zoneUpdateItems.size() - 1) / conf.getZoneLogPageSize()) + 1);
-        lw.setTotal(items.size());
-        return lw;
+        lp.setPageSize(conf.getZoneLogPageSize());
+        lp.setItems(pageItems);
+        lp.setTotalPage(((zoneUpdateItems.size() - 1) / conf.getZoneLogPageSize()) + 1);
+        lp.setTotal(items.size());
+        return lp;
     }
 
     ZoneLogItem parseLogEntry(String logEntry, Pattern pattern) {
