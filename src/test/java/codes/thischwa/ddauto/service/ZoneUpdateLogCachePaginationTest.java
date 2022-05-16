@@ -31,6 +31,23 @@ class ZoneUpdateLogCachePaginationTest {
 		assertEquals("ursa.mydyndns.com", lp.getItems().get(3).getHost());
 	}
 
+
+	@Test
+	final void testNullPageFirst() {
+		ZoneLogPage lp = cache.getResponsePage(null, null);
+		assertEquals(1, lp.getPage());
+		assertEquals(4, lp.getPageSize());
+		assertEquals(10, lp.getTotalPage());
+		assertEquals(38, lp.getTotal());
+		assertEquals(4, lp.getItems().size());
+		assertNull(lp.getQueryStringPrev());
+		assertEquals("page=2", lp.getQueryStringNext());
+		assertEquals("2022-02-17 03:39:37.606", lp.getItems().get(0).getDateTime());
+		assertEquals("master.mydyndns.com", lp.getItems().get(0).getHost());
+		assertEquals("2022-02-15 03:11:00.224", lp.getItems().get(3).getDateTime());
+		assertEquals("ursa.mydyndns.com", lp.getItems().get(3).getHost());
+	}
+
 	@Test 
 	final void testPageFirstSearch() {
 		ZoneLogPage lp = cache.getResponsePage(1, "master");
