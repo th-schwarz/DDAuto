@@ -11,11 +11,7 @@ public class ZoneLogPage {
 	private int page;
 	
 	private int pageSize;
-	
-	private String queryStringPrev;
 
-	private String queryStringNext;
-	
 	private List<ZoneLogItem> items;
 
 	public int getTotal() {
@@ -58,20 +54,4 @@ public class ZoneLogPage {
 		this.pageSize = pageSize;
 	}
 
-	public String getQueryStringPrev() {
-		return queryStringPrev;
-	}
-
-	public void setQueryStringPrev(String queryStringPrev) {
-		this.queryStringPrev = queryStringPrev;
-	}
-
-	public String getQueryStringNext() {
-		return queryStringNext;
-	}
-
-	public void setQueryStringNext(String queryStringNext) {
-		this.queryStringNext = queryStringNext;
-	}
-	
 }

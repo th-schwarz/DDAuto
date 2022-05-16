@@ -120,10 +120,6 @@ public class ZoneUpdateLogCache implements InitializingBean {
             pageItems.add(items.get(i));
         }
 
-        if (nextIdx < items.size() - 1)
-            lw.setQueryStringNext(String.format("page=%d", page + 1));
-        if (page > 1)
-            lw.setQueryStringPrev(String.format("page=%d", page - 1));
         lw.setPageSize(conf.getZoneLogPageSize());
         lw.setItems(pageItems);
         lw.setTotalPage(((zoneUpdateItems.size() - 1) / conf.getZoneLogPageSize()) + 1);

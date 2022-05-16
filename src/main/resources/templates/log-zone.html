@@ -10,7 +10,7 @@
 <div id="grid"></div>
 <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
 <script th:inline="javascript">
-    let server_url = [[${server_url}]];
+    server_url = [[${server_url}]];
     let header_basicauth = [[${header_basicauth}]];
     let page_size = [[${page_size}]];
 
@@ -19,17 +19,16 @@
             {id: 'host', name: 'Host'},
             {id: 'ipv4', name: 'IPv4'},
             {id: 'ipv6', name: 'IPv6'}],
-        /*search: {
+        search: {
             server: {
-                url: (prev, keyword) => `${prev}?search=${keyword}`
+                url: (prev, keyword) => `${prev}${prev.includes('?') ? '&' : '?'}search=${keyword}`
             }
-        },*/
-        // pagination: {limit: 100},
+        },
         pagination: {
             enabled: true,
             limit: page_size,
             server: {
-                url: (prev, page, limit) => `${prev}?page=${page}`
+                url: (prev, page) => `${prev}${prev.includes('?') ? '&' : '?'}page=${page}`
             }
         },
         server: {
