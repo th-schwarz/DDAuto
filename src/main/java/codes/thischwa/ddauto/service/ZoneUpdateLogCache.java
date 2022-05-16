@@ -109,7 +109,7 @@ public class ZoneUpdateLogCache implements InitializingBean {
         ZoneLogPage lp = new ZoneLogPage();
         lp.setPage(page);
 
-        // searching in host und timestamp
+        // searching in host and timestamp
         List<ZoneLogItem> items = (search == null || search.isEmpty()) ? new ArrayList<>(zoneUpdateItems)
                 : zoneUpdateItems.stream().filter(i -> i.getHost().contains(search) || i.getDateTime().contains(search))
                 .collect(Collectors.toList());
