@@ -24,11 +24,6 @@ A simple REST service for update IPs in a zone.</description>
 		<domainrobot.version>0.2.8</domainrobot.version>
 		<springdoc.version>1.6.6</springdoc.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.sources>
-			src/main/java,
-			src/main/resources,
-			src/main/test
-		</sonar.sources>
 		<sonar.coverage.exclusions>
 			src/main/java/codes/thischwa/ddauto/DDAutoStarter.java,
 			src/main/java/codes/thischwa/ddauto/SecurityConfig.java,
