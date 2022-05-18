@@ -1,5 +1,13 @@
 # changelog
 
+- 2.0.0
+  - Enhancements
+    - simple page to show the zone update logs [#18](https://github.com/th-schwarz/DDAuto/issues/18)
+    - route for getting zone update logs [#17](https://github.com/th-schwarz/DDAuto/issues/17)
+    - configuration has refactored, please visit the corresponding wiki article for further details
+  - Improvements
+    - only do a zone-update, if the IP has changed [#23](https://github.com/th-schwarz/DDAuto/issues/23)
+    - update spring-boot to 2.6.6 [#21](https://github.com/th-schwarz/DDAuto/issues/21)
 - 1.1.0
   - Enhancements
     - Switch from log4j2 to logback [#16](https://github.com/th-schwarz/DDAuto/issues/16)
