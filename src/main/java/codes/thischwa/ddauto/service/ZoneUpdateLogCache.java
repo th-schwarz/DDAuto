@@ -4,7 +4,6 @@ import codes.thischwa.ddauto.config.DDAutoConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
@@ -33,12 +32,15 @@ public class ZoneUpdateLogCache implements InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(ZoneUpdateLogCache.class);
 
-    @Autowired
-    private DDAutoConfig conf;
+    private final DDAutoConfig conf;
 
     private List<ZoneLogItem> zoneUpdateItems = new CopyOnWriteArrayList<>();
 
     private DateTimeFormatter dateTimeFormatter;
+
+    public ZoneUpdateLogCache(DDAutoConfig conf) {
+        this.conf = conf;
+    }
 
     public boolean enabled() {
         return conf.isZoneLogPageEnabled() && conf.getZoneLogFilePattern() != null;
@@ -76,7 +78,6 @@ public class ZoneUpdateLogCache implements InitializingBean {
         }
 
         // ordering and parsing, must be asc because new items will be added at the end
-        logEntries.sort(null);
         Pattern pattern = Pattern.compile(conf.getZoneLogPattern());
         zoneUpdateItems = logEntries.stream().map(i -> parseLogEntry(i, pattern)).filter(Objects::nonNull)
                 .sorted(Comparator.comparing(ZoneLogItem::getDateTime))
