@@ -1,5 +1,10 @@
 # changelog
 
+- 2.1.0
+  - Enhancements
+    - log view: implement pagination and search with grid.js [#24](https://github.com/th-schwarz/DDAuto/issues/24)
+  - Improvements
+    - update spring-boot to 2.6.7 [#25](https://github.com/th-schwarz/DDAuto/issues/25)
 - 2.0.0
   - Enhancements
     - simple page to show the zone update logs [#18](https://github.com/th-schwarz/DDAuto/issues/18)
