@@ -36,6 +36,7 @@ A simple REST service for update IPs in a zone.</description>
 			src/main/java/codes/thischwa/ddauto/service/ZoneSdkException.java
 		</sonar.coverage.exclusions>
 		<fakerepo.dir>${project.basedir}/fake-repo</fakerepo.dir>
+		<opendoc.outputDir>${project.basedir}/src/gen</opendoc.outputDir>
 	</properties>
 
 	<repositories>
@@ -209,6 +210,7 @@ A simple REST service for update IPs in a zone.</description>
 				<version>1.4</version>
 				<configuration>
 					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+					<outputDir>${opendoc.outputDir}</outputDir>
 					<outputFileName>api.json</outputFileName>
 				</configuration>
 				<executions>

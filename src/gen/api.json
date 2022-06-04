@@ -1,0 +1,277 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "DDAuto :: Dynamic DNS with AutoDNS",
+    "description" : "The routes of the dynamic DNS API",
+    "license" : {
+      "name" : "MIT Licence",
+      "url" : "https://github.com/th-schwarz/DDAuto/blob/develop/LICENSE"
+    },
+    "version" : "1.0"
+  },
+  "externalDocs" : {
+    "description" : "DDAuto on Github",
+    "url" : "https://github.com/th-schwarz/DDAuto"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080",
+    "description" : "Generated server url"
+  } ],
+  "tags" : [ {
+    "name" : "main",
+    "description" : "The main api routes."
+  } ],
+  "paths" : {
+    "/update/{host}" : {
+      "get" : {
+        "tags" : [ "main" ],
+        "summary" : "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.",
+        "operationId" : "update",
+        "parameters" : [ {
+          "name" : "host",
+          "in" : "path",
+          "description" : "The host, for which the IPs must be updated.",
+          "required" : true,
+          "content" : {
+            "text/plain" : {
+              "example" : "mydyndns.domain.com"
+            }
+          }
+        }, {
+          "name" : "apitoken",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ipv4",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ipv6",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "If the zone update fails.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Zone update failed."
+              }
+            }
+          },
+          "400" : {
+            "description" : "If the 'apitoken' doesn't belong to the host, IP addresses aren't valid or the remote IP couldn't determine.",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Update successful."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/meminfo" : {
+      "get" : {
+        "tags" : [ "main" ],
+        "summary" : "Generates basic memory informations",
+        "operationId" : "getMemoryStatistics",
+        "responses" : {
+          "200" : {
+            "description" : "Textual information about the memory usage.",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info/{host}" : {
+      "get" : {
+        "tags" : [ "main" ],
+        "summary" : "Determine the IP settings of the 'host' and returns it as formatted plain text.",
+        "operationId" : "info",
+        "parameters" : [ {
+          "name" : "host",
+          "in" : "path",
+          "description" : "The host, for which the IPs must be identified.",
+          "required" : true,
+          "content" : {
+            "text/plain" : {
+              "example" : "mydyndns.domain.com"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Formatted plain text with the IP settings of the 'host'",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "If the zone info fails.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Zone info failed."
+              }
+            }
+          },
+          "404" : {
+            "description" : "If the 'host' isn't configured.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Host not found."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info/zone-log" : {
+      "get" : {
+        "tags" : [ "main" ],
+        "summary" : "Zone update log.",
+        "operationId" : "getZoneUpdateLogs",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "All zone update log.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ZoneLogPage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exist/{host}" : {
+      "get" : {
+        "tags" : [ "main" ],
+        "summary" : "Checks, if the 'host' exists and is configured.",
+        "operationId" : "exist",
+        "parameters" : [ {
+          "name" : "host",
+          "in" : "path",
+          "description" : "The desired host to check.",
+          "required" : true,
+          "content" : {
+            "text/plain" : {
+              "example" : "mydyndns.domain.com"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Host exists and is configured.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Host found."
+              }
+            }
+          },
+          "404" : {
+            "description" : "Host doesn't exists.",
+            "content" : {
+              "text/plain" : {
+                "example" : "Host not found."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ZoneLogItem" : {
+        "type" : "object",
+        "properties" : {
+          "dateTime" : {
+            "type" : "string"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "ipv4" : {
+            "type" : "string"
+          },
+          "ipv6" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ZoneLogPage" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "totalPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "page" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ZoneLogItem"
+            }
+          }
+        }
+      }
+    }
+  }
+}
