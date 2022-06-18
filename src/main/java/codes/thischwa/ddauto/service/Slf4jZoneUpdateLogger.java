@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 /**
  * Implementation of {@link ZoneUpdateLogger} that implies an extra log configuration for "ZoneUpdateLogger"
