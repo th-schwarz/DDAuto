@@ -1,16 +1,14 @@
 package codes.thischwa.ddauto.service;
 
-import java.util.Comparator;
-import java.util.Optional;
-
+import codes.thischwa.ddauto.config.ZoneHostConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import codes.thischwa.ddauto.config.ZoneHostConfig;
+import java.util.Comparator;
+import java.util.Optional;
 
 /**
  * Implementation of {@link ZoneUpdateLogger} that implies an extra log configuration for "ZoneUpdateLogger"
@@ -21,14 +19,17 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 
 	private static final Logger logger = LoggerFactory.getLogger("ZoneUpdateLogger");
 
-	@Autowired
-	private ZoneHostConfig conf;
+	private final ZoneHostConfig conf;
 	
-	@Autowired
-	private ZoneUpdateLogCache cache;
+	private final ZoneUpdateLogCache cache;
 
 	private String logEntryFormat;
-	
+
+	public Slf4jZoneUpdateLogger(ZoneHostConfig conf, ZoneUpdateLogCache cache) {
+		this.conf = conf;
+		this.cache = cache;
+	}
+
 	@Override
 	public void log(String host, String ipv4, String ipv6) {
 		Assert.notNull(host, "'host' shouldn't be null.");
@@ -46,8 +47,8 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// determine the max. length of the hosts for nicer logging
-		Optional<String> max = conf.getConfiguredHosts().stream().max(Comparator.comparing(String::length));
-		int maxSize = max.isPresent() ? max.get().length() : 12;
+		int maxSize = conf.getConfiguredHosts().stream()
+				.max(Comparator.comparing(String::length)).map(max -> max.length()).orElse(12);
 		logEntryFormat = "%" + maxSize + "s  %16s  %s";
 	}
 }

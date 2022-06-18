@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties()
+@ConfigurationProperties
 public class ZoneHostConfig implements InitializingBean {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ZoneHostConfig.class);

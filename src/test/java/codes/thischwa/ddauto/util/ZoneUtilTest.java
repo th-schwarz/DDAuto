@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 class ZoneUtilTest {
 
 	private Zone zone;
@@ -21,7 +23,7 @@ class ZoneUtilTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		JsonResponseDataZone response = JsonUtils.deserialize(this.getClass().getResourceAsStream("zone-info.json").readAllBytes(),
+		JsonResponseDataZone response = JsonUtils.deserialize(Objects.requireNonNull(this.getClass().getResourceAsStream("zone-info.json")).readAllBytes(),
 				JsonResponseDataZone.class);
 		zone = response.getData().get(0);
 	}
@@ -95,9 +97,7 @@ class ZoneUtilTest {
 	
 	@Test
 	final void testDeriveZone_fail() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ZoneUtil.deriveZone("example.com");
-		});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> ZoneUtil.deriveZone("example.com"));
 	}
 	
 	@Test

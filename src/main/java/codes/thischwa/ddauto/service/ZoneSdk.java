@@ -1,8 +1,9 @@
 package codes.thischwa.ddauto.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import codes.thischwa.ddauto.config.AutoDnsConfig;
+import codes.thischwa.ddauto.config.DDAutoConfig;
+import codes.thischwa.ddauto.config.ZoneHostConfig;
+import codes.thischwa.ddauto.util.ZoneUtil;
 import org.domainrobot.sdk.client.Domainrobot;
 import org.domainrobot.sdk.client.clients.ZoneClient;
 import org.domainrobot.sdk.models.DomainRobotHeaders;
@@ -11,13 +12,10 @@ import org.domainrobot.sdk.models.generated.Zone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import codes.thischwa.ddauto.config.AutoDnsConfig;
-import codes.thischwa.ddauto.config.DDAutoConfig;
-import codes.thischwa.ddauto.config.ZoneHostConfig;
-import codes.thischwa.ddauto.util.ZoneUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple wrapper to ZoneClient of the Domainrobot Sdk.
@@ -29,14 +27,17 @@ public class ZoneSdk implements InitializingBean {
 
 	private static final Map<String, String> customHeaders = new HashMap<>(Map.of(DomainRobotHeaders.DOMAINROBOT_HEADER_WEBSOCKET, "NONE"));
 
-	@Autowired
-	private DDAutoConfig conf;
+	private final DDAutoConfig conf;
 
-	@Autowired
-	private AutoDnsConfig autoDnsConfig;
+	private final AutoDnsConfig autoDnsConfig;
 
-	@Autowired
-	private ZoneHostConfig zoneConfig;
+	private final ZoneHostConfig zoneConfig;
+
+	public ZoneSdk(DDAutoConfig conf, AutoDnsConfig autoDnsConfig, ZoneHostConfig zoneConfig) {
+		this.conf = conf;
+		this.autoDnsConfig = autoDnsConfig;
+		this.zoneConfig = zoneConfig;
+	}
 
 	private ZoneClient getInstance() {
 		return new Domainrobot(autoDnsConfig.getUser(), String.valueOf(autoDnsConfig.getContext()), autoDnsConfig.getPassword(),
@@ -44,7 +45,7 @@ public class ZoneSdk implements InitializingBean {
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		if(conf.isZoneValidationEnabled())
 			validateConfiguredZones();
 	}

@@ -19,7 +19,7 @@ public class SecurityConfig {
 	@Value("${spring.security.user.password}")
 	private String password;
 	
-	private DDAutoConfig ddAutoConfig;
+	private final DDAutoConfig ddAutoConfig;
 	
 	public SecurityConfig(DDAutoConfig ddAutoConfig) {
 		this.ddAutoConfig = ddAutoConfig;
@@ -48,8 +48,8 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
       return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
-    
-    @Bean
+
+	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 		// disable security for greeting and open-api endpoint

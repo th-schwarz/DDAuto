@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class ZoneLogItem implements Comparable<ZoneLogItem> {
 
-	private String dateTime;
+	private final String dateTime;
 
-	private String host;
+	private final String host;
 
-	private String ipv4;
+	private final String ipv4;
 
-	private String ipv6;
+	private final String ipv6;
 		
 	ZoneLogItem(String dateTime, String host, String ipv4, String ipv6) {
 		this.dateTime = dateTime;
