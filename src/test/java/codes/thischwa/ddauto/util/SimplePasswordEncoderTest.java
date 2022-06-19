@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = { "spring.security.salt=3" })
-public class SimplePasswordEncoderTest {
+class SimplePasswordEncoderTest {
 
     @Autowired
     private SimplePasswordEncoder passwordEncoder;
