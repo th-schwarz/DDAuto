@@ -5,13 +5,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+	static final String ROLE_LOGVIEWER = "LOGVIEWER";
+	static final String USER = "USER";
 
 	@Value("${spring.security.user.name}")
 	private String userName;
@@ -27,18 +29,15 @@ public class SecurityConfig {
 		
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.withUsername(userName)
-            .password(password)
-            .roles("USER")
-            .build();
+        User.UserBuilder userBuilder = User.builder();
+            userBuilder.username(userName).password(password)
+            .roles(USER);
         InMemoryUserDetailsManager userManager = new InMemoryUserDetailsManager();
-        userManager.createUser(user);
+        userManager.createUser(userBuilder.build());
         if(ddAutoConfig.getZoneLogUserName() != null && ddAutoConfig.getZoneLogUserPassword() != null) {
-			UserDetails logUser = User.withUsername(ddAutoConfig.getZoneLogUserName())
-					.password(ddAutoConfig.getZoneLogUserPassword())
-					.roles("LOGVIEWER")
-					.build();
-			userManager.createUser(logUser);
+			userBuilder.username(ddAutoConfig.getZoneLogUserName())
+					.password(ddAutoConfig.getZoneLogUserPassword()).roles(ROLE_LOGVIEWER);
+			userManager.createUser(userBuilder.build());
 		}
         return userManager;
     }
@@ -54,13 +53,13 @@ public class SecurityConfig {
 		http
 		// disable security for greeting and open-api endpoint
 		.authorizeRequests().antMatchers("/", "/favicon.ico", "/v3/api-docs*").permitAll().and()
-		
+
 		// log
-		.authorizeRequests().antMatchers("/log").hasAnyRole("LOGVIEWER").and()
-		
+		.authorizeRequests().antMatchers("/log").hasAnyRole(ROLE_LOGVIEWER).and()
+
 		// other routes
-		.authorizeRequests().anyRequest().hasAnyRole("USER").and().httpBasic();
-		
+		.authorizeRequests().anyRequest().hasAnyRole(USER).and().httpBasic();
+
 		return http.build();
 	}
 	
