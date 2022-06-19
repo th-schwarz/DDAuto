@@ -13,7 +13,7 @@ class GreetingControllerTest extends GenericIntegrationTest {
 
 	@Test
 	void greetingShouldReturnDefaultMessage() {
-		assertTrue(this.restTemplate.getForObject("http://localhost:" + port, String.class).contains("DDAuto"));
+		assertTrue(this.restTemplate.getForObject(getBaseUrl(), String.class).contains("DDAuto"));
 	}
 
 	@Test
