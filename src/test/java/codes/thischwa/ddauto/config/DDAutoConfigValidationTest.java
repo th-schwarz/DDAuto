@@ -1,11 +1,9 @@
 package codes.thischwa.ddauto.config;
 
-import codes.thischwa.ddauto.DDAutoStarter;
+import codes.thischwa.ddauto.GenericIntegrationTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -17,11 +15,11 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class, ZoneHostConfig.class })
-class DDAutoConfigValidationTest {
+class DDAutoConfigValidationTest extends GenericIntegrationTest {
 
 	@Autowired
 	private ZoneHostConfig config;
+
 	private static Validator validator;
 
 	@BeforeAll

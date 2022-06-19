@@ -1,15 +1,12 @@
 package codes.thischwa.ddauto.config;
 
-import codes.thischwa.ddauto.DDAutoStarter;
+import codes.thischwa.ddauto.GenericIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class DDAutoConfigTest {
+class DDAutoConfigTest extends GenericIntegrationTest {
 
 	@Autowired
 	private DDAutoConfig config;
