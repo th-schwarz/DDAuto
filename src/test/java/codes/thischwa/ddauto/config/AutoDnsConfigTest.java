@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { AutoDnsConfig.class, DDAutoStarter.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class AutoDnsConfigTest {
 	
 	@Autowired

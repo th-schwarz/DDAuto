@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class, DDAutoConfig.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class DDAutoConfigTest {
 
 	@Autowired

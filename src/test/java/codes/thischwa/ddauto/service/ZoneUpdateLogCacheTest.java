@@ -1,6 +1,5 @@
 package codes.thischwa.ddauto.service;
 
-import codes.thischwa.ddauto.DDAutoStarter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +9,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ZoneUpdateLogCacheTest {
 
 	private final int startCnt = 38;

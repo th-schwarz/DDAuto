@@ -7,16 +7,16 @@ import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class }, properties = { "ddauto.greeting-enabled=false" })
-class GreetingControllerFailTest {
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "ddauto.greeting-enabled=false" })
+class GreetingControllerDiabledTest {
 
-	@LocalServerPort
+	@Value("${local.server.port}")
 	private int port;
 
 	@Autowired

@@ -1,6 +1,5 @@
 package codes.thischwa.ddauto.config;
 
-import codes.thischwa.ddauto.DDAutoStarter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { DDAutoStarter.class, ZoneHostConfig.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ZoneHostConfigTest {
 
 	private final int configuredEntries = 2;
