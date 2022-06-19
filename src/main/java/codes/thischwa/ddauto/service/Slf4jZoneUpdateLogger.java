@@ -47,7 +47,7 @@ public class Slf4jZoneUpdateLogger implements ZoneUpdateLogger, InitializingBean
 	public void afterPropertiesSet() throws Exception {
 		// determine the max. length of the hosts for nicer logging
 		int maxSize = conf.getConfiguredHosts().stream()
-				.max(Comparator.comparing(String::length)).map(max -> max.length()).orElse(12);
+				.max(Comparator.comparing(String::length)).map(String::length).orElse(12);
 		logEntryFormat = "%" + maxSize + "s  %16s  %s";
 	}
 }
