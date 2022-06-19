@@ -12,7 +12,7 @@ autodns:
   context: 4
   url: https://api.autodns.com/v1
 
-## ddauto congig
+## ddauto config
 ddauto:
   zone-validation-enabled: true
   zone-log-page-size: 30
