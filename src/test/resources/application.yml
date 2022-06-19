@@ -21,6 +21,8 @@ ddauto:
   #zone-log-file-pattern: classpath:/test-files/ddauto-zone*
   zone-log-file-pattern: file:target/test-classes/test-files/ddauto-zone*
 
+test-value: 1
+
 zones:
   -  
     name: dynhost0.info
