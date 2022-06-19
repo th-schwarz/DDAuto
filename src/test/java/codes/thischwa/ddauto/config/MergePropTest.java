@@ -1,16 +1,18 @@
 package codes.thischwa.ddauto.config;
 
 import codes.thischwa.ddauto.GenericIntegrationTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MergePropTest extends GenericIntegrationTest {
+class MergePropTest extends GenericIntegrationTest {
 
     @Autowired
     private TestProp prop;
 
-    void tesValue() {
+    @Test
+    void testValue() {
         assertEquals(2, prop.getProp());
     }
 }
