@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.IntStream;
 
+/**
+ * A very simple {@link PasswordEncoder}, mainly to avoid ci-travis warnings.
+ */
 @Service
 public class SimplePasswordEncoder implements PasswordEncoder {
 
