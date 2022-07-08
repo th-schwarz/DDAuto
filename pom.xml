@@ -176,6 +176,7 @@ A simple REST service for update IPs in a zone.</description>
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<!-- starts spring boot for generating the openapi docu -->
 				<groupId>org.springframework.boot</groupId>
@@ -203,6 +204,7 @@ A simple REST service for update IPs in a zone.</description>
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<!-- generates the openapi docu -->
 				<groupId>org.springdoc</groupId>
