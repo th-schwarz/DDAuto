@@ -25,7 +25,7 @@ class GreetingControllerTest extends GenericIntegrationTest {
     private MockMvc mockMvc;
     
     @Test
-    public void testGreeting() throws Exception {
+    void testGreeting() throws Exception {
         this.mockMvc.perform(get("/"))
         	//.andDo(print())
             .andExpect(status().isOk())
