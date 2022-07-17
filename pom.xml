@@ -211,9 +211,9 @@ A simple REST service for update IPs in a zone.</description>
 				<artifactId>springdoc-openapi-maven-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
-					<apiDocsUrl>http://localhost:8080/v3/api-docs.yaml</apiDocsUrl>
+					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
 					<outputDir>${opendoc.outputDir}</outputDir>
-					<outputFileName>api.yml</outputFileName>
+					<outputFileName>api.json</outputFileName>
 				</configuration>
 				<executions>
 					<execution>
