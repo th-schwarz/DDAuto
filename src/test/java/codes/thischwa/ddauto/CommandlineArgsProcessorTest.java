@@ -26,8 +26,7 @@ class CommandlineArgsProcessorTest {
 
 	@Test
 	final void testProcess_logback() {
-		CommandlineArgsProcessor.workingDir = "target/test-classes/test-files";
-		List<String> args = CommandlineArgsProcessor.process(testArgs.toArray(new String[testArgs.size()]));
+		List<String> args = CommandlineArgsProcessor.process(testArgs.toArray(new String[testArgs.size()]), "target/test-classes/test-files");
 		assertTrue(args.contains("--logging.config=target/test-classes/test-files/logback.xml"));
 	}
 }
