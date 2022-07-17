@@ -11,10 +11,11 @@ import java.util.List;
  * Updates the command line parameters, if required. Tasks:
  * <ul>
  * <li>Disables springdoc, is <code>--swagger.enabled=true</code> isn't set.
- * <li>Discover logback config files and set the corresponding arguments.
+ * <li>Discover logback config files and set the corresponding argument,
+ * e.g. <code>--logging.config=/opt/ddauto/logback.xml</code>.
  * </ul>
  */
-class CommandlineArgsProcessor {
+abstract class CommandlineArgsProcessor {
 
 	private static final String const_swagger_enabled_cli = "--swagger.enabled=true";
 
