@@ -12,14 +12,11 @@ externalDocs:
 servers:
 - url: http://localhost:8080
   description: Generated server url
-tags:
-- name: main
-  description: The main api routes.
 paths:
   /update/{host}:
     get:
       tags:
-      - main
+      - main-controller
       summary: "Updates the desired IP addresses of the 'host', if the 'apitoken'\
         \ belongs to the host. If both parameters for IP addresses aren't set, an\
         \ attempt is made to fetch the remote IP."
@@ -70,7 +67,7 @@ paths:
   /meminfo:
     get:
       tags:
-      - main
+      - main-controller
       summary: Generates basic memory informations
       operationId: getMemoryStatistics
       responses:
@@ -83,7 +80,7 @@ paths:
   /info/{host}:
     get:
       tags:
-      - main
+      - main-controller
       summary: Determine the IP settings of the 'host' and returns it as formatted
         plain text.
       operationId: info
@@ -102,20 +99,20 @@ paths:
             application/json:
               schema:
                 type: string
-        "500":
-          description: If the zone info fails.
-          content:
-            text/plain:
-              example: Zone info failed.
         "404":
           description: If the 'host' isn't configured.
           content:
             text/plain:
               example: Host not found.
+        "500":
+          description: If the zone info fails.
+          content:
+            text/plain:
+              example: Zone info failed.
   /info/zone-log:
     get:
       tags:
-      - main
+      - main-controller
       summary: Zone update log.
       operationId: getZoneUpdateLogs
       parameters:
@@ -140,7 +137,7 @@ paths:
   /exist/{host}:
     get:
       tags:
-      - main
+      - main-controller
       summary: "Checks, if the 'host' exists and is configured."
       operationId: exist
       parameters:
