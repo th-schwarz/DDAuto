@@ -43,10 +43,10 @@ public class SecurityConfig {
         return userManager;
     }
 
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-      return new SimplePasswordEncoder();
-    }
+//	@Bean
+//    public PasswordEncoder passwordEncoder() {
+//      return new SimplePasswordEncoder();
+//    }
 
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

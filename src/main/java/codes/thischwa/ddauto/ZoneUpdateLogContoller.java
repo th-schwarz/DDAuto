@@ -43,7 +43,7 @@ public class ZoneUpdateLogContoller {
 			model.addAttribute("header_basicauth", basicAuth);
 			model.addAttribute("page_size", config.getZoneLogPageSize());
 		}
-		return "log-zone";
+		return "log-view";
 	}
 
 }
