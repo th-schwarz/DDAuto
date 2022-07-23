@@ -50,7 +50,7 @@ class IntegrationTest extends GenericIntegrationTest {
 			.andDo(print())
 	        .andExpect(status().isOk())
 	        .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-	        .andExpect(content().string(containsString("{\"total\":38,\"totalPage\":10,\"page\":1,\"pageSize\":4")));
+	        .andExpect(content().string(startsWith("{\"total\":38,\"totalPage\":10,\"page\":1,\"pageSize\":4")));
 	}
 
 	@Test
