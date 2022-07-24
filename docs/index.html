@@ -725,12 +725,6 @@
       "type" : "integer",
       "format" : "int32"
     },
-    "queryStringPrev" : {
-      "type" : "string"
-    },
-    "queryStringNext" : {
-      "type" : "string"
-    },
     "items" : {
       "type" : "array",
       "items" : {
@@ -755,21 +749,18 @@
             -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
-                  <li class="nav-header" data-group="Main"><a href="#api-Main">API Methods - Main</a></li>
-                    <li data-group="Main" data-name="exist" class="">
-                      <a href="#api-Main-exist">exist</a>
+                  <li class="nav-header" data-group="MainController"><a href="#api-MainController">API Methods - MainController</a></li>
+                    <li data-group="MainController" data-name="exist" class="">
+                      <a href="#api-MainController-exist">exist</a>
                     </li>
-                    <li data-group="Main" data-name="getMemoryStatistics" class="">
-                      <a href="#api-Main-getMemoryStatistics">getMemoryStatistics</a>
+                    <li data-group="MainController" data-name="info" class="">
+                      <a href="#api-MainController-info">info</a>
                     </li>
-                    <li data-group="Main" data-name="getZoneUpdateLogs" class="">
-                      <a href="#api-Main-getZoneUpdateLogs">getZoneUpdateLogs</a>
+                    <li data-group="MainController" data-name="update" class="">
+                      <a href="#api-MainController-update">update</a>
                     </li>
-                    <li data-group="Main" data-name="info" class="">
-                      <a href="#api-Main-info">info</a>
-                    </li>
-                    <li data-group="Main" data-name="update" class="">
-                      <a href="#api-Main-update">update</a>
+                    <li data-group="MainController" data-name="zoneLogs" class="">
+                      <a href="#api-MainController-zoneLogs">zoneLogs</a>
                     </li>
           </ul>
         </nav>
@@ -784,16 +775,16 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
-              <div class="app-desc">Version: 1.0</div>
+              <div class="app-desc">Version: 1.1</div>
             <hr>
             <div>The routes of the dynamic DNS API</div>
           </div>
         </div>
         <div id="sections">
-                <section id="api-Main">
-                  <h1>Main</h1>
-                    <div id="api-Main-exist">
-                      <article id="api-Main-exist-0" data-group="User" data-name="exist" data-version="0">
+                <section id="api-MainController">
+                  <h1>MainController</h1>
+                    <div id="api-MainController-exist">
+                      <article id="api-MainController-exist-0" data-group="User" data-name="exist" data-version="0">
                         <div class="pull-left">
                           <h1>exist</h1>
                           <p>Checks, if the &#x27;host&#x27; exists and is configured.</p>
@@ -809,75 +800,75 @@
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Main-exist-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Main-exist-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Main-exist-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Main-exist-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Main-exist-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Main-exist-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-MainController-exist-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-java">Java</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-MainController-exist-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-MainController-exist-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-MainController-exist-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-MainController-exist-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-MainController-exist-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Main-exist-0-curl">
+                          <div class="tab-pane active" id="examples-MainController-exist-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
 "http://localhost:8080/exist/{host}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Main-exist-0-java">
+                          <div class="tab-pane" id="examples-MainController-exist-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.MainApi;
+import io.swagger.client.api.MainControllerApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
         
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The desired host to check.
         try {
             apiInstance.exist();
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#exist");
+            System.err.println("Exception when calling MainControllerApi#exist");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Main-exist-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainApi;
+                          <div class="tab-pane" id="examples-MainController-exist-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainControllerApi;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The desired host to check.
         try {
             apiInstance.exist();
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#exist");
+            System.err.println("Exception when calling MainControllerApi#exist");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Main-exist-0-groovy">
+  <div class="tab-pane" id="examples-MainController-exist-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Main-exist-0-objc">
+                            <div class="tab-pane" id="examples-MainController-exist-0-objc">
                               <pre class="prettyprint"><code class="language-cpp"> * = ; // The desired host to check.
 
-MainApi *apiInstance = [[MainApi alloc] init];
+MainControllerApi *apiInstance = [[MainControllerApi alloc] init];
 
 // Checks, if the 'host' exists and is configured.
 [apiInstance existWith:
@@ -889,10 +880,10 @@ MainApi *apiInstance = [[MainApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-exist-0-javascript">
+                            <div class="tab-pane" id="examples-MainController-exist-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
 
-var api = new DdAutoDynamicDnsWithAutoDns.MainApi()
+var api = new DdAutoDynamicDnsWithAutoDns.MainControllerApi()
 var  = ; // {{}} The desired host to check.
 
 var callback = function(error, data, response) {
@@ -906,10 +897,10 @@ api.exist(, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Main-exist-0-angular">
+                            <!--<div class="tab-pane" id="examples-MainController-exist-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Main-exist-0-csharp">
+                            <div class="tab-pane" id="examples-MainController-exist-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -923,7 +914,7 @@ namespace Example
         public void main()
         {
 
-            var apiInstance = new MainApi();
+            var apiInstance = new MainControllerApi();
             var  = new (); //  | The desired host to check.
 
             try
@@ -933,7 +924,7 @@ namespace Example
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MainApi.exist: " + e.Message );
+                Debug.Print("Exception when calling MainControllerApi.exist: " + e.Message );
             }
         }
     }
@@ -941,38 +932,38 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-exist-0-php">
+                            <div class="tab-pane" id="examples-MainController-exist-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\ApiMainApi();
+$api_instance = new Swagger\Client\ApiMainControllerApi();
 $ = ; //  | The desired host to check.
 
 try {
     $api_instance->exist($);
 } catch (Exception $e) {
-    echo 'Exception when calling MainApi->exist: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling MainControllerApi->exist: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-exist-0-perl">
+                            <div class="tab-pane" id="examples-MainController-exist-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MainApi;
+use WWW::SwaggerClient::MainControllerApi;
 
-my $api_instance = WWW::SwaggerClient::MainApi->new();
+my $api_instance = WWW::SwaggerClient::MainControllerApi->new();
 my $ = ; #  | The desired host to check.
 
 eval { 
     $api_instance->exist( => $);
 };
 if ($@) {
-    warn "Exception when calling MainApi->exist: $@\n";
+    warn "Exception when calling MainControllerApi->exist: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-exist-0-python">
+                            <div class="tab-pane" id="examples-MainController-exist-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -980,14 +971,14 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.MainApi()
+api_instance = swagger_client.MainControllerApi()
  =  #  | The desired host to check.
 
 try: 
     # Checks, if the 'host' exists and is configured.
     api_instance.exist()
 except ApiException as e:
-    print("Exception when calling MainApi->exist: %s\n" % e)</code></pre>
+    print("Exception when calling MainControllerApi->exist: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -1028,14 +1019,6 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - Host exists and is configured. </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
                             <h3> Status: 404 - Host doesn&#x27;t exists. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
@@ -1044,528 +1027,19 @@ except ApiException as e:
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Main-getMemoryStatistics">
-                      <article id="api-Main-getMemoryStatistics-0" data-group="User" data-name="getMemoryStatistics" data-version="0">
-                        <div class="pull-left">
-                          <h1>getMemoryStatistics</h1>
-                          <p>Generates basic memory informations</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/meminfo</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Main-getMemoryStatistics-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Main-getMemoryStatistics-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Main-getMemoryStatistics-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Main-getMemoryStatistics-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Main-getMemoryStatistics-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: text/plain"\
-"http://localhost:8080/meminfo"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.MainApi;
-
-import java.io.File;
-import java.util.*;
-
-public class MainApiExample {
-
-    public static void main(String[] args) {
-        
-        MainApi apiInstance = new MainApi();
-        try {
-            'String' result = apiInstance.getMemoryStatistics();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#getMemoryStatistics");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainApi;
-
-public class MainApiExample {
-
-    public static void main(String[] args) {
-        MainApi apiInstance = new MainApi();
-        try {
-            'String' result = apiInstance.getMemoryStatistics();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#getMemoryStatistics");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
-MainApi *apiInstance = [[MainApi alloc] init];
-
-// Generates basic memory informations
-[apiInstance getMemoryStatisticsWithCompletionHandler: 
-              ^('String' output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
-
-var api = new DdAutoDynamicDnsWithAutoDns.MainApi()
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getMemoryStatistics(callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Main-getMemoryStatistics-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getMemoryStatisticsExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new MainApi();
-
-            try
-            {
-                // Generates basic memory informations
-                'String' result = apiInstance.getMemoryStatistics();
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling MainApi.getMemoryStatistics: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiMainApi();
-
-try {
-    $result = $api_instance->getMemoryStatistics();
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling MainApi->getMemoryStatistics: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MainApi;
-
-my $api_instance = WWW::SwaggerClient::MainApi->new();
-
-eval { 
-    my $result = $api_instance->getMemoryStatistics();
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling MainApi->getMemoryStatistics: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getMemoryStatistics-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.MainApi()
-
-try: 
-    # Generates basic memory informations
-    api_response = api_instance.get_memory_statistics()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling MainApi->getMemoryStatistics: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - Textual information about the memory usage. </h3>
+                            <h3> Status: 200 - Host exists and is configured. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getMemoryStatistics-200-schema">Schema</a>
-                                </li>
-
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getMemoryStatistics-200-schema">
-                                  <div id='responses-getMemoryStatistics-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "Textual information about the memory usage.",
-  "content" : {
-    "text/plain" : {
-      "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["text/plain"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getMemoryStatistics-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getMemoryStatistics-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getMemoryStatistics-200-schema-data' type='hidden' value=''></input>
-                                </div>
                             </div>
 
                         </article>
                       </div>
                       <hr>
-                    <div id="api-Main-getZoneUpdateLogs">
-                      <article id="api-Main-getZoneUpdateLogs-0" data-group="User" data-name="getZoneUpdateLogs" data-version="0">
-                        <div class="pull-left">
-                          <h1>getZoneUpdateLogs</h1>
-                          <p>Zone update log.</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/info/zone-log</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Main-getZoneUpdateLogs-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Main-getZoneUpdateLogs-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Main-getZoneUpdateLogs-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Main-getZoneUpdateLogs-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Main-getZoneUpdateLogs-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json"\
-"http://localhost:8080/info/zone-log"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.MainApi;
-
-import java.io.File;
-import java.util.*;
-
-public class MainApiExample {
-
-    public static void main(String[] args) {
-        
-        MainApi apiInstance = new MainApi();
-        try {
-            ZoneLogPage result = apiInstance.getZoneUpdateLogs();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#getZoneUpdateLogs");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainApi;
-
-public class MainApiExample {
-
-    public static void main(String[] args) {
-        MainApi apiInstance = new MainApi();
-        try {
-            ZoneLogPage result = apiInstance.getZoneUpdateLogs();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#getZoneUpdateLogs");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
-MainApi *apiInstance = [[MainApi alloc] init];
-
-// Zone update log.
-[apiInstance getZoneUpdateLogsWithCompletionHandler: 
-              ^(ZoneLogPage output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
-
-var api = new DdAutoDynamicDnsWithAutoDns.MainApi()
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getZoneUpdateLogs(callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getZoneUpdateLogsExample
-    {
-        public void main()
-        {
-
-            var apiInstance = new MainApi();
-
-            try
-            {
-                // Zone update log.
-                ZoneLogPage result = apiInstance.getZoneUpdateLogs();
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling MainApi.getZoneUpdateLogs: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\ApiMainApi();
-
-try {
-    $result = $api_instance->getZoneUpdateLogs();
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling MainApi->getZoneUpdateLogs: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MainApi;
-
-my $api_instance = WWW::SwaggerClient::MainApi->new();
-
-eval { 
-    my $result = $api_instance->getZoneUpdateLogs();
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling MainApi->getZoneUpdateLogs: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Main-getZoneUpdateLogs-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.MainApi()
-
-try: 
-    # Zone update log.
-    api_response = api_instance.get_zone_update_logs()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling MainApi->getZoneUpdateLogs: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - All zone update log. </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getZoneUpdateLogs-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getZoneUpdateLogs-200-schema">
-                                  <div id='responses-getZoneUpdateLogs-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "All zone update log.",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/ZoneLogPage"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getZoneUpdateLogs-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getZoneUpdateLogs-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getZoneUpdateLogs-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Main-info">
-                      <article id="api-Main-info-0" data-group="User" data-name="info" data-version="0">
+                    <div id="api-MainController-info">
+                      <article id="api-MainController-info-0" data-group="User" data-name="info" data-version="0">
                         <div class="pull-left">
                           <h1>info</h1>
                           <p>Determine the IP settings of the &#x27;host&#x27; and returns it as formatted plain text.</p>
@@ -1581,77 +1055,77 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Main-info-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Main-info-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Main-info-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Main-info-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Main-info-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Main-info-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Main-info-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Main-info-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Main-info-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Main-info-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Main-info-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-MainController-info-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-java">Java</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-MainController-info-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-MainController-info-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-MainController-info-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-MainController-info-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-MainController-info-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Main-info-0-curl">
+                          <div class="tab-pane active" id="examples-MainController-info-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: application/json,text/plain"\
+-H "Accept: text/plain,application/json"\
 "http://localhost:8080/info/{host}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Main-info-0-java">
+                          <div class="tab-pane" id="examples-MainController-info-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.MainApi;
+import io.swagger.client.api.MainControllerApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
         
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The host, for which the IPs must be identified.
         try {
             'String' result = apiInstance.info();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#info");
+            System.err.println("Exception when calling MainControllerApi#info");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Main-info-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainApi;
+                          <div class="tab-pane" id="examples-MainController-info-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainControllerApi;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The host, for which the IPs must be identified.
         try {
             'String' result = apiInstance.info();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#info");
+            System.err.println("Exception when calling MainControllerApi#info");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Main-info-0-groovy">
+  <div class="tab-pane" id="examples-MainController-info-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Main-info-0-objc">
+                            <div class="tab-pane" id="examples-MainController-info-0-objc">
                               <pre class="prettyprint"><code class="language-cpp"> * = ; // The host, for which the IPs must be identified.
 
-MainApi *apiInstance = [[MainApi alloc] init];
+MainControllerApi *apiInstance = [[MainControllerApi alloc] init];
 
 // Determine the IP settings of the 'host' and returns it as formatted plain text.
 [apiInstance infoWith:
@@ -1666,10 +1140,10 @@ MainApi *apiInstance = [[MainApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-info-0-javascript">
+                            <div class="tab-pane" id="examples-MainController-info-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
 
-var api = new DdAutoDynamicDnsWithAutoDns.MainApi()
+var api = new DdAutoDynamicDnsWithAutoDns.MainControllerApi()
 var  = ; // {{}} The host, for which the IPs must be identified.
 
 var callback = function(error, data, response) {
@@ -1683,10 +1157,10 @@ api.info(, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Main-info-0-angular">
+                            <!--<div class="tab-pane" id="examples-MainController-info-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Main-info-0-csharp">
+                            <div class="tab-pane" id="examples-MainController-info-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1700,7 +1174,7 @@ namespace Example
         public void main()
         {
 
-            var apiInstance = new MainApi();
+            var apiInstance = new MainControllerApi();
             var  = new (); //  | The host, for which the IPs must be identified.
 
             try
@@ -1711,7 +1185,7 @@ namespace Example
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MainApi.info: " + e.Message );
+                Debug.Print("Exception when calling MainControllerApi.info: " + e.Message );
             }
         }
     }
@@ -1719,28 +1193,28 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-info-0-php">
+                            <div class="tab-pane" id="examples-MainController-info-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\ApiMainApi();
+$api_instance = new Swagger\Client\ApiMainControllerApi();
 $ = ; //  | The host, for which the IPs must be identified.
 
 try {
     $result = $api_instance->info($);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling MainApi->info: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling MainControllerApi->info: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-info-0-perl">
+                            <div class="tab-pane" id="examples-MainController-info-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MainApi;
+use WWW::SwaggerClient::MainControllerApi;
 
-my $api_instance = WWW::SwaggerClient::MainApi->new();
+my $api_instance = WWW::SwaggerClient::MainControllerApi->new();
 my $ = ; #  | The host, for which the IPs must be identified.
 
 eval { 
@@ -1748,11 +1222,11 @@ eval {
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling MainApi->info: $@\n";
+    warn "Exception when calling MainControllerApi->info: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-info-0-python">
+                            <div class="tab-pane" id="examples-MainController-info-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1760,7 +1234,7 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.MainApi()
+api_instance = swagger_client.MainControllerApi()
  =  #  | The host, for which the IPs must be identified.
 
 try: 
@@ -1768,7 +1242,7 @@ try:
     api_response = api_instance.info()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling MainApi->info: %s\n" % e)</code></pre>
+    print("Exception when calling MainControllerApi->info: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -1809,6 +1283,14 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
+                            <h3> Status: 500 - If the zone info fails. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
                             <h3> Status: 200 - Formatted plain text with the IP settings of the &#x27;host&#x27; </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
@@ -1866,19 +1348,11 @@ except ApiException as e:
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                            <h3> Status: 500 - If the zone info fails. </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
                         </article>
                       </div>
                       <hr>
-                    <div id="api-Main-update">
-                      <article id="api-Main-update-0" data-group="User" data-name="update" data-version="0">
+                    <div id="api-MainController-update">
+                      <article id="api-MainController-update-0" data-group="User" data-name="update" data-version="0">
                         <div class="pull-left">
                           <h1>update</h1>
                           <p>Updates the desired IP addresses of the &#x27;host&#x27;, if the &#x27;apitoken&#x27; belongs to the host. If both parameters for IP addresses aren&#x27;t set, an attempt is made to fetch the remote IP.</p>
@@ -1894,39 +1368,39 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Main-update-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Main-update-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Main-update-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Main-update-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Main-update-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Main-update-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Main-update-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Main-update-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Main-update-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Main-update-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Main-update-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-MainController-update-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-java">Java</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-MainController-update-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-MainController-update-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-MainController-update-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-MainController-update-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-MainController-update-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Main-update-0-curl">
+                          <div class="tab-pane active" id="examples-MainController-update-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: text/plain"\
 "http://localhost:8080/update/{host}?apitoken=&ipv4=&ipv6="</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Main-update-0-java">
+                          <div class="tab-pane" id="examples-MainController-update-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.MainApi;
+import io.swagger.client.api.MainControllerApi;
 
 import java.io.File;
 import java.util.*;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
         
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The host, for which the IPs must be updated.
         String apitoken = apitoken_example; // String | 
         String ipv4 = ipv4_example; // String | 
@@ -1934,20 +1408,20 @@ public class MainApiExample {
         try {
             apiInstance.update(, apitoken, ipv4, ipv6);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#update");
+            System.err.println("Exception when calling MainControllerApi#update");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Main-update-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainApi;
+                          <div class="tab-pane" id="examples-MainController-update-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainControllerApi;
 
-public class MainApiExample {
+public class MainControllerApiExample {
 
     public static void main(String[] args) {
-        MainApi apiInstance = new MainApi();
+        MainControllerApi apiInstance = new MainControllerApi();
           = ; //  | The host, for which the IPs must be updated.
         String apitoken = apitoken_example; // String | 
         String ipv4 = ipv4_example; // String | 
@@ -1955,23 +1429,23 @@ public class MainApiExample {
         try {
             apiInstance.update(, apitoken, ipv4, ipv6);
         } catch (ApiException e) {
-            System.err.println("Exception when calling MainApi#update");
+            System.err.println("Exception when calling MainControllerApi#update");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Main-update-0-groovy">
+  <div class="tab-pane" id="examples-MainController-update-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Main-update-0-objc">
+                            <div class="tab-pane" id="examples-MainController-update-0-objc">
                               <pre class="prettyprint"><code class="language-cpp"> * = ; // The host, for which the IPs must be updated.
 String *apitoken = apitoken_example; // 
 String *ipv4 = ipv4_example; //  (optional)
 String *ipv6 = ipv6_example; //  (optional)
 
-MainApi *apiInstance = [[MainApi alloc] init];
+MainControllerApi *apiInstance = [[MainControllerApi alloc] init];
 
 // Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.
 [apiInstance updateWith:
@@ -1986,10 +1460,10 @@ MainApi *apiInstance = [[MainApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-update-0-javascript">
+                            <div class="tab-pane" id="examples-MainController-update-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
 
-var api = new DdAutoDynamicDnsWithAutoDns.MainApi()
+var api = new DdAutoDynamicDnsWithAutoDns.MainControllerApi()
 var  = ; // {{}} The host, for which the IPs must be updated.
 var apitoken = apitoken_example; // {{String}} 
 var opts = { 
@@ -2007,10 +1481,10 @@ api.update(, apitoken, opts, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Main-update-0-angular">
+                            <!--<div class="tab-pane" id="examples-MainController-update-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Main-update-0-csharp">
+                            <div class="tab-pane" id="examples-MainController-update-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -2024,7 +1498,7 @@ namespace Example
         public void main()
         {
 
-            var apiInstance = new MainApi();
+            var apiInstance = new MainControllerApi();
             var  = new (); //  | The host, for which the IPs must be updated.
             var apitoken = apitoken_example;  // String | 
             var ipv4 = ipv4_example;  // String |  (optional) 
@@ -2037,7 +1511,7 @@ namespace Example
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling MainApi.update: " + e.Message );
+                Debug.Print("Exception when calling MainControllerApi.update: " + e.Message );
             }
         }
     }
@@ -2045,11 +1519,11 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-update-0-php">
+                            <div class="tab-pane" id="examples-MainController-update-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\ApiMainApi();
+$api_instance = new Swagger\Client\ApiMainControllerApi();
 $ = ; //  | The host, for which the IPs must be updated.
 $apitoken = apitoken_example; // String | 
 $ipv4 = ipv4_example; // String | 
@@ -2058,17 +1532,17 @@ $ipv6 = ipv6_example; // String |
 try {
     $api_instance->update($, $apitoken, $ipv4, $ipv6);
 } catch (Exception $e) {
-    echo 'Exception when calling MainApi->update: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling MainControllerApi->update: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-update-0-perl">
+                            <div class="tab-pane" id="examples-MainController-update-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::MainApi;
+use WWW::SwaggerClient::MainControllerApi;
 
-my $api_instance = WWW::SwaggerClient::MainApi->new();
+my $api_instance = WWW::SwaggerClient::MainControllerApi->new();
 my $ = ; #  | The host, for which the IPs must be updated.
 my $apitoken = apitoken_example; # String | 
 my $ipv4 = ipv4_example; # String | 
@@ -2078,11 +1552,11 @@ eval {
     $api_instance->update( => $, apitoken => $apitoken, ipv4 => $ipv4, ipv6 => $ipv6);
 };
 if ($@) {
-    warn "Exception when calling MainApi->update: $@\n";
+    warn "Exception when calling MainControllerApi->update: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Main-update-0-python">
+                            <div class="tab-pane" id="examples-MainController-update-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -2090,7 +1564,7 @@ from swagger_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = swagger_client.MainApi()
+api_instance = swagger_client.MainControllerApi()
  =  #  | The host, for which the IPs must be updated.
 apitoken = apitoken_example # String | 
 ipv4 = ipv4_example # String |  (optional)
@@ -2100,7 +1574,7 @@ try:
     # Updates the desired IP addresses of the 'host', if the 'apitoken' belongs to the host. If both parameters for IP addresses aren't set, an attempt is made to fetch the remote IP.
     api_instance.update(, apitoken, ipv4=ipv4, ipv6=ipv6)
 except ApiException as e:
-    print("Exception when calling MainApi->update: %s\n" % e)</code></pre>
+    print("Exception when calling MainControllerApi->update: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2199,6 +1673,14 @@ except ApiException as e:
                             </table>
 
                           <h2>Responses</h2>
+                            <h3> Status: 500 - If the zone update fails. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
                             <h3> Status: 200 - Updates the desired IP addresses of the &#x27;host&#x27;, if the &#x27;apitoken&#x27; belongs to the host. If both parameters for IP addresses aren&#x27;t set, an attempt is made to fetch the remote IP. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
@@ -2256,12 +1738,329 @@ except ApiException as e:
                                 </div>
                             </div>
 
-                            <h3> Status: 500 - If the zone update fails. </h3>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-MainController-zoneLogs">
+                      <article id="api-MainController-zoneLogs-0" data-group="User" data-name="zoneLogs" data-version="0">
+                        <div class="pull-left">
+                          <h1>zoneLogs</h1>
+                          <p>Zone update log.</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/info/zone-log</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-MainController-zoneLogs-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-java">Java</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-MainController-zoneLogs-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-MainController-zoneLogs-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-MainController-zoneLogs-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-MainController-zoneLogs-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/json"\
+"http://localhost:8080/info/zone-log?page=&search="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-MainController-zoneLogs-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.MainControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class MainControllerApiExample {
+
+    public static void main(String[] args) {
+        
+        MainControllerApi apiInstance = new MainControllerApi();
+          = ; //  | Page number to fetch. If it is not committed, it will be '1'.
+          = ; //  | String to search for. It belongs to 'host' and 'timestamp'.
+        try {
+            ZoneLogPage result = apiInstance.zoneLogs(, );
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MainControllerApi#zoneLogs");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-MainController-zoneLogs-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.MainControllerApi;
+
+public class MainControllerApiExample {
+
+    public static void main(String[] args) {
+        MainControllerApi apiInstance = new MainControllerApi();
+          = ; //  | Page number to fetch. If it is not committed, it will be '1'.
+          = ; //  | String to search for. It belongs to 'host' and 'timestamp'.
+        try {
+            ZoneLogPage result = apiInstance.zoneLogs(, );
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MainControllerApi#zoneLogs");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-MainController-zoneLogs-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp"> * = ; // Page number to fetch. If it is not committed, it will be '1'.
+ * = ; // String to search for. It belongs to 'host' and 'timestamp'. (optional)
+
+MainControllerApi *apiInstance = [[MainControllerApi alloc] init];
+
+// Zone update log.
+[apiInstance zoneLogsWith:
+    :
+              completionHandler: ^(ZoneLogPage output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var DdAutoDynamicDnsWithAutoDns = require('dd_auto__dynamic_dns_with_auto_dns');
+
+var api = new DdAutoDynamicDnsWithAutoDns.MainControllerApi()
+var  = ; // {{}} Page number to fetch. If it is not committed, it will be '1'.
+var opts = { 
+  '':  // {{}} String to search for. It belongs to 'host' and 'timestamp'.
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.zoneLogs(, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-MainController-zoneLogs-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class zoneLogsExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new MainControllerApi();
+            var  = new (); //  | Page number to fetch. If it is not committed, it will be '1'.
+            var  = new (); //  | String to search for. It belongs to 'host' and 'timestamp'. (optional) 
+
+            try
+            {
+                // Zone update log.
+                ZoneLogPage result = apiInstance.zoneLogs(, );
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling MainControllerApi.zoneLogs: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiMainControllerApi();
+$ = ; //  | Page number to fetch. If it is not committed, it will be '1'.
+$ = ; //  | String to search for. It belongs to 'host' and 'timestamp'.
+
+try {
+    $result = $api_instance->zoneLogs($, $);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MainControllerApi->zoneLogs: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::MainControllerApi;
+
+my $api_instance = WWW::SwaggerClient::MainControllerApi->new();
+my $ = ; #  | Page number to fetch. If it is not committed, it will be '1'.
+my $ = ; #  | String to search for. It belongs to 'host' and 'timestamp'.
+
+eval { 
+    my $result = $api_instance->zoneLogs( => $,  => $);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling MainControllerApi->zoneLogs: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-MainController-zoneLogs-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.MainControllerApi()
+ =  #  | Page number to fetch. If it is not committed, it will be '1'.
+ =  #  | String to search for. It belongs to 'host' and 'timestamp'. (optional)
+
+try: 
+    # Zone update log.
+    api_response = api_instance.zone_logs(, =)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling MainControllerApi->zoneLogs: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">page*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_zoneLogs_">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        Page number to fetch. If it is not committed, it will be &#x27;1&#x27;.
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">search</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_zoneLogs_">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        String to search for. It belongs to &#x27;host&#x27; and &#x27;timestamp&#x27;.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Order list of zone update logs. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-zoneLogs-200-schema">Schema</a>
+                                </li>
+
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-zoneLogs-200-schema">
+                                  <div id='responses-zoneLogs-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Order list of zone update logs.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ZoneLogPage"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-zoneLogs-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-zoneLogs-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-zoneLogs-200-schema-data' type='hidden' value=''></input>
+                                </div>
                             </div>
 
                         </article>
@@ -2275,7 +2074,7 @@ except ApiException as e:
                   <div class="app-desc">Information URL: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
                   <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
               </p>
-                <div class="license-info">MIT</div>
+                <div class="license-info">MIT Licence</div>
                 <div class="license-url">https://github.com/th-schwarz/DDAuto/blob/develop/LICENSE</div>
             </div>
           </div>
