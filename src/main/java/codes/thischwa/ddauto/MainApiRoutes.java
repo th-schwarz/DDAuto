@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 		info = @Info(
 				title = "DDAuto :: Dynamic DNS with AutoDNS",
 				description = "The routes of the dynamic DNS API",
-				version = "1.0", 
+				version = "1.1", 
 				license = @License(
 						name = "MIT Licence", 
 						url = "https://github.com/th-schwarz/DDAuto/blob/develop/LICENSE")),
@@ -76,7 +76,8 @@ public interface MainApiRoutes {
 			@PathVariable String host);
 
 	@Operation(summary = "Zone update log.")
-	@ApiResponse(responseCode = "200", description = "All zone update log.")
+	@ApiResponse(responseCode = "200", description = "Order list of zone update logs.")
 	@GetMapping(value = "info/zone-log", produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam(required = false) Integer page, @RequestParam(required = false) String search);
+	ResponseEntity<ZoneLogPage> zoneLogs(@Parameter(description = "Page number to fetch. If it is not committed, it will be '1'.", content = @Content(mediaType = "int")) @RequestParam(required = false) Integer page,
+			@Parameter(description = "String to search for. It belongs to 'host' and 'timestamp'.", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE)) @RequestParam(required = false) String search);
 }
