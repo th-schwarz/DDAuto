@@ -113,17 +113,6 @@ public class MainController implements MainApiRoutes {
 		info.append("IPv6: ").append(ipv6Str).append('\n');
 		return ResponseEntity.ok(info.toString());
 	}
-
-	@Override
-	public ResponseEntity<String> getMemoryStatistics() {
-		StringBuilder memInfo = new StringBuilder();
-		memInfo.append("Basic memory Information:\n");
-		long mb = 1024L * 1024L;
-		memInfo.append(String.format("Total: %6d MB\n", Runtime.getRuntime().totalMemory() / mb));
-		memInfo.append(String.format("Max:   %6d MB\n", Runtime.getRuntime().maxMemory() / mb));
-		memInfo.append(String.format("Free:  %6d MB\n", Runtime.getRuntime().freeMemory() / mb));
-		return ResponseEntity.ok(memInfo.toString());
-	}
 	
 	@Override
 	public ResponseEntity<ZoneLogPage> getZoneUpdateLogs(@RequestParam Integer page, @RequestParam(required = false) String search) {

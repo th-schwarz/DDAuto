@@ -75,11 +75,6 @@ public interface MainApiRoutes {
 					@ExampleObject(value = "mydyndns.domain.com") }))
 			@PathVariable String host);
 
-	@Operation(summary = "Generates basic memory informations")
-	@ApiResponse(responseCode = "200", description = "Textual information about the memory usage.")
-	@GetMapping(value = "meminfo", produces = MediaType.TEXT_PLAIN_VALUE)
-	ResponseEntity<String> getMemoryStatistics();
-
 	@Operation(summary = "Zone update log.")
 	@ApiResponse(responseCode = "200", description = "All zone update log.")
 	@GetMapping(value = "info/zone-log", produces = MediaType.APPLICATION_JSON_VALUE)
