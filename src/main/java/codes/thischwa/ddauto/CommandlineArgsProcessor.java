@@ -21,19 +21,20 @@ abstract class CommandlineArgsProcessor {
 
 	private static final String const_logback_name = "logback.xml";
 
-	private static final String Const_working_dir = System.getProperty("user.dir");
+	private static final String const_working_dir = System.getProperty("user.dir");
 	
 	private CommandlineArgsProcessor() {
 	}
 
 	static List<String> process(String[] orgArgs) {
-		return process(orgArgs, Const_working_dir);
+		return process(orgArgs, const_working_dir);
 	}
 	
 	static List<String> process(String[] orgArgs, String workingDir) {
 		List<String> cmdArgs = new ArrayList<>(Arrays.asList(orgArgs));
 		// map swagger property
 		if(!cmdArgs.remove(const_swagger_enabled_cli))
+			// disable springdoc by default
 			cmdArgs.add("--springdoc.api-docs.enabled=false");
 
 		// logback config
