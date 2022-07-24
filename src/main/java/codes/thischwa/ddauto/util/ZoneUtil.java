@@ -10,9 +10,9 @@ public interface ZoneUtil {
 
 	long DEFAULT_TLD = 60;
 	
-	public enum ResouceRecordTypeIP {
+	enum ResouceRecordTypeIP {
 		A,
-		AAAA;
+		AAAA
 	}
 
 	static void addOrUpdateIPv4(Zone zone, String sld, String ip) {
@@ -70,12 +70,12 @@ public interface ZoneUtil {
 	static boolean hasIPsChanged(Zone zone, String sld, String ipv4, String ipv6) {
 		ResourceRecord rrv4 = searchResourceRecord(zone, sld, ResouceRecordTypeIP.A);
 		ResourceRecord rrv6 = searchResourceRecord(zone, sld, ResouceRecordTypeIP.AAAA);
-		boolean ipv4Changed = !equals(rrv4, ipv4);
-		boolean ipv6Changed = !equals(rrv6, ipv6);
+		boolean ipv4Changed = !hasIP(rrv4, ipv4);
+		boolean ipv6Changed = !hasIP(rrv6, ipv6);
 		return ipv4Changed || ipv6Changed;
 	}
 	
-	private static boolean equals(ResourceRecord rr, String ip) {
-		return (rr == null && ip == null) || (rr != null && ip != null && ip.equals(rr.getValue()));
+	private static boolean hasIP(ResourceRecord rr, String ip) {
+		return rr != null && ip != null && rr.getValue().equals(ip);
 	}
 }
