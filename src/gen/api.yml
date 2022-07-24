@@ -5,7 +5,7 @@ info:
   license:
     name: MIT Licence
     url: https://github.com/th-schwarz/DDAuto/blob/develop/LICENSE
-  version: "1.0"
+  version: "1.1"
 externalDocs:
   description: DDAuto on Github
   url: https://github.com/th-schwarz/DDAuto
@@ -45,13 +45,11 @@ paths:
         schema:
           type: string
       responses:
-        "400":
-          description: "If the 'apitoken' doesn't belong to the host, IP addresses\
-            \ aren't valid or the remote IP couldn't determine."
+        "500":
+          description: If the zone update fails.
           content:
             text/plain:
-              schema:
-                type: string
+              example: Zone update failed.
         "200":
           description: "Updates the desired IP addresses of the 'host', if the 'apitoken'\
             \ belongs to the host. If both parameters for IP addresses aren't set,\
@@ -59,20 +57,9 @@ paths:
           content:
             text/plain:
               example: Update successful.
-        "500":
-          description: If the zone update fails.
-          content:
-            text/plain:
-              example: Zone update failed.
-  /meminfo:
-    get:
-      tags:
-      - main-controller
-      summary: Generates basic memory informations
-      operationId: getMemoryStatistics
-      responses:
-        "200":
-          description: Textual information about the memory usage.
+        "400":
+          description: "If the 'apitoken' doesn't belong to the host, IP addresses\
+            \ aren't valid or the remote IP couldn't determine."
           content:
             text/plain:
               schema:
@@ -93,6 +80,11 @@ paths:
           text/plain:
             example: mydyndns.domain.com
       responses:
+        "500":
+          description: If the zone info fails.
+          content:
+            text/plain:
+              example: Zone info failed.
         "200":
           description: Formatted plain text with the IP settings of the 'host'
           content:
@@ -104,32 +96,28 @@ paths:
           content:
             text/plain:
               example: Host not found.
-        "500":
-          description: If the zone info fails.
-          content:
-            text/plain:
-              example: Zone info failed.
   /info/zone-log:
     get:
       tags:
       - main-controller
       summary: Zone update log.
-      operationId: getZoneUpdateLogs
+      operationId: zoneLogs
       parameters:
       - name: page
         in: query
+        description: "Page number to fetch. If it is not committed, it will be '1'."
         required: true
-        schema:
-          type: integer
-          format: int32
+        content:
+          int: {}
       - name: search
         in: query
+        description: String to search for. It belongs to 'host' and 'timestamp'.
         required: false
-        schema:
-          type: string
+        content:
+          text/plain: {}
       responses:
         "200":
-          description: All zone update log.
+          description: Order list of zone update logs.
           content:
             application/json:
               schema:
@@ -149,16 +137,16 @@ paths:
           text/plain:
             example: mydyndns.domain.com
       responses:
-        "200":
-          description: Host exists and is configured.
-          content:
-            text/plain:
-              example: Host found.
         "404":
           description: Host doesn't exists.
           content:
             text/plain:
               example: Host not found.
+        "200":
+          description: Host exists and is configured.
+          content:
+            text/plain:
+              example: Host found.
 components:
   schemas:
     ZoneLogItem:
