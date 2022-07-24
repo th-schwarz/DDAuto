@@ -1,11 +1,12 @@
 package codes.thischwa.ddauto;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.StandardCharsets;
 
@@ -45,9 +46,15 @@ class IntegrationTest extends GenericIntegrationTest {
 	}
 
 	@Test
+	final void testBasicUnAuth_global() throws Exception {
+		mockMvc.perform(get("/info/test.mein-virtuelles-blech.de"))
+			.andExpect(status().isUnauthorized());
+	}
+	
+	@Test
 	final void testBasicAuth_global() throws Exception {
 		mockMvc.perform(get("/info/zone-log").queryParam("page", "0").with(httpBasic("dyndns", "test123")))
-			.andDo(print())
+//			.andDo(print())
 	        .andExpect(status().isOk())
 	        .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 	        .andExpect(content().string(startsWith("{\"total\":38,\"totalPage\":10,\"page\":1,\"pageSize\":4")));
