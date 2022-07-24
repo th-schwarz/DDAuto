@@ -19,7 +19,7 @@ abstract class CommandlineArgsProcessor {
 
 	private static final String const_swagger_enabled_cli = "--swagger.enabled=true";
 
-	private static String workingDir = System.getProperty("user.dir");
+	private static final String workingDir = System.getProperty("user.dir");
 
 	private static final String const_logback_name = "logback.xml";
 	
