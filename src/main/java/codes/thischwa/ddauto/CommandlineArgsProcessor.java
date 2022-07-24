@@ -20,14 +20,12 @@ abstract class CommandlineArgsProcessor {
 	private static final String const_swagger_enabled_cli = "--swagger.enabled=true";
 
 	private static final String const_logback_name = "logback.xml";
-
-	private static final String const_working_dir = System.getProperty("user.dir");
 	
 	private CommandlineArgsProcessor() {
 	}
 
 	static List<String> process(String[] orgArgs) {
-		return process(orgArgs, const_working_dir);
+		return process(orgArgs, System.getProperty("user.dir"));
 	}
 	
 	static List<String> process(String[] orgArgs, String workingDir) {
